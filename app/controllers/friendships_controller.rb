@@ -1,11 +1,12 @@
 class FriendshipsController < ApplicationController
+  before_action :set_friendship, only: [:show, :destroy, :accept, :decline]
 
   def index
     @friendships = Friendship.all
   end
 
   def show
-    @friendship = Friendship.find(params[:id])
+  
   end
 
   def new
@@ -21,8 +22,23 @@ class FriendshipsController < ApplicationController
   end
 
   def destroy
-    @friendship = Friendship.find(params[:id])
     @friendship.destroy
     redirect_to friendships_path()
+  end
+
+  def accept
+    @friendship.accepted!
+    redirect_to friendships_path()
+  end
+
+  def decline
+    @friendship.decline!
+    redirect_to friendship_path()
+  end
+
+  private
+
+  def set_friendship
+    @friendship = Friendship.find(params[:id])
   end
 end
