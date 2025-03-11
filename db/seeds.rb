@@ -30,4 +30,25 @@ puts 'Création de 100 restaurants 👨🏻‍🎨'
 end
 puts '...'
 p
-puts 'Finished ✅'
+puts 'Finished restos ✅'
+
+puts 'Destruction des users 💥'
+User.destroy_all
+p
+puts 'Users supprimés 🎊'
+p
+puts 'Création de 5 restaurants 👨🏻‍🎨'
+5.times do
+  user = User.new(
+    email: "#{Faker::Name.first_name}@#{Faker::Name.last_name}",
+    password: Faker::Lorem.word,
+    city: Faker::Address.city,
+    username: Faker::FunnyName.name,
+    first_name: Faker::Name.first_name,
+    last_name: Faker::Name.last_name,
+  )
+  user.save!
+end
+puts '...'
+p
+puts 'Finished users ✅'
