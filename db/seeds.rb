@@ -15,17 +15,17 @@ puts 'Restos supprimés 🎊'
 p
 puts 'Création de 100 restaurants 👨🏻‍🎨'
 100.times do
-  Faker::Config.locale = 'fr'
   restaurant = Restaurant.new(
     name: Faker::Restaurant.name,
     description: Faker::Restaurant.description,
     address: Faker::Address.full_address,
     category: Faker::Nation.nationality,
     menu: Faker::Internet.domain_name,
-    rating: Faker::Number.decimal(l_digits: 2),
-    phone_number: Faker::PhoneNumber.cell_phone_with_country_code,
+    rating: Faker::Number.within(range: 1..5),
     website: Faker::Internet.domain_name
   )
+  Faker::Config.locale = 'fr'
+  restaurant.phone_number = Faker::PhoneNumber.cell_phone_with_country_code
   restaurant.save!
 end
 puts '...'

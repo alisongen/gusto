@@ -44,7 +44,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_11_142557) do
     t.string "category"
     t.string "menu"
     t.float "rating"
-    t.integer "phone_number"
+    t.string "phone_number"
     t.string "website"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
