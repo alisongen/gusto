@@ -27,8 +27,8 @@ puts 'Création de 100 restaurants 👨🏻‍🎨'
   Faker::Config.locale = 'fr'
   restaurant.phone_number = Faker::PhoneNumber.cell_phone_with_country_code
   restaurant.save!
+  puts '...'
 end
-puts '...'
 p
 puts 'Finished restos ✅'
 
@@ -41,14 +41,15 @@ puts 'Création de 5 restaurants 👨🏻‍🎨'
 5.times do
   user = User.new(
     email: "#{Faker::Name.first_name}@#{Faker::Name.last_name}",
-    password: Faker::Lorem.word,
+    password: Faker::Lorem.characters(number: 6),
     city: Faker::Address.city,
     username: Faker::FunnyName.name,
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
   )
   user.save!
+  puts '...'
 end
-puts '...'
+
 p
 puts 'Finished users ✅'
