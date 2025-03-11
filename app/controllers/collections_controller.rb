@@ -13,7 +13,7 @@ class CollectionsController < ApplicationController
   end
 
   def create
-    @user = create_user
+    @user = current_user
     @collection = Collection.new(collection_params)
     @collection.user_id = @user.id
     @collection.save
