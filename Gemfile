@@ -45,12 +45,19 @@ gem "bootsnap", require: false
 # gem "image_processing", "~> 1.2"
 
 gem "bootstrap", "~> 5.2"
+
+# users et authentifications
 gem "devise"
+
 gem "autoprefixer-rails"
 gem "font-awesome-sass", "~> 6.1"
 gem "simple_form", github: "heartcombo/simple_form"
 gem "sassc-rails"
+
+# pour la geoloc, carte, etc...
 gem "geocoder"
+
+gem 'ostruct'
 
 group :development, :test do
   gem "dotenv-rails"
