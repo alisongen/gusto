@@ -37,7 +37,7 @@ User.destroy_all
 p
 puts 'Users supprimés 🎊'
 p
-puts 'Création de 5 restaurants 👨🏻‍🎨'
+puts 'Création de 5 users 👨🏻‍🎨'
 5.times do
   user = User.new(
     email: "#{Faker::Name.first_name}@#{Faker::Name.last_name}",
