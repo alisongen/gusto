@@ -57,7 +57,11 @@ gem "sassc-rails"
 # pour la geoloc, carte, etc...
 gem "geocoder"
 
+# ne plus avoir le msg d'erreur
 gem 'ostruct'
+
+# faker la seed facilement
+gem 'faker'
 
 group :development, :test do
   gem "dotenv-rails"
