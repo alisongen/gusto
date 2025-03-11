@@ -22,7 +22,7 @@ puts 'Création de 100 restaurants 👨🏻‍🎨'
     address: Faker::Address.full_address,
     category: Faker::Nation.nationality,
     menu: Faker::Internet.domain_name,
-    rating: Faker::Number.decimal(l_digits: 2),
+    rating: Faker::Number.within(range: 1..5),
     phone_number: Faker::PhoneNumber.cell_phone_with_country_code,
     website: Faker::Internet.domain_name
   )
