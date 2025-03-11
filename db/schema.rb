@@ -66,6 +66,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_11_142557) do
     t.bigint "restaurant_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "collection"
     t.index ["restaurant_id"], name: "index_saved_restaurants_on_restaurant_id"
     t.index ["user_id"], name: "index_saved_restaurants_on_user_id"
   end
