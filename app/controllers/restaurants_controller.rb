@@ -1,14 +1,14 @@
 class RestaurantsController < ApplicationController
+  def index
+    Restaurant.all
+  end
+
   def new
 
   end
 
   def create
 
-  end
-
-  def index
-    Restaurant.all
   end
 
   def edit
