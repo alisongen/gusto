@@ -1,4 +1,4 @@
-class SavedRestaurant
-  belongs_to :user
+class SavedRestaurant < ApplicationRecord
   belongs_to :restaurant
+  belongs_to :user
 end
