@@ -1,0 +1,2 @@
+class SavedRestaurantsController < ApplicationController
+end
