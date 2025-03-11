@@ -14,16 +14,11 @@ class FriendshipsController < ApplicationController
 
   def create
     @friendship = Friendship.new
-
+    @friendship.user_id = current_user.id
+    @friendship.friend_id = User.find(params[:user_id])
   end
 
   def delete
 
-  end
-
-  private
-
-  def friendship_params
-    params.require(:booking).permit(:reservation_date, :user_id, :dream_id)
   end
 end
