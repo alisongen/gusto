@@ -17,10 +17,12 @@ class FriendshipsController < ApplicationController
     @friendship.user_id = current_user.id
     @friendship.friend_id = User.find(params[:user_id])
     @friendship.save
-    redirect_to dashboard_path()
+    redirect_to friendships_path()
   end
 
-  def delete
-
+  def destroy
+    @friendship = Friendship.find(params[:id])
+    @friendship.destroy
+    redirect_to friendships_path()
   end
 end
