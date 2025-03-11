@@ -1,0 +1,3 @@
+class SavedRestaurant
+
+end
