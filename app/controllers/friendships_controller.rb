@@ -16,6 +16,8 @@ class FriendshipsController < ApplicationController
     @friendship = Friendship.new
     @friendship.user_id = current_user.id
     @friendship.friend_id = User.find(params[:user_id])
+    @friendship.save
+    redirect_to dashboard_path()
   end
 
   def delete
