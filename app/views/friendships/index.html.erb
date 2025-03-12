@@ -1,0 +1,6 @@
+<h1>Mes amis</h1>
+<% @friendships.each do |friendship| %>
+  <% if (current_user == User.find(friendship.user_id)) %>
+    <%= User.find(friendship.friend_id).username %>
+  <% end %>
+<% end %>
