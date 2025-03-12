@@ -27,9 +27,11 @@ puts 'Création de 100 restaurants 👨🏻‍🎨'
   Faker::Config.locale = 'fr'
   restaurant.phone_number = Faker::PhoneNumber.cell_phone_with_country_code
   restaurant.save!
-  puts '...'
 end
 p
+puts '...'
+puts '...'
+puts '...'
 puts 'Finished restos ✅'
 
 puts 'Destruction des users 💥'
@@ -37,8 +39,8 @@ User.destroy_all
 p
 puts 'Users supprimés 🎊'
 p
-puts 'Création de 5 users 👨🏻‍🎨'
-5.times do
+puts 'Création de 10 users 👨🏻‍🎨'
+10.times do
   user = User.new(
     email: "#{Faker::Name.first_name}@#{Faker::Name.last_name}",
     password: Faker::Lorem.characters(number: 6),
@@ -46,10 +48,49 @@ puts 'Création de 5 users 👨🏻‍🎨'
     username: Faker::FunnyName.name,
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
-  )
-  user.save!
+    )
+    user.save!
+  end
+
+  p
   puts '...'
+  puts '...'
+  puts '...'
+puts 'Finished users ✅'
+
+puts "Création de l'admin 👨🏻‍🎨"
+
+admin = User.new(
+  email: "admin@gmail.com",
+  password: "123456",
+  city: "Admin-city",
+  username: "admin",
+  first_name: "admin",
+  last_name: "admin",
+  )
+  admin.save!
+  puts '...'
+  puts 'Finish the Admin ✅'
+
+puts 'Destruction des friendships 💥'
+Friendship.destroy_all
+p
+puts 'Friendships supprimés 🎊'
+p
+puts 'Création de 5 friendships 👨🏻‍🎨'
+5.times do
+  friendship = Friendship.new(
+    user_id: User.find
+    t.bigint "user_id", null: false
+    t.bigint "friend_id", null: false
+  )
+  friendship.save!
 end
 
+puts '...'
+puts '...'
+puts '...'
 p
-puts 'Finished users ✅'
+puts 'Finished friendships ✅'
+
+
