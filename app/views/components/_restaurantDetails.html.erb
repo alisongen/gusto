@@ -1,38 +1,47 @@
 <div class="details-container">
-   <!-- Afficher la description -->
+  <!-- Afficher la description -->
   <div class="description">
     <p>Description</p>
-    <p><%= @restaurant.description %></p>
+    <% if @restaurant.description.length <= 120 %>
+      <p><%= @restaurant.description %></p>
+    <% else %>
+      <p><%= truncate(@restaurant.description, length: 120) %></p>
+      <!-- TODO: JS pour afficher un bouton "See more"/"See less" -->
+    <% end %>
   </div>
-  <!-- Afficher la catégorie -->
-  <div class="detail">
-    <i class="fa-solid fa-utensils"></i>
-    <p>Catégorie</p>
-    <p><%= @restaurant.category %></p>
-  </div>
-  <!-- Afficher l'adresse -->
-  <div class="detail">
-    <i class="fa-solid fa-utensils"></i>
-    <p>Adresse</p>
-    <p><%= @restaurant.address %></p>
-  </div>
-  <!-- Afficher le téléphone -->
-  <div class="detail">
-    <i class="fa-solid fa-utensils"></i>
-    <p>Téléphone</p>
-    <p><%= @restaurant.phone_number %></p>
-  </div>
-  <!-- Afficher le téléphone -->
-  <div class="detail">
-    <i class="fa-solid fa-utensils"></i>
-    <p>Téléphone</p>
-    <p><%= @restaurant.phone_number %></p>
-  </div>
-  <!-- Afficher le site internet -->
-  <div class="detail">
-    <i class="fa-solid fa-utensils"></i>
-    <p>Site internet</p>
-    <p><%= @restaurant.website %></p>
-    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+  <div class="details-list">
+    <!-- Afficher la catégorie -->
+    <div class="detail">
+      <i class="fa-solid fa-utensils"></i>
+      <div class="detail-info">
+        <p>Catégorie</p>
+        <p><%= @restaurant.category %></p>
+      </div>
+    </div>
+    <!-- Afficher l'adresse -->
+    <div class="detail">
+      <i class="fa-solid fa-utensils"></i>
+      <div class="detail-info">
+        <p>Adresse</p>
+        <p><%= @restaurant.address %></p>
+      </div>
+    </div>
+    <!-- Afficher le téléphone -->
+    <div class="detail">
+      <i class="fa-solid fa-utensils"></i>
+      <div class="detail-info">
+        <p>Téléphone</p>
+        <p><%= @restaurant.phone_number %></p>
+      </div>
+    </div>
+    <!-- Afficher le site internet -->
+    <div class="detail">
+      <i class="fa-solid fa-utensils"></i>
+      <div class="detail-info">
+        <p>Site internet</p>
+        <p><%= @restaurant.website %></p>
+      </div>
+      <i class="fa-solid fa-arrow-up-right-from-square"></i>
+    </div>
   </div>
 </div>
