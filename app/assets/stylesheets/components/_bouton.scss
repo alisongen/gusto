@@ -1,0 +1,19 @@
+@media screen and (max-width: 767px) {
+  .bouton-large {
+    text-decoration: none;
+    width: 100%;
+    background-color: black;
+    color: white;
+    padding: 15px;
+  }
+
+  .bouton-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    border-radius: 10px;
+    background-color: aqua;
+  }
+}

@@ -1,0 +1,5 @@
+<div class="carousel">
+  <% @restaurant.images.each do |image|%>
+    <%= cl_image_tag, class: "carousel-image" %>
+  <% end %>
+</div>

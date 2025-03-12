@@ -1,0 +1,23 @@
+@media screen and (max-width: 767px) {
+  .details-container {
+    width: 100%;
+  }
+
+  .details-list{
+    border-radius : 20px;
+    border : solid #E6E6E6;
+    margin: 20px;
+    padding: 10px;
+  }
+
+  .detail {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    border-bottom: solid #E6E6E6;
+  }
+
+  .detail-info p {
+    margin: 0;
+  }
+}
