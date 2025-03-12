@@ -10,7 +10,8 @@ Rails.application.routes.draw do
 
   resources :saved_restaurants, except: :show
 
-  resources :friendships, except: %i[edit update]
+  resources :friendships, except: %i[edit update new]
+  get "friendships", to: "friendship#new"
 
   get "dashboard", to: "pages#dashboard"
   get "actuality", to: "pages#actuality"

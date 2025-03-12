@@ -6,7 +6,7 @@ class FriendshipsController < ApplicationController
   end
 
   def show
-  
+
   end
 
   def new
