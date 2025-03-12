@@ -67,8 +67,8 @@ puts 'Finished users ✅'
 puts "Création de l'admin 👨🏻‍🎨"
 
 admin = User.new(
-  email: "admin@gmail.com",
-  password: "123456",
+  email: "admin@admin",
+  password: "adminadmin",
   city: "Admin-city",
   username: "admin",
   first_name: "admin",
@@ -79,21 +79,14 @@ admin = User.new(
   puts 'Finish the Admin ✅'
 
   p
-  puts 'Création de 5 friendships 👨🏻‍🎨'
-  5.times do
+  puts 'Création de 33 friendships 👨🏻‍🎨'
+  30.times do
     users = User.all
     friendship = Friendship.new(
       user: users.sample,
       friend: users.sample
     )
     friendship.save! unless friendship.user == friendship.friend
-    # User.sample
-    # users.each do |user|
-    #   3.times do
-    #   friend = users.sample # Choisir un ami aléatoire
-    #   Friendship.create!(user: user.id, friend: friend.id) unless user == friend
-    #   end
-    # end
   end
 
 
@@ -108,3 +101,4 @@ admin = User.new(
   puts "Les users commencent à l'ID #{User.first.id}"
   puts "L'ID de l'admin est #{admin.id}"
   puts "Les friendships commencent à l'ID #{Friendship.first.id}"
+  puts "Les collections commencent à l'ID #{.first.id}"
