@@ -11,7 +11,6 @@ class SavedRestaurantsController < ApplicationController
     @user = current_user
     @saved_restaurant = SavedRestaurant.new(saved_restaurant_params)
     @saved_restaurant.user_id = @user.id
-    @saved_restaurant.restaurant_id = ??
     @saved_restaurant.save
   end
 
@@ -27,6 +26,6 @@ class SavedRestaurantsController < ApplicationController
   private
 
   def saved_restaurant_params
-    params.require(:saved_restaurant).permit(:restaurant_id, :user_id)
+    params.require(:saved_restaurant).permit(:user_id)
   end
 end
