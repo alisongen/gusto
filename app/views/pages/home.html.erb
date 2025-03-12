@@ -8,7 +8,9 @@
 <% end %>
 
   <!-- afficher les photos cloudinary -->
-
+<% @saved_restaurant.photos.each do |photo| %>
+  <%= cl_image_tag(photo.key, width: 300, height: 200, crop: "scale", effect: "cartoonify")  %>
+<% end %>
 
 <div data-controller="reset">
   <%= render "search-bar" %>

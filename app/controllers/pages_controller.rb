@@ -10,5 +10,6 @@ class PagesController < ApplicationController
     #  C'EST LA FAUTE DE BRUNO SI C'EST PAS CURRENT USER
     @user = User.first
     @saved_restaurants = @user.saved_restaurants
+    @saved_restaurant = @saved_restaurants.first
   end
 end
