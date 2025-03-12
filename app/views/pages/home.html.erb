@@ -1,5 +1,16 @@
 <h1>Pages#home</h1>
-<p><%= restaurants = Restaurant.all %></p>
+<!-- vérifier cloudinary -->
+<%= simple_form_for(@saved_restaurant) do |f| %>
+  <!-- [...] -->
+  <%= f.input :photos, as: :file, input_html: { multiple: true } %>
+  <!-- [...] -->
+  <%= f.button :submit %>
+<% end %>
+
+  <!-- afficher les photos cloudinary -->
+
+<!-- pouvoir se rendre sur la show via autant de liens que de restaurants -->
+<% restaurants = Restaurant.all %>
 <% restaurants.each do |restaurant| %>
   <p>
     <%= link_to 'Joli resto', restaurant_path(restaurant) %>
