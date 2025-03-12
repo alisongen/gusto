@@ -34,7 +34,8 @@ class FriendshipsController < ApplicationController
 
   def decline
     @friendship.decline!
-    redirect_to friendship_path()
+    @friendship.destroy
+    redirect_to friendships_path()
   end
 
   private
