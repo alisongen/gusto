@@ -8,7 +8,7 @@
 <h1>Friends requests</h1>
 <% @friendships.each do |friendship| %>
   <% if (current_user == User.find(friendship.friend_id) && friendship.status == "pending") %>
-     <p>Friend request for <%=  User.find(friendship.friend_id).username %><%= link_to "Accept", accept_path(friendship), class: "btn btn-success", data: { turbo_method: "PATCH" } %><%= link_to "Decline", decline_path(friendship), class: "btn btn-danger", data: { turbo_method: "PATCH" } %></p>
+     <p>Friend request for <%=  User.find(friendship.user_id).username %><%= link_to "Accept", accept_path(friendship), class: "btn btn-success", data: { turbo_method: "PATCH" } %><%= link_to "Decline", decline_path(friendship), class: "btn btn-danger", data: { turbo_method: "PATCH" } %></p>
   <% end %>
 <% end %>
 
