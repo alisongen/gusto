@@ -2,11 +2,11 @@
 <% @friendships.each do |friendship| %>
   <% if (current_user == User.find(friendship.user_id)) %>
     <%= link_to "#{ User.find(friendship.friend_id).username }", friendship_path(friendship) %>
-    <%= link_to "Delete", friendship_path(friendship), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+    <%= link_to "Delete", friendship_path(friendship), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-danger" %>
   <% end %>
 <% end %>
 
 <h1>Ajouter un ami</h1>
-<% @friendships.each do |friendship| %>
-  
+<% User.all.each do |user| %>
+  <%= user.username %>
 <% end %>
