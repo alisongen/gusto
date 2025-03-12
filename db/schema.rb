@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_03_11_151652) do
+ActiveRecord::Schema[7.1].define(version: 2025_03_12_101924) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -71,6 +71,15 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_11_151652) do
     t.index ["user_id"], name: "index_saved_restaurants_on_user_id"
   end
 
+  create_table "saved_restaurants_collections", force: :cascade do |t|
+    t.bigint "saved_restaurant_id", null: false
+    t.bigint "collection_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["collection_id"], name: "index_saved_restaurants_collections_on_collection_id"
+    t.index ["saved_restaurant_id"], name: "index_saved_restaurants_collections_on_saved_restaurant_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -95,4 +104,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_11_151652) do
   add_foreign_key "reviews", "users"
   add_foreign_key "saved_restaurants", "restaurants"
   add_foreign_key "saved_restaurants", "users"
+  add_foreign_key "saved_restaurants_collections", "collections"
+  add_foreign_key "saved_restaurants_collections", "saved_restaurants"
 end
