@@ -63,6 +63,9 @@ gem 'ostruct'
 # faker la seed facilement
 gem 'faker'
 
+# sauvegarder les images
+gem "cloudinary"
+
 group :development, :test do
   gem "dotenv-rails"
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
