@@ -18,3 +18,9 @@
   <% end %>
   </div>
 </div>
+<p><%= restaurants = Restaurant.all %></p>
+<% restaurants.each do |restaurant| %>
+  <p>
+    <%= link_to 'Joli resto', restaurant_path(restaurant) %>
+  </p>
+<% end %>
