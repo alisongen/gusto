@@ -1,2 +1,7 @@
 <h1>Pages#home</h1>
-<p></p>
+<p><%= restaurants = Restaurant.all %></p>
+<% restaurants.each do |restaurant| %>
+  <p>
+    <%= link_to 'Joli resto', restaurant_path(restaurant) %>
+  </p>
+<% end %>
