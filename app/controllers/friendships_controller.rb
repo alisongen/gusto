@@ -6,7 +6,7 @@ class FriendshipsController < ApplicationController
   end
 
   def show
-  
+
   end
 
   def new
@@ -16,8 +16,9 @@ class FriendshipsController < ApplicationController
   def create
     @friendship = Friendship.new
     @friendship.user_id = current_user.id
-    @friendship.friend_id = User.find(params[:user_id])
+    @friendship.friend_id = User.find(params[:format].to_i).id
     @friendship.save
+    @friendship.pending!
     redirect_to friendships_path()
   end
 
@@ -33,7 +34,8 @@ class FriendshipsController < ApplicationController
 
   def decline
     @friendship.decline!
-    redirect_to friendship_path()
+    @friendship.destroy
+    redirect_to friendships_path()
   end
 
   private

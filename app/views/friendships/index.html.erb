@@ -1,0 +1,35 @@
+<h1>Pending requests</h1>
+<% @friendships.each do |friendship| %>
+  <% if (current_user == User.find(friendship.user_id) && friendship.status == "pending") %>
+     <p>Your request for <%=  User.find(friendship.friend_id).username %> is pending</p>
+  <% end %>
+<% end %>
+
+<h1>Friends requests</h1>
+<% @friendships.each do |friendship| %>
+  <% if (current_user == User.find(friendship.friend_id) && friendship.status == "pending") %>
+     <p>Friend request for <%=  User.find(friendship.friend_id).username %><%= link_to "Accept", accept_path(friendship), class: "btn btn-success", data: { turbo_method: "PATCH" } %><%= link_to "Decline", decline_path(friendship), class: "btn btn-danger", data: { turbo_method: "PATCH" } %></p>
+  <% end %>
+<% end %>
+
+<h1>My Friends</h1>
+<% @friendships.each do |friendship| %>
+  <% if ((current_user == User.find(friendship.user_id) || current_user == User.find(friendship.friend_id)) && friendship.status == "accepted") %>
+    <%= link_to "#{ User.find(friendship.friend_id).username }", friendship_path(friendship) %>
+    <%= link_to "Delete", friendship_path(friendship), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-danger" %>
+  <% end %>
+<% end %>
+
+<h1>Add a friend</h1>
+<% User.all.each do |user| %>
+  <% friends = [] %>
+  <% @friendships.each do |friendship| %>
+    <% if (current_user == User.find(friendship.user_id)) %>
+      <% friends.insert(-1, friendship.friend_id) %>
+    <% end %>
+  <% end %>
+  <% unless (user == current_user || friends.include?(user.id)) %>
+    <%= user.username %>
+    <%= link_to "Add", friendships_path(user), data: {turbo_method: :post, turbo_confirm: "Are you sure?"}, class: "btn btn-success" %>
+  <% end %>
+<% end %>
