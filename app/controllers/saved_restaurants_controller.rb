@@ -1,11 +1,4 @@
 class SavedRestaurantsController < ApplicationController
-  def new
-
-  end
-
-  def create
-
-  end
 
   def index
     SavedRestaurant.all
@@ -19,7 +12,4 @@ class SavedRestaurantsController < ApplicationController
     @saved_restaurant = SavedRestaurant.first
   end
 
-  def delete
-
-  end
 end

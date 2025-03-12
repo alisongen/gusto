@@ -9,10 +9,30 @@
 
   <!-- afficher les photos cloudinary -->
 
-<!-- pouvoir se rendre sur la show via autant de liens que de restaurants -->
-<% restaurants = Restaurant.all %>
-<% restaurants.each do |restaurant| %>
-  <p>
-    <%= link_to 'Joli resto', restaurant_path(restaurant) %>
-  </p>
-<% end %>
+
+<div data-controller="reset">
+  <%= render "search-bar" %>
+
+  <% if params[:query].present? %>
+    <div data-reset-target="list">
+      <% if @restaurants.any? %>
+          <% @restaurants.each do |restaurant| %>
+            <p><%= restaurant.name %><i class="fa-solid fa-bookmark"></i></p>
+          <% end %>
+      <% else %>
+        <p>Sorry, no restaurant found.</p>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+<h1>Favorites</h1>
+<div>
+  <% @saved_restaurants.each do |saved_restaurant| %>
+    <p>
+      <%= link_to saved_restaurant.restaurant.name, restaurant_path(saved_restaurant.restaurant) %>
+    </p>
+  <% end %>
+</div>
+
+<h1>Recommended</h1>
