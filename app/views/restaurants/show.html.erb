@@ -2,3 +2,5 @@
 <i class="bouton-icon fa-solid fa-bookmark"></i>
 <%= render "components/restaurantDetails" %>
 <%= link_to "Add a review", root_path, class: "bouton-large" %>
+
+<%= link_to "Add favorite", saved_restaurants_path(restaurant_id: @restaurant.id),  data: { turbo_method: "post" } %>

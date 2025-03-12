@@ -29,7 +29,9 @@ class CollectionsController < ApplicationController
   end
 
   def destroy
-    # TO DO
+    @collection = Collection.find(params[:id])
+    @collection.destroy
+    redirect_to collection_path()
   end
 
   private
