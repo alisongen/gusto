@@ -22,6 +22,14 @@
 
 <h1>Add a friend</h1>
 <% User.all.each do |user| %>
-  <%= user.username %>
-  <%= link_to "Add", friendships_path(user), data: {turbo_method: :post, turbo_confirm: "Are you sure?"}, class: "btn btn-success" %>
+  <% friends = [] %>
+  <% @friendships.each do |friendship| %>
+    <% if (current_user == User.find(friendship.user_id)) %>
+      <% friends.insert(-1, friendship.friend_id) %>
+    <% end %>
+  <% end %>
+  <% unless (user == current_user || friends.include?(user.id)) %>
+    <%= user.username %>
+    <%= link_to "Add", friendships_path(user), data: {turbo_method: :post, turbo_confirm: "Are you sure?"}, class: "btn btn-success" %>
+  <% end %>
 <% end %>
