@@ -10,9 +10,19 @@ require 'faker'
 #   end
 puts 'Destruction des restos 💥'
 Restaurant.destroy_all
-p
+p ''
 puts 'Restos supprimés 🎊'
-p
+
+puts 'Destruction des friendships 💥'
+Friendship.destroy_all
+p ''
+puts 'Friendships supprimés 🎊'
+
+puts 'Destruction des users 💥'
+User.destroy_all
+p ''
+puts 'Users supprimés 🎊'
+p ''
 puts 'Création de 100 restaurants 👨🏻‍🎨'
 100.times do
   restaurant = Restaurant.new(
@@ -34,13 +44,9 @@ puts '...'
 puts '...'
 puts 'Finished restos ✅'
 
-puts 'Destruction des users 💥'
-User.destroy_all
-p
-puts 'Users supprimés 🎊'
 p
 puts 'Création de 10 users 👨🏻‍🎨'
-10.times do
+users = Array.new(10) do
   user = User.new(
     email: "#{Faker::Name.first_name}@#{Faker::Name.last_name}",
     password: Faker::Lorem.characters(number: 6),
@@ -72,25 +78,33 @@ admin = User.new(
   puts '...'
   puts 'Finish the Admin ✅'
 
-puts 'Destruction des friendships 💥'
-Friendship.destroy_all
-p
-puts 'Friendships supprimés 🎊'
-p
-puts 'Création de 5 friendships 👨🏻‍🎨'
-5.times do
-  friendship = Friendship.new(
-    user_id: User.find
-    t.bigint "user_id", null: false
-    t.bigint "friend_id", null: false
-  )
-  friendship.save!
-end
-
-puts '...'
-puts '...'
-puts '...'
-p
-puts 'Finished friendships ✅'
+  p
+  puts 'Création de 5 friendships 👨🏻‍🎨'
+  5.times do
+    users = User.all
+    friendship = Friendship.new(
+      user: users.sample,
+      friend: users.sample
+    )
+    friendship.save! unless friendship.user == friendship.friend
+    # User.sample
+    # users.each do |user|
+    #   3.times do
+    #   friend = users.sample # Choisir un ami aléatoire
+    #   Friendship.create!(user: user.id, friend: friend.id) unless user == friend
+    #   end
+    # end
+  end
 
 
+
+  puts '...'
+  puts '...'
+  puts '...'
+  p
+  puts 'Finished friendships ✅'
+
+  puts "Les restaurants commencent à l'ID #{Restaurant.first.id}"
+  puts "Les users commencent à l'ID #{User.first.id}"
+  puts "L'ID de l'admin est #{admin.id}"
+  puts "Les friendships commencent à l'ID #{Friendship.first.id}"
