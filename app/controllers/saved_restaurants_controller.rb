@@ -16,7 +16,7 @@ class SavedRestaurantsController < ApplicationController
   end
 
   def update
-
+    @saved_restaurant = SavedRestaurant.first
   end
 
   def delete
