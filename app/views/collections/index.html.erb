@@ -1,0 +1,6 @@
+<h1>Toutes les collections</h1>
+<% @collections.each do |collection| %>
+  <%= collection.name %>
+  <br>
+<% end %>
+<%= link_to "Create new collection", new_restaurant_collection_path(@restaurant, @collection)%>
