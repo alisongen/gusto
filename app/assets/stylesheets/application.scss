@@ -1,3 +1,9 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 // Graphical variables
 @import "config/fonts";
 @import "config/colors";
@@ -15,3 +21,4 @@
 @import "components/restaurant_details";
 @import "components/bouton";
 @import "components/review_list";
+@import "pages/show_restaurant"

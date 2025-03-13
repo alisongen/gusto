@@ -1,10 +1,14 @@
-<h1><%= @restaurant.name %></h1>
-<i class="bouton-icon fa-solid fa-bookmark"></i>
+<div class="restaurant-header">
+  <h1><%= @restaurant.name %></h1>
+  <%= link_to "#", data: { bs_toggle: "modal", bs_target: "#collectionModal" }, class: "bouton-icon " do %>
+    <i class="fa-solid fa-bookmark"></i>
+  <% end %>
+</div>
 <%= render "components/restaurantDetails" %>
 <%= link_to "Add a review", root_path, class: "bouton-large" %>
 
-
-<%= link_to "Add favorite", "#", data: { bs_toggle: "modal", bs_target: "#collectionModal" }, class: "btn btn-primary" %>
+<!---->
+<!-- Modal pour choisir la catégorie qui s'ouvre en mode pop-up -->
 <div class="modal fade" id="collectionModal" tabindex="-1" aria-labelledby="collectionModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
