@@ -10,7 +10,7 @@ Rails.application.routes.draw do
       patch "update_collection", to: "restaurants#update_collection", as: :collection
   end
 
-  resources :saved_restaurants, except: :show
+  resources :collections
 
   resources :friendships, except: %i[edit update new]
   get "friendships", to: "friendship#new"

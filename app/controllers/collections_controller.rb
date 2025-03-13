@@ -1,6 +1,7 @@
 class CollectionsController < ApplicationController
   def index
     @user = current_user
+
     if params[:collection]
 
     else
