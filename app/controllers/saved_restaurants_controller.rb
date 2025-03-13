@@ -1,6 +1,8 @@
 class SavedRestaurantsController < ApplicationController
   def create
+    # Récupération de l'ID Restaurant
     @restaurant = Restaurant.find(params[:restaurant_id])
+    # Création du saved restaurant
     @saved_restaurant = SavedRestaurant.new
     @saved_restaurant.user_id = current_user.id
     @saved_restaurant.restaurant = @restaurant
@@ -12,8 +14,12 @@ class SavedRestaurantsController < ApplicationController
     end
   end
 
-  def edit
+  # def choose_collection
+  #   @restaurant = Restaurant.find(params[:restaurant_id])
+  #   @collections = current_user.collections
+  # end
 
+  def edit
   end
 
   def update
@@ -26,9 +32,8 @@ class SavedRestaurantsController < ApplicationController
   end
 
   def delete
-  
   end
-  
+
 private
 
   def saved_restaurant_params

@@ -3,4 +3,31 @@
 <%= render "components/restaurantDetails" %>
 <%= link_to "Add a review", root_path, class: "bouton-large" %>
 
-<%= link_to "Add favorite", saved_restaurants_path(restaurant_id: @restaurant.id),  data: { turbo_method: "post" } %>
+
+<%= link_to "Add favorite", "#", data: { bs_toggle: "modal", bs_target: "#collectionModal" }, class: "btn btn-primary" %>
+<div class="modal fade" id="collectionModal" tabindex="-1" aria-labelledby="collectionModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="collectionModalLabel">Choose a collection</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <%= form_with url: restaurant_collection_path(restaurant_id: @restaurant.id), method: :patch, local: true do |f| %>
+          <div class="mb-3">
+            <label for="collectionSelect" class="form-label">Select Collection</label>
+            <select class="form-select" id="collectionSelect" name="collection_id">
+              <% @collections.each do |collection| %>
+                <option value="<%= collection.id %>"><%= collection.name %></option>
+              <% end %>
+            </select>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <%= f.submit "Add to Collection", class: "btn btn-primary" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
