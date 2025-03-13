@@ -1,0 +1,38 @@
+<h1>Dashboard</h1>
+
+<div>
+  <div>
+    <%# <%= cl_image_tag @user.avatar.key, class: "avatar" %>
+  </div>
+  <div>
+    <p><%= @user.username %></p>
+    <p><%= @user.email %></p>
+    <p><%= @user.city %></p>
+  </div>
+</div>
+
+<div>
+  <button>Modify Profil</button>
+  <button>Disconnect</button>
+</div>
+
+
+<div data-controller="showcat">
+  <div>
+    <button data-action="focus->showcat#toggle" >All</button>
+    <button data-action="focus->showcat#toggle">Collections</button>
+    <button>Reviews/Photos</button>
+  </div>
+
+  <div data-showcat-target="all">
+    <% @saved_restaurants.each do |saved_restaurant| %>
+      <p><%= link_to saved_restaurant.restaurant.name, restaurant_path(saved_restaurant.restaurant) %></p>
+    <% end %>
+  </div>
+
+  <div class="d-none" data-showcat-target="collections">
+    <% @collections.each do |collection| %>
+      <p><%= collection.name %></p>
+    <% end %>
+  </div>
+</div>
