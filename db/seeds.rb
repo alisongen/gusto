@@ -41,11 +41,18 @@ puts 'Users supprimés 🎊'
 p ''
 puts 'Création de 100 restaurants 👨🏻‍🎨'
 
-Cloudinary::Uploader.upload("../app/assets/images/jason-leung-poI7DelFiVA-unsplash.jpg")
-Cloudinary::Uploader.upload("../app/assets/images/jay-wennington-N_Y88TWmGwA-unsplash.jpg")
-Cloudinary::Uploader.upload("../app/assets/images/nick-karvounis-Ciqxn7FE4vE-unsplash.jpg")
-Cloudinary::Uploader.upload("../app/assets/images/volkan-vardar-1H30uRC1plc-unsplash.jpg")
+# COMMANDES POUR LA CONSOLE
+# Cloudinary::Uploader.upload(Rails.root.join('app/assets/images/jason-leung-poI7DelFiVA-unsplash.jpg'))
+# Cloudinary::Uploader.upload(Rails.root.join('app/assets/images/jay-wennington-N_Y88TWmGwA-unsplash.jpg'))
+# Cloudinary::Uploader.upload(Rails.root.join('app/assets/images/nick-karvounis-Ciqxn7FE4vE-unsplash.jpg'))
+# Cloudinary::Uploader.upload(Rails.root.join('app/assets/images/volkan-vardar-1H30uRC1plc-unsplash.jpg'))
 puts "photo uploadés sur cloudinary ✅"
+
+photo_ids = [
+  'lfedtxdtjovboo3bn9r8',
+  'nick-karvounis-Ciqxn7FE4vE-unsplash_wksntl',
+  'volkan-vardar-1H30uRC1plc-unsplash_rtdbef'
+]
 
 100.times do
   restaurant = Restaurant.new(
@@ -61,6 +68,13 @@ puts "photo uploadés sur cloudinary ✅"
   Faker::Config.locale = 'fr'
   restaurant.phone_number = Faker::PhoneNumber.cell_phone_with_country_code
   restaurant.save!
+
+  photo_id = photo_ids.sample
+  restaurant.images.attach(
+    io: URI.open("https://res.cloudinary.com/#{ENV['CLOUDINARY_CLOUD_NAME']}/image/upload/#{photo_id}.jpg"),
+    filename: "#{photo_id}.jpg",
+    content_type: "image/jpeg"
+  )
 
 end
 
