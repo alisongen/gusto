@@ -15,7 +15,7 @@
 <h1>My Friends</h1>
 <% @friendships.each do |friendship| %>
   <% if ((current_user == User.find(friendship.user_id) || current_user == User.find(friendship.friend_id)) && friendship.status == "accepted") %>
-    <%= link_to "#{ User.find(friendship.friend_id).username }", friendship_path(friendship) %>
+    <%= link_to "#{ User.find(friendship.user_id).username }", friendship_path(friendship) %>
     <%= link_to "Delete", friendship_path(friendship), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-danger" %>
   <% end %>
 <% end %>
