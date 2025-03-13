@@ -24,8 +24,9 @@
       <% if @restaurants.any? %>
           <%# Alors je fais une itération sur "@restaurants" %>
           <% @restaurants.each do |restaurant| %>
-            <%# Et pour chaque "restaurant", j'affiche les infos et la possibilité de l'ajouter à une collection %>
-            <p><%= restaurant.name %><i class="fa-solid fa-bookmark"></i></p>
+            <%# Et pour chaque "restaurant", j'affiche les infos (name et address), la possibilité de l'ajouter à une collection via l'icon %>
+            <%# et le lien cers la show du restaurant %>
+            <p><%= link_to restaurant.name, restaurant_path(restaurant) %><i class="fa-solid fa-bookmark"></i></p>
           <% end %>
       <%# Sinon %>
       <% else %>
@@ -42,9 +43,7 @@
   <%# Je fais une itération sur "@saved_restaurants" %>
   <% @saved_restaurants.each do |saved_restaurant| %>
     <%# Et pour chaque "saved_restaurant", je créé un lien qui me renvoie vers la show du restaurant %>
-    <p>
-      <%= link_to saved_restaurant.restaurant.name, restaurant_path(saved_restaurant.restaurant) %>
-    </p>
+    <p><%= link_to saved_restaurant.restaurant.name, restaurant_path(saved_restaurant.restaurant) %></p>
   <% end %>
 </div>
 
