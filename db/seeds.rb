@@ -47,7 +47,12 @@ puts 'Création de 100 restaurants 👨🏻‍🎨'
     menu: Faker::Internet.domain_name,
     rating: Faker::Number.within(range: 1..5),
     website: Faker::Internet.domain_name
-  )
+  ).tap do |resto|
+    resto.images.attach(
+      io: URI.open("https://res.cloudinary.com/#{ENV['CLOUDINARY_CLOUD_NAME']}/image/upload/#{cloudinary_ids.sample}.jpg"),
+      filename: "dream_image.jpg",
+      content_type: "image/jpeg"
+    )
   Faker::Config.locale = 'fr'
   restaurant.phone_number = Faker::PhoneNumber.cell_phone_with_country_code
   restaurant.save!
