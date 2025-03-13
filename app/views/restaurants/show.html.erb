@@ -1,6 +1,6 @@
 <h1><%= @restaurant.name %></h1>
 <i class="bouton-icon fa-solid fa-bookmark"></i>
-<%= render "components/imageCarousel", photo: @photo %>
+<%= render "components/imageCarousel", images: @images %>
 <%= render "components/restaurantDetails" %>
 <%= link_to "Add a review", root_path, class: "bouton-large" %>
 

@@ -1,8 +1,7 @@
 <div class="carousel">
-  <%= cl_image_tag('nick-karvounis-Ciqxn7FE4vE-unsplash_xitvdh', width: 300, height: 200, crop: "scale", effect: "cartoonify") %>
-</div>
-<div class="carousel">
-    <p>Photo key: <%= photo %></p>
+  <% images.each do |image| %>
+    <%= cl_image_tag image.key, class: "carousel-image" %>
+  <% end %>
 </div>
 
 <!-- Le futur carousel de la show du restaurant -->
