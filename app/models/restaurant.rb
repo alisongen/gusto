@@ -10,4 +10,5 @@ class Restaurant < ApplicationRecord
   after_validation :geocode, if: :will_save_change_to_address?
 
   has_many :saved_restaurants
+  has_many_attached :images
 end

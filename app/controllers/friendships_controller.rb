@@ -7,7 +7,7 @@ class FriendshipsController < ApplicationController
 
   def show
      # J'assigne à ma variable d'instance "@user" le "current_user"
-     @user = User.find(@friendship.friend_id)
+     @user = User.find(@friendship.user_id)
      # Récupération de tout les saved_restaurants de mon @user
      @saved_restaurants = @user.saved_restaurants
      # Récupération des collections de mon @user

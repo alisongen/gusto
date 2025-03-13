@@ -5,6 +5,7 @@ class RestaurantsController < ApplicationController
 
   def show
     @restaurant = Restaurant.find(params[:id])
+    @images = @restaurant.images
     @collections = Collection.where(user_id: current_user.id)
   end
 

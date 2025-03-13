@@ -4,6 +4,7 @@
     <i class="fa-solid fa-bookmark"></i>
   <% end %>
 </div>
+<%= render "components/imageCarousel", images: @images %>
 <%= render "components/restaurantDetails" %>
 <%= link_to "Add a review", root_path, class: "bouton-large" %>
 
@@ -35,3 +36,16 @@
     </div>
   </div>
 </div>
+
+<!-- ajouter une photo via cloudinary à notre saved restaurant-->
+<%#= simple_form_for(@saved_restaurant) do |f| %>
+  <!-- [...] -->
+  <%#= f.input :photos, as: :file, input_html: { multiple: true } %>
+  <!-- [...] -->
+  <%#= f.button :submit %>
+<%# end %>
+
+  <!-- afficher les photos cloudinary du saved restaurant -->
+<%# @saved_restaurant.photos.each do |photo| %>
+  <%#= cl_image_tag(photo.key, width: 300, height: 200, crop: "scale", effect: "cartoonify")  %>
+<%# end %>

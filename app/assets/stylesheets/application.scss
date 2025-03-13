@@ -12,6 +12,7 @@
 // External libraries
 @import "bootstrap";
 @import "font-awesome";
+@import url("https://api.mapbox.com/mapbox-gl-js/v3.1.2/mapbox-gl.css");
 
 // Your CSS partials
 @import "components/index";
@@ -21,4 +22,5 @@
 @import "components/restaurant_details";
 @import "components/bouton";
 @import "components/review_list";
+@import "components/map";
 @import "pages/show_restaurant"
