@@ -1,0 +1,65 @@
+<body cz-shortcut-listen="true">
+    <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
+  <div class="container-fluid d-flex align-items-center">
+        <a class="navbar-brand" href="/dashboard/">
+          <img class="avatar" alt="avatar" src="https://png.pngtree.com/png-vector/20221018/ourmid/pngtree-master-chef-logo-illustration-png-image_6351381.png">
+</a>
+    <div class="d-flex justify-content-center flex-grow-1">
+        <ul class="gap-4 navbar-nav">
+            <li class="nav-item active">
+              <h1>GUSTO</h1>
+            </li>
+        </ul>
+      </div>
+
+    <div class="d-flex justify-content-end" id="navbarSupportedContent">
+      <ul class="navbar-nav">
+          <li class="nav-item">
+            <a data-turbo-method="delete" class="nav-link" href="/users/sign_out">Disconnect</a>
+          </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+
+
+    <div data-controller="reset">
+  <div class="row justify-content-center">
+  <div class="col-sm-8 my-3">
+    <form class="d-flex" action="/" accept-charset="UTF-8" method="get">
+      <input type="text" name="query" id="query" class="form-control" placeholder="Type a keyword" data-reset-target="textField" data-action="input->reset#changeInput">
+
+      <button name="button" type="button" data-action="click->reset#clear" data-reset-target="button" class="btn d-none">
+        <i class="fa-solid fa-x icon"></i>
+</button>      <input type="submit" name="" value="Search" class="btn btn-primary" data-disable-with="Search">
+</form>  </div>
+</div>
+
+</div>
+
+<h1>Favorites</h1>
+<div>
+    <p><a href="/restaurants/3958">Salty Gastropub</a></p>
+    <p><a href="/restaurants/3954">Blue House</a></p>
+    <p><a href="/restaurants/3960">Blue Plate Pizza</a></p>
+    <p><a href="/restaurants/3959">Green Deli</a></p>
+    <p><a href="/restaurants/3956">Salty Kitchen</a></p>
+</div>
+
+<h1>Recommended</h1>
+
+
+    <div class="footer">
+  <div class="footer-links">
+    <a href="/"><i class="fa-solid fa-house"></i></a>
+    <a href="/dashboard/"><i class="fa-solid fa-heart"></i></a>
+    <a href="/"><i class="fa-solid fa-bell"></i></a>
+    <a href="/friendships/"><i class="fa-solid fa-user-group"></i></a>
+  </div>
+</div>
+
+
+
+</body>
