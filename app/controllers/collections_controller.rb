@@ -2,13 +2,14 @@ class CollectionsController < ApplicationController
   def index
     @user = User.first
     @collections = @user.collections
-    @saved_restaurants = @user.saved_restaurants
+    # @saved_restaurants = @user.saved_restaurants
+    @restaurants = @user.restaurants
 
-    @markers = @saved_restaurants.geocoded.map do |saved_restaurant|
+    @markers = @restaurants.geocoded.map do |restaurant|
       {
-        lat: saved_restaurant.latitude,
-        lng: saved_restaurant.longitude,
-        info_window_html: render_to_string(partial: "info_window", locals: {saved_restaurant: saved_restaurant}),
+        lat: restaurant.latitude,
+        lng: restaurant.longitude,
+        info_window_html: render_to_string(partial: "info_window", locals: { restaurant: restaurant }),
         marker_html: render_to_string(partial: "marker")
       }
     end
