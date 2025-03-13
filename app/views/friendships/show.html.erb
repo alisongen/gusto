@@ -4,7 +4,7 @@
 <div>
   <%  if (@user.avatar.attached?) %>
     <%= link_to "/dashboard/", class: "navbar-brand" do %>
-      <%= cl_image_tag @_user.avatar.key, class: "avatar-large", alt: "avatar" %>
+      <%= cl_image_tag @user.avatar.key, class: "avatar-large", alt: "avatar" %>
     <% end %>
   <% else %>
     <%= link_to "/dashboard/", class: "navbar-brand" do %>
