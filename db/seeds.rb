@@ -1,4 +1,6 @@
 require 'faker'
+require 'open-uri'
+
 # This file should ensure the existence of records required to run the application in every environment (production,
 # development, test). The code here should be idempotent so that it can be executed at any point in every environment.
 # The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
@@ -38,6 +40,8 @@ User.destroy_all
 puts 'Users supprimés 🎊'
 p ''
 puts 'Création de 100 restaurants 👨🏻‍🎨'
+
+photos = ['nick-karvounis-Ciqxn7FE4vE-unsplash_xitvdh', 'jason-leung-poI7DelFiVA-unsplash_elpnbh', 'volkan-vardar-1H30uRC1plc-unsplash_wksntl', 'jay-wennington-N_Y88TWmGwA-unsplash_rtdbef']
 100.times do
   restaurant = Restaurant.new(
     name: Faker::Restaurant.name,
@@ -47,16 +51,20 @@ puts 'Création de 100 restaurants 👨🏻‍🎨'
     menu: Faker::Internet.domain_name,
     rating: Faker::Number.within(range: 1..5),
     website: Faker::Internet.domain_name
-  ).tap do |resto|
-    resto.images.attach(
-      io: URI.open("https://res.cloudinary.com/#{ENV['CLOUDINARY_CLOUD_NAME']}/image/upload/#{cloudinary_ids.sample}.jpg"),
-      filename: "dream_image.jpg",
-      content_type: "image/jpeg"
-    )
+  )
+
   Faker::Config.locale = 'fr'
   restaurant.phone_number = Faker::PhoneNumber.cell_phone_with_country_code
   restaurant.save!
+
+  restaurant.images.attach(
+    io: URI.open("https://res.cloudinary.com/#{ENV['CLOUDINARY_CLOUD_NAME']}/image/upload/#{photos.sample}.jpg"),
+    filename: "restaurant_image.jpg",
+    content_type: "image/jpeg"
+  )
+
 end
+
 p
 puts '...'
 puts '...'
