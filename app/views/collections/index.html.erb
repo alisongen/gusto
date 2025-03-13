@@ -1,27 +1,15 @@
-<h1>Dashboard</h1>
+<h1>Collections</h1>
 
-<div>
-  <div>
-    <%# <%= cl_image_tag @user.avatar.key, class: "avatar" %>
-  </div>
-  <div>
-    <p><%= @user.username %></p>
-    <p><%= @user.email %></p>
-    <p><%= @user.city %></p>
-  </div>
-</div>
-
-<div>
-  <button>Modify Profil</button>
-  <button>Disconnect</button>
-</div>
-
+<div style="width: 100%; height: 600px;"
+  data-controller="map"
+  data-map-markers-value="<%= @markers.to_json %>"
+  data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
 
 <div data-controller="showcat">
   <div>
     <button data-action="focus->showcat#toggle" >All</button>
     <button data-action="focus->showcat#toggle">Collections</button>
-    <button>Reviews/Photos</button>
+    <button data-action="focus->showcat#toggle">Friends</button>
   </div>
 
   <div data-showcat-target="all">
@@ -32,7 +20,13 @@
 
   <div class="d-none" data-showcat-target="collections">
     <% @collections.each do |collection| %>
-      <p><%= link_to collection.name, collections_path %></p>
+      <p><%= collection.name %></p>
     <% end %>
   </div>
+
+  <%# <div class="d-none" data-showcat-target="friends">
+    <% @frienships.each do |friendship| %>
+      <%# <p><%= friendship.user.username </p> %>
+    <%# <% end %>
+  <%# </div>  %>
 </div>
