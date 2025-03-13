@@ -41,7 +41,12 @@ puts 'Users supprimés 🎊'
 p ''
 puts 'Création de 100 restaurants 👨🏻‍🎨'
 
-photos = ['nick-karvounis-Ciqxn7FE4vE-unsplash_xitvdh', 'jason-leung-poI7DelFiVA-unsplash_elpnbh', 'volkan-vardar-1H30uRC1plc-unsplash_wksntl', 'jay-wennington-N_Y88TWmGwA-unsplash_rtdbef']
+Cloudinary::Uploader.upload("../app/assets/images/jason-leung-poI7DelFiVA-unsplash.jpg")
+Cloudinary::Uploader.upload("../app/assets/images/jay-wennington-N_Y88TWmGwA-unsplash.jpg")
+Cloudinary::Uploader.upload("../app/assets/images/nick-karvounis-Ciqxn7FE4vE-unsplash.jpg")
+Cloudinary::Uploader.upload("../app/assets/images/volkan-vardar-1H30uRC1plc-unsplash.jpg")
+puts "photo uploadés sur cloudinary ✅"
+
 100.times do
   restaurant = Restaurant.new(
     name: Faker::Restaurant.name,
@@ -56,12 +61,6 @@ photos = ['nick-karvounis-Ciqxn7FE4vE-unsplash_xitvdh', 'jason-leung-poI7DelFiVA
   Faker::Config.locale = 'fr'
   restaurant.phone_number = Faker::PhoneNumber.cell_phone_with_country_code
   restaurant.save!
-
-  restaurant.images.attach(
-    io: URI.open("https://res.cloudinary.com/#{ENV['CLOUDINARY_CLOUD_NAME']}/image/upload/#{photos.sample}.jpg"),
-    filename: "restaurant_image.jpg",
-    content_type: "image/jpeg"
-  )
 
 end
 
