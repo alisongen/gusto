@@ -23,13 +23,13 @@
   <% end %>
 </div>
 
-<h1>Favorites</h1>
+<h1><%= link_to "Favorites", collections_path() %> </h1>
 <%# Création d'une div afin d'afficher la collection "Favorites" %>
 <div>
-  <%# Je fais une itération sur "@saved_restaurants" %>
-  <% @saved_restaurants.each do |saved_restaurant| %>
+  <%# Je fais une itération sur "@restaurants" %>
+  <% @restaurants.each do |restaurant| %>
     <%# Et pour chaque "saved_restaurant", je créé un lien qui me renvoie vers la show du restaurant %>
-    <p><%= link_to saved_restaurant.restaurant.name, restaurant_path(saved_restaurant.restaurant) %></p>
+    <p><%= link_to restaurant.name, restaurant_path(restaurant) %></p>
   <% end %>
 </div>
 

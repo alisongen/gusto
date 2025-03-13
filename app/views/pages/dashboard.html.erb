@@ -33,14 +33,14 @@
   </div>
 
   <div data-showcat-target="all">
-    <% @saved_restaurants.each do |saved_restaurant| %>
-      <p><%= link_to saved_restaurant.restaurant.name, restaurant_path(saved_restaurant.restaurant) %></p>
+    <% @restaurants.each do |restaurant| %>
+      <p><%= link_to restaurant.name, restaurant_path(restaurant) %></p>
     <% end %>
   </div>
 
   <div class="d-none" data-showcat-target="collections">
     <% @collections.each do |collection| %>
-      <p><%= collection.name %></p>
+      <p><%= link_to collection.name, collections_path %></p>
     <% end %>
   </div>
 </div>
