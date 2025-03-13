@@ -1,6 +1,21 @@
 class CollectionsController < ApplicationController
   def index
     @user = current_user
+
+    if params[:collection]
+
+    else
+      @restaurants = @user.restaurants
+    end
+    @markers = @restaurants.geocoded.map do |restaurant|
+      {
+        lat: restaurant.latitude,
+        lng: restaurant.longitude,
+        info_window_html: render_to_string(partial: "info_window", locals: { restaurant: restaurant }),
+        marker_html: render_to_string(partial: "marker")
+      }
+    end
+
     @collections = @user.collections
   end
 
@@ -9,10 +24,12 @@ class CollectionsController < ApplicationController
   end
 
   def new
+    @restaurant = Restaurant.find(params[:restaurant_id])
     @collection = Collection.new
   end
 
   def create
+    @restaurant = Restaurant.find(params[:restaurant_id])
     @user = current_user
     @collection = Collection.new(collection_params)
     @collection.user_id = @user.id

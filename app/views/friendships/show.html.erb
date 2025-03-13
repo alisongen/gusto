@@ -1,1 +1,34 @@
-<%= User.find(@friendship.friend_id).username %>
+<h1><%= @user.username %></h1>
+
+
+<div>
+  <%  if (@user.avatar.attached?) %>
+    <%= link_to "/dashboard/", class: "navbar-brand" do %>
+      <%= cl_image_tag @user.avatar.key, class: "avatar-large", alt: "avatar" %>
+    <% end %>
+  <% else %>
+    <%= link_to "/dashboard/", class: "navbar-brand" do %>
+      <%= image_tag "https://png.pngtree.com/png-vector/20221018/ourmid/pngtree-master-chef-logo-illustration-png-image_6351381.png", class: "avatar", alt: "avatar" %>
+    <% end %>
+  <% end %>
+</div>
+
+<div data-controller="showcat">
+  <div>
+    <button data-action="focus->showcat#toggle" >All</button>
+    <button data-action="focus->showcat#toggle">Collections</button>
+    <button>Reviews/Photos</button>
+  </div>
+
+  <div data-showcat-target="all">
+    <% @saved_restaurants.each do |saved_restaurant| %>
+      <p><%= link_to saved_restaurant.restaurant.name, restaurant_path(saved_restaurant.restaurant) %></p>
+    <% end %>
+  </div>
+
+  <div class="d-none" data-showcat-target="collections">
+    <% @collections.each do |collection| %>
+      <p><%= collection.name %></p>
+    <% end %>
+  </div>
+</div>
