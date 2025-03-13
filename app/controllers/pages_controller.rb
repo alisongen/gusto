@@ -17,7 +17,7 @@ class PagesController < ApplicationController
 
   def dashboard
     # J'assigne à ma variable d'instance "@user" le "current_user"
-    @user = User.first
+    @user = current_user
     # Récupération de tout les saved_restaurants de mon @user
     @restaurants = @user.restaurants
     # Récupération des collections de mon @user

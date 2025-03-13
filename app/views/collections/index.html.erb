@@ -21,7 +21,9 @@
   <div class="d-none" data-showcat-target="collections" data-controller="showfav">
     <% @collections.each do |collection| %>
       <button><%= collection.name %></button>
-      <p><%= collection.name.saved_restaurants %></p>
+      <% collection.saved_restaurants.each do |saved_restaurant| %>
+        <p><%= saved_restaurant.restaurant.name %></p>
+      <% end %>
     <% end %>
   </div>
 

@@ -1,10 +1,8 @@
 class CollectionsController < ApplicationController
   def index
     @user = User.first
-    @collections = @user.collections
-    # @saved_restaurants = @user.saved_restaurants
-    @restaurants = @user.restaurants
 
+    @restaurants = @user.restaurants
     @markers = @restaurants.geocoded.map do |restaurant|
       {
         lat: restaurant.latitude,
@@ -13,6 +11,8 @@ class CollectionsController < ApplicationController
         marker_html: render_to_string(partial: "marker")
       }
     end
+
+    @collections = @user.collections
   end
 
   def show
@@ -20,10 +20,12 @@ class CollectionsController < ApplicationController
   end
 
   def new
+    @restaurant = Restaurant.find(params[:restaurant_id])
     @collection = Collection.new
   end
 
   def create
+    @restaurant = Restaurant.find(params[:restaurant_id])
     @user = current_user
     @collection = Collection.new(collection_params)
     @collection.user_id = @user.id

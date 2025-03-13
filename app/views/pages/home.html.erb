@@ -9,7 +9,7 @@
 
   <!-- afficher les photos cloudinary -->
 <%# <% @restaurant.photos.each do |photo| %>
-  <%# <%= cl_image_tag(photo.key, width: 300, height: 200, crop: "scale", effect: "cartoonify")  %> 
+  <%# <%= cl_image_tag(photo.key, width: 300, height: 200, crop: "scale", effect: "cartoonify")  %>
 <%# <% end %>
 
 <div data-controller="reset">
@@ -37,7 +37,7 @@
   <% end %>
 </div>
 
-<h1>Favorites</h1>
+<h1><%= link_to "Favorites", collections_path() %> </h1>
 <%# Création d'une div afin d'afficher la collection "Favorites" %>
 <div>
   <%# Je fais une itération sur "@restaurants" %>

@@ -2,7 +2,15 @@
 
 <div>
   <div>
-    <%# <%= cl_image_tag @user.avatar.key, class: "avatar" %>
+    <%  if (current_user.avatar.attached?) %>
+      <%= link_to "/dashboard/", class: "navbar-brand" do %>
+        <%= cl_image_tag current_user.avatar.key, class: "avatar-large", alt: "avatar" %>
+      <% end %>
+    <% else %>
+      <%= link_to "/dashboard/", class: "navbar-brand" do %>
+        <%= image_tag "https://png.pngtree.com/png-vector/20221018/ourmid/pngtree-master-chef-logo-illustration-png-image_6351381.png", class: "avatar", alt: "avatar" %>
+      <% end %>
+    <% end %>
   </div>
   <div>
     <p><%= @user.username %></p>
