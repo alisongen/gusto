@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:home]
+  skip_before_action :authenticate_user!, only: []
 
   def home
     # @collection.user = @user
@@ -8,8 +8,8 @@ class PagesController < ApplicationController
     # si une valeur "query" est présente dans mes params
     @restaurants = Restaurant.search_by_name(params[:query]) if params[:query].present?
     # J'assigne à ma variable d'instance "@user" le "current_user"
-    @user = User.first
-    # J'associe à ma variable "@restaurants" les "restaurants" de mon "@user"
+    @user = current_user
+    # J'associe à ma variable "@saved_restaurants" les "saved_restaurants" de mon "@user"
     @restaurants = @user.restaurants
     # CODE TEST
     @restaurant = @restaurants.first
