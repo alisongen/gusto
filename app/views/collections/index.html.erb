@@ -19,11 +19,13 @@
   </div>
 
   <div class="d-none" data-showcat-target="collections" data-controller="showfav">
-    <% @collections.each do |collection| %>
-      <button><%= collection.name %></button>
-      <% collection.saved_restaurants.each do |saved_restaurant| %>
-        <p><%= saved_restaurant.restaurant.name %></p>
-      <% end %>
+    <% @collections.each_with_index do |collection, index| %>
+      <button data-action="focus->showfav#toggle" data-showfav-index-param=<%= index %>><%= collection.name %></button>
+      <div class="d-none" data-showfav-target="toggleelement">
+        <% collection.saved_restaurants.each do |saved_restaurant| %>
+          <p><%= link_to saved_restaurant.restaurant.name, restaurant_path(saved_restaurant.restaurant) %></p>
+        <% end %>
+      </div>
     <% end %>
   </div>
 

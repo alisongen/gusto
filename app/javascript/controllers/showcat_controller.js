@@ -13,10 +13,10 @@ export default class extends Controller {
       this.collectionsTarget.classList.remove("d-none")
       this.allTarget.classList.add("d-none")
       this.friendsTarget.classList.add("d-none")
-    } else if (event.currentTarget.textContent === "Friends") {
-      this.friendsTarget.classList.remove("d-none")
-      this.allTarget.classList.add("d-none")
-      this.collectionsTarget.classList.add("d-none")
+    // } else if (event.currentTarget.textContent === "Friends") {
+    //   this.friendsTarget.classList.remove("d-none")
+    //   this.allTarget.classList.add("d-none")
+    //   this.collectionsTarget.classList.add("d-none")
     }
   }
 }

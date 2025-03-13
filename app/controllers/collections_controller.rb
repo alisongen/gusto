@@ -1,8 +1,11 @@
 class CollectionsController < ApplicationController
   def index
     @user = User.first
+    if params[:collection]
 
-    @restaurants = @user.restaurants
+    else
+      @restaurants = @user.restaurants
+    end
     @markers = @restaurants.geocoded.map do |restaurant|
       {
         lat: restaurant.latitude,
