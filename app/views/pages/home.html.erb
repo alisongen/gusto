@@ -6,15 +6,23 @@
     <%# Si la valeur "query" dans params est présente %>
     <% if params[:query].present? %>
       <%# Je créé une div qui affichera mes résultats %>
-      <div data-reset-target="list">
+      <div data-reset-target="list" class="card-container">
         <%# Si je trouve des restaurants dans les résultats de ma recherche %>
         <% if @restaurants.any? %>
-            <%# Alors je fais une itération sur "@restaurants" %>
-            <% @restaurants.each do |restaurant| %>
-              <%# Et pour chaque "restaurant", j'affiche les infos (name et address), la possibilité de l'ajouter à une collection via l'icon %>
-              <%# et le lien cers la show du restaurant %>
-              <p><%= link_to restaurant.name, restaurant_path(restaurant) %><i class="fa-solid fa-bookmark"></i></p>
-            <% end %>
+          <%# Alors je fais une itération sur "@restaurants" %>
+          <% @restaurants.each do |restaurant| %>
+            <%# Et pour chaque "restaurant", j'affiche les infos (name et address), la possibilité de l'ajouter à une collection via l'icon %>
+            <%# et le lien cers la show du restaurant %>
+            <div class="card">
+              <%= image_tag restaurant.images.sample, class: "card-img-top" if restaurant.images.attached? %>
+              <div class="card-body">
+                <h5 class="card-title"><%= restaurant.name %></h5>
+                <p class="card-text"><%= restaurant.address %></p>
+                <p class="card-text">Rating: <%= restaurant.rating %></p>
+                <a href="<%= restaurant_path(restaurant) %>" class="card-btn btn-primary">View Restaurant</a>
+              </div>
+            </div>
+          <% end %>
         <%# Sinon %>
         <% else %>
           <%# On affiche le message suivant %>
@@ -22,18 +30,24 @@
         <% end %>
       </div>
     <% end %>
-  </div>
 
-  <h1><%= link_to @collection.name, collections_path(name: @collection.name) %> </h1>
-  <div>
+  <div class="home-title">
+    <h1><%= link_to @collection.name, collections_path(name: @collection.name) %> </h1>
+  </div>
+  <%# Création d'une div afin d'afficher la collection "Favorites" %>
+  <div class="card-container">
     <% @collection.saved_restaurants.each do |saved_restaurant| %>
-      <% 6.times do %>
-        <p>
-          <%= link_to saved_restaurant.restaurant.name, restaurant_path(saved_restaurant.restaurant) %>
-        </p>
-      <% end %>
+      <div class="card">
+         <%= image_tag saved_restaurant.restaurant.images.sample, class: "card-img-top" if saved_restaurant.restaurant.images.attached? %>
+          <div class="card-body">
+            <h5 class="card-title"><%= saved_restaurant.restaurant.name %></h5>
+            <p class="card-text"><%= saved_restaurant.restaurant.address %></p>
+            <p class="card-text">Rating: <%= saved_restaurant.restaurant.rating %></p>
+            <a href="<%= restaurant_path(saved_restaurant.restaurant) %>" class="card-btn btn-primary">View Restaurant</a>
+          </div>
+      </div>
     <% end %>
   </div>
-  
+
   <h1>Recommended</h1>
 </div>
