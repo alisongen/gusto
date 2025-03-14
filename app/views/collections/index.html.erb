@@ -3,9 +3,9 @@
 <div data-controller="showcat">
   <div class="row">
     <div class="col-12 d-flex justify-content-between mx-auto" style="width: 85%;">
-      <button data-action="focus->showcat#toggle"><%= link_to "All", collections_path(), class: "text-deco-none" %></button>
-      <button data-action="focus->showcat#toggle">Collections</button>
-      <button data-action="focus->showcat#toggle">Friends</button>
+      <button data-action="focus->showcat#toggle" class="btn"><%= link_to "All", collections_path(), class: "text-deco-none" %></button>
+      <button data-action="focus->showcat#toggle" class="btn">Collections</button>
+      <button data-action="focus->showcat#toggle" class="btn">Friends</button>
     </div>
   </div>
 
@@ -23,7 +23,7 @@
 
   <div class="d-none" data-showcat-target="collections" data-controller="showfav">
     <% @collections.each_with_index do |collection, index| %>
-      <button data-action="focus->showfav#toggle" data-showfav-index-param=<%= index %>>
+      <button data-action="focus->showfav#toggle" class="btn">
         <%= link_to collection.name, collections_path(name: collection.name) %>
       </button>
       <div class="d-none" data-showfav-target="toggleelement">
