@@ -1,5 +1,5 @@
 <div class="container m-3">
-  <h1>Pending requests</h1>
+  <h1 class="mb-3">Pending requests</h1>
   <% @friendships.each do |friendship| %>
     <% if (current_user == User.find(friendship.user_id) && friendship.status == "pending") %>
       <p>Your request for <%=  User.find(friendship.friend_id).username %> is pending</p>
@@ -9,11 +9,26 @@
 
 <div class="container m-3">
   <h1>Friends requests</h1>
-  <% @friendships.each do |friendship| %>
-    <% if (current_user == User.find(friendship.friend_id) && friendship.status == "pending") %>
-      <p>Friend request for <%=  User.find(friendship.user_id).username %><%= link_to "Accept", accept_path(friendship), class: "btn btn-success m-1", data: { turbo_method: "PATCH" } %><%= link_to "Decline", decline_path(friendship), class: "btn btn-danger m-1", data: { turbo_method: "PATCH" } %></p>
+  <ul>
+    <% @friendships.each do |friendship| %>
+      <% if (current_user == User.find(friendship.friend_id) && friendship.status == "pending") %>
+        <li  class="list-unstyled">
+          <p>Friend request for
+          <%  if (User.find(friendship.user_id).avatar.attached?) %>
+            <%= link_to friendship_path(friendship) do %>
+              <%= cl_image_tag User.find(friendship.user_id).avatar.key, class: "avatar", alt: "avatar" %>
+            <% end %>
+          <% else %>
+            <%= link_to friendship_path(friendship) do %>
+              <%= image_tag "https://png.pngtree.com/png-vector/20221018/ourmid/pngtree-master-chef-logo-illustration-png-image_6351381.png", class: "avatar", alt: "avatar" %>
+            <% end %>
+          <% end %>
+          <%= User.find(friendship.user_id).username %></p>
+          <p><%= link_to "Accept", accept_path(friendship), class: "btn btn-success m-1", data: { turbo_method: "PATCH" } %><%= link_to "Decline", decline_path(friendship), class: "btn btn-danger m-1", data: { turbo_method: "PATCH" } %></p>
+        </li>
+      <% end %>
     <% end %>
-  <% end %>
+  </ul>
 </div>
 
 <div class="container m-3">
@@ -23,11 +38,11 @@
     <% if ((current_user == User.find(friendship.user_id) || current_user == User.find(friendship.friend_id)) && friendship.status == "accepted") %>
       <li class="list-unstyled">
         <%  if (User.find(friendship.user_id).avatar.attached?) %>
-          <%= link_to friendship_path(friendship), class: "navbar-brand" do %>
+          <%= link_to friendship_path(friendship) do %>
             <%= cl_image_tag User.find(friendship.user_id).avatar.key, class: "avatar", alt: "avatar" %>
           <% end %>
         <% else %>
-          <%= link_to friendship_path(friendship), class: "navbar-brand" do %>
+          <%= link_to friendship_path(friendship) do %>
             <%= image_tag "https://png.pngtree.com/png-vector/20221018/ourmid/pngtree-master-chef-logo-illustration-png-image_6351381.png", class: "avatar", alt: "avatar" %>
           <% end %>
         <% end %>
