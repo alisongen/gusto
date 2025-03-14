@@ -10,7 +10,6 @@
   .details-list{
     border-radius : 20px;
     border : solid #E6E6E6;
-    padding: 20px;
   }
 
   .detail {
@@ -18,9 +17,15 @@
     align-items: center;
     gap: 20px;
     border-bottom: solid #E6E6E6;
+    margin: 10px;
+  }
+
+  .detail:last-child {
+    border-bottom: none;
   }
 
   .detail-info p {
     margin: 0;
+    border-bottom: 10px;
   }
 }
