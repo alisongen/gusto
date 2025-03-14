@@ -1,4 +1,6 @@
 require 'faker'
+require 'open-uri'
+
 # This file should ensure the existence of records required to run the application in every environment (production,
 # development, test). The code here should be idempotent so that it can be executed at any point in every environment.
 # The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
@@ -37,8 +39,22 @@ puts 'Destruction des users 💥'
 User.destroy_all
 puts 'Users supprimés 🎊'
 p ''
-puts 'Création de 100 restaurants 👨🏻‍🎨'
-100.times do
+puts 'Création de 10 restaurants 👨🏻‍🎨'
+
+# COMMANDES POUR LA CONSOLE
+# Cloudinary::Uploader.upload(Rails.root.join('app/assets/images/jason-leung-poI7DelFiVA-unsplash.jpg'))
+# Cloudinary::Uploader.upload(Rails.root.join('app/assets/images/jay-wennington-N_Y88TWmGwA-unsplash.jpg'))
+# Cloudinary::Uploader.upload(Rails.root.join('app/assets/images/nick-karvounis-Ciqxn7FE4vE-unsplash.jpg'))
+# Cloudinary::Uploader.upload(Rails.root.join('app/assets/images/volkan-vardar-1H30uRC1plc-unsplash.jpg'))
+
+photo_ids = [
+  'ap2cjhbd0jaoytk31ynr',
+  'ceelnbk7kgconvmmoius',
+  'wo0jqa95b7lmgme2cdbt',
+  'jloubcbwbitpxlplp8bx'
+]
+
+10.times do
   restaurant = Restaurant.new(
     name: Faker::Restaurant.name,
     description: Faker::Restaurant.description,
@@ -48,10 +64,44 @@ puts 'Création de 100 restaurants 👨🏻‍🎨'
     rating: Faker::Number.within(range: 1..5),
     website: Faker::Internet.domain_name
   )
+
   Faker::Config.locale = 'fr'
   restaurant.phone_number = Faker::PhoneNumber.cell_phone_with_country_code
-  restaurant.save!
+  photo_ids.each do |photo_id|
+    image_url = Cloudinary::Utils.cloudinary_url(photo_id)
+    photo1 = URI.parse(image_url).open
+    restaurant.images.attach(io: photo1, filename: "WHATEVER.jpg", content_type: "image/jpg")
+    restaurant.save!
+  end
+  p 'one down'
 end
+
+puts "photo uploadés sur cloudinary ✅"
+
+# 100.times do
+#   restaurant = Restaurant.new(
+#     name: Faker::Restaurant.name,
+#     description: Faker::Restaurant.description,
+#     address: Faker::Address.full_address,
+#     category: Faker::Nation.nationality,
+#     menu: Faker::Internet.domain_name,
+#     rating: Faker::Number.within(range: 1..5),
+#     website: Faker::Internet.domain_name
+#   )
+
+#   Faker::Config.locale = 'fr'
+#   restaurant.phone_number = Faker::PhoneNumber.cell_phone_with_country_code
+#   restaurant.save!
+
+#   photo_id = photo_ids.sample
+#   restaurant.images.attach(
+#     io: URI.open("https://res.cloudinary.com/#{ENV['CLOUDINARY_CLOUD_NAME']}/image/upload/#{photo_id}.jpg"),
+#     filename: "#{photo_id}.jpg",
+#     content_type: "image/jpeg"
+#   )
+
+# end
+
 p
 puts '...'
 puts '...'

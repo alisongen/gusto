@@ -1,35 +1,103 @@
-<h1>Pending requests</h1>
-<% @friendships.each do |friendship| %>
-  <% if (current_user == User.find(friendship.user_id) && friendship.status == "pending") %>
-     <p>Your request for <%=  User.find(friendship.friend_id).username %> is pending</p>
-  <% end %>
-<% end %>
-
-<h1>Friends requests</h1>
-<% @friendships.each do |friendship| %>
-  <% if (current_user == User.find(friendship.friend_id) && friendship.status == "pending") %>
-     <p>Friend request for <%=  User.find(friendship.user_id).username %><%= link_to "Accept", accept_path(friendship), class: "btn btn-success", data: { turbo_method: "PATCH" } %><%= link_to "Decline", decline_path(friendship), class: "btn btn-danger", data: { turbo_method: "PATCH" } %></p>
-  <% end %>
-<% end %>
-
-<h1>My Friends</h1>
-<% @friendships.each do |friendship| %>
-  <% if ((current_user == User.find(friendship.user_id) || current_user == User.find(friendship.friend_id)) && friendship.status == "accepted") %>
-    <%= link_to "#{ User.find(friendship.friend_id).username }", friendship_path(friendship) %>
-    <%= link_to "Delete", friendship_path(friendship), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-danger" %>
-  <% end %>
-<% end %>
-
-<h1>Add a friend</h1>
-<% User.all.each do |user| %>
-  <% friends = [] %>
+<div class="container m-3">
+  <h1 class="mb-3">Pending requests</h1>
   <% @friendships.each do |friendship| %>
-    <% if (current_user == User.find(friendship.user_id)) %>
-      <% friends.insert(-1, friendship.friend_id) %>
+    <% if (current_user == User.find(friendship.user_id) && friendship.status == "pending") %>
+      <p>Your request for <%=  User.find(friendship.friend_id).username %> is pending</p>
     <% end %>
   <% end %>
-  <% unless (user == current_user || friends.include?(user.id)) %>
-    <%= user.username %>
-    <%= link_to "Add", friendships_path(user), data: {turbo_method: :post, turbo_confirm: "Are you sure?"}, class: "btn btn-success" %>
+</div>
+
+<div class="container m-3">
+  <h1>Friends requests</h1>
+  <ul>
+    <% @friendships.each do |friendship| %>
+      <% if (current_user == User.find(friendship.friend_id) && friendship.status == "pending") %>
+        <li  class="list-unstyled">
+          <p>Friend request for
+          <%  if (User.find(friendship.user_id).avatar.attached?) %>
+            <%= link_to friendship_path(friendship) do %>
+              <%= cl_image_tag User.find(friendship.user_id).avatar.key, class: "avatar", alt: "avatar" %>
+            <% end %>
+          <% else %>
+            <%= link_to friendship_path(friendship) do %>
+              <%= image_tag "https://png.pngtree.com/png-vector/20221018/ourmid/pngtree-master-chef-logo-illustration-png-image_6351381.png", class: "avatar", alt: "avatar" %>
+            <% end %>
+          <% end %>
+          <%= User.find(friendship.user_id).username %></p>
+          <p><%= link_to "Accept", accept_path(friendship), class: "btn btn-success m-1", data: { turbo_method: "PATCH" } %><%= link_to "Decline", decline_path(friendship), class: "btn btn-danger m-1", data: { turbo_method: "PATCH" } %></p>
+        </li>
+      <% end %>
+    <% end %>
+  </ul>
+</div>
+
+<div class="container m-3">
+  <h1>My Friends</h1>
+  <ul>
+    <% @friendships.each do |friendship| %>
+    <% if ((current_user == User.find(friendship.user_id) || current_user == User.find(friendship.friend_id)) && friendship.status == "accepted") %>
+      <li class="list-unstyled">
+        <%  if (User.find(friendship.user_id).avatar.attached?) %>
+          <%= link_to friendship_path(friendship) do %>
+            <%= cl_image_tag User.find(friendship.user_id).avatar.key, class: "avatar", alt: "avatar" %>
+          <% end %>
+        <% else %>
+          <%= link_to friendship_path(friendship) do %>
+            <%= image_tag "https://png.pngtree.com/png-vector/20221018/ourmid/pngtree-master-chef-logo-illustration-png-image_6351381.png", class: "avatar", alt: "avatar" %>
+          <% end %>
+        <% end %>
+        <%= link_to "#{ User.find(friendship.user_id).username }", friendship_path(friendship), class: "text-decoration-none" %>
+        <%= link_to friendship_path(friendship), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "text-black" do %>
+          <i class="fa-solid fa-trash-can"></i>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
   <% end %>
-<% end %>
+</div>
+
+<div class="container m-3">
+  <h1>Add a friend</h1>
+  <% User.all.each do |user| %>
+    <% friends = [] %>
+    <% @friendships.each do |friendship| %>
+      <% if (current_user == User.find(friendship.user_id)) %>
+        <% friends.insert(-1, friendship.friend_id) %>
+      <% end %>
+    <% end %>
+    <% unless (user == current_user || friends.include?(user.id)) %>
+      <%# user.username %>
+      <%# link_to "Add", friendships_path(user), data: {turbo_method: :post, turbo_confirm: "Are you sure?"}, class: "btn btn-success" %>
+    <% end %>
+  <% end %>
+</div>
+<div class="m-3" data-controller="reset2">
+  <%# J'affiche ma partial search-bar %>
+  <%= render "pages/search-bar" %>
+  <%# Je gère l'affichage des résultats %>
+  <%# Si la valeur "query" dans params est présente %>
+  <% if params[:query].present? %>
+    <%# Je créé une div qui affichera mes résultats %>
+    <div data-reset-target="list2">
+      <%# Si je trouve des restaurants dans les résultats de ma recherche %>
+      <% User.all.each do |user| %>
+        <% friends = [] %>
+        <% @friendships.each do |friendship| %>
+          <% if (current_user == User.find(friendship.user_id)) %>
+            <% friends.insert(-1, friendship.friend_id) %>
+          <% end %>
+        <% end %>
+        <% unless (user == current_user || friends.include?(user.id)) %>
+          <% if friends.any? %>
+              <%= user.username %>
+              <%= link_to "Add", friendships_path(user), data: {turbo_method: :post, turbo_confirm: "Are you sure?"}, class: "btn btn-success" %>
+          <%# Sinon %>
+          <% else %>
+            <%# On affiche le message suivant %>
+            <p>Sorry, no friends found.</p>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
