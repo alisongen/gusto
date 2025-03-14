@@ -3,6 +3,7 @@ class FriendshipsController < ApplicationController
 
   def index
     @friendships = Friendship.all
+    @newfriends = Friendship.search_by_username(params[:query]) if params[:query].present?
   end
 
   def show
