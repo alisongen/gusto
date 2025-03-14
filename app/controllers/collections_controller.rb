@@ -2,7 +2,16 @@ class CollectionsController < ApplicationController
   def index
     @user = current_user
     @collections = @user.collections
-    @restaurant = Restaurant.find(params[:restaurant_id])
+    @restaurants = @user.restaurants
+
+    @markers = @restaurants.geocoded.map do |restaurant|
+      {
+        lat: restaurant.latitude,
+        lng: restaurant.longitude,
+        info_window_html: render_to_string(partial: "info_window", locals: { restaurant: restaurant }),
+        marker_html: render_to_string(partial: "marker")
+      }
+    end
   end
 
   def show

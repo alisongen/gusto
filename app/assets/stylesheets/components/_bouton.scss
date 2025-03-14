@@ -1,10 +1,14 @@
 @media screen and (max-width: 767px) {
   .bouton-large {
     text-decoration: none;
-    width: 100%;
+    display: flex;
+    width: calc(100% - 40px);
     background-color: black;
     color: white;
     padding: 15px;
+    margin: 20px;
+    justify-content: center;
+    border-radius: 10px;
   }
 
   .bouton-icon {
@@ -15,5 +19,7 @@
     height: 45px;
     border-radius: 10px;
     background-color: aqua;
+    text-decoration: none;
+    color: black;
   }
 }
