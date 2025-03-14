@@ -16,6 +16,7 @@ class RestaurantsController < ApplicationController
     @collection = Collection.find(params[:collection_id])
     @saved_restaurant = SavedRestaurant.find_or_create_by(restaurant: @restaurant, user: current_user)
     @collection.saved_restaurants << @saved_restaurant
+    @collection.save!
     redirect_to collections_path(name: @collection.name)
   end
 end
