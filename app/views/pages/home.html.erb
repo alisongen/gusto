@@ -1,5 +1,5 @@
-.
-  <div class="main-content" data-controller="reset">
+<div class="main-content">
+  <div data-controller="reset">
     <%# J'affiche ma partial search-bar %>
     <%= render "search-bar" %>
     <%# Je gère l'affichage des résultats %>
@@ -30,8 +30,13 @@
     <%# Je fais une itération sur "@saved_restaurants" %>
     <% @saved_restaurants.each do |saved_restaurant| %>
       <%# Et pour chaque "saved_restaurant", je créé un lien qui me renvoie vers la show du restaurant %>
-      <p><%= link_to saved_restaurant.restaurant.name, restaurant_path(saved_restaurant.restaurant) %></p>
+      <% 6.times do %>
+        <p>
+          <%= link_to saved_restaurant.restaurant.name, restaurant_path(saved_restaurant.restaurant) %>
+        </p>
+      <% end %>
     <% end %>
   </div>
 
   <h1>Recommended</h1>
+</div>
