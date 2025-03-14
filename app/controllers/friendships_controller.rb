@@ -13,6 +13,7 @@ class FriendshipsController < ApplicationController
      @saved_restaurants = @user.saved_restaurants
      # Récupération des collections de mon @user
      @collections = @user.collections
+     @collection = @user.collections.where(name: "Favoris").first
   end
 
   def new

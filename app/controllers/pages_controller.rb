@@ -18,5 +18,6 @@ class PagesController < ApplicationController
     @restaurants = @user.restaurants
     # Récupération des collections de mon @user
     @collections = @user.collections
+    @collection = @user.collections.where(name: "Favoris").first
   end
 end
