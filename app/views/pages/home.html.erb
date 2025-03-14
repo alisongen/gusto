@@ -19,7 +19,7 @@
                 <h5 class="card-title"><%= restaurant.name %></h5>
                 <p class="card-text"><%= restaurant.address %></p>
                 <p class="card-text">Rating: <%= restaurant.rating %></p>
-                <a href="<%= restaurant_path(restaurant) %>" class="btn btn-primary">View Restaurant</a>
+                <a href="<%= restaurant_path(restaurant) %>" class="card-btn btn-primary">View Restaurant</a>
               </div>
             </div>
           <% end %>
@@ -43,7 +43,7 @@
             <h5 class="card-title"><%= saved_restaurant.restaurant.name %></h5>
             <p class="card-text"><%= saved_restaurant.restaurant.address %></p>
             <p class="card-text">Rating: <%= saved_restaurant.restaurant.rating %></p>
-            <a href="<%= restaurant_path(saved_restaurant.restaurant) %>" class="btn btn-primary">View Restaurant</a>
+            <a href="<%= restaurant_path(saved_restaurant.restaurant) %>" class="card-btn btn-primary">View Restaurant</a>
           </div>
       </div>
     <% end %>
