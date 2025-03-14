@@ -2,7 +2,12 @@ class CollectionsController < ApplicationController
   def index
     @user = User.first
     @collections = @user.collections
-    @restaurants = @user.restaurants
+
+    if params[:name].present?
+      @restaurants = Collection.find_by(name: params[:name]).restaurants
+    else
+      @restaurants = @user.restaurants
+    end
 
     @markers = @restaurants.geocoded.map do |restaurant|
       {
