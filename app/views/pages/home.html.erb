@@ -26,16 +26,17 @@
 
   <h1>Favorites</h1>
   <%# Création d'une div afin d'afficher la collection "Favorites" %>
-  <div>
-    <%# Je fais une itération sur "@saved_restaurants" %>
+  <div class="card-container">
     <% @saved_restaurants.each do |saved_restaurant| %>
-      <%# Et pour chaque "saved_restaurant", je créé un lien qui me renvoie vers la show du restaurant %>
-      <% 6.times do %>
-        <p>
-          <%= link_to saved_restaurant.restaurant.name, restaurant_path(saved_restaurant.restaurant) %>
-        </p>
-      <% end %>
+      <div class="card">
+         <%= image_tag saved_restaurant.restaurant.images.first, class: "card-img-top" if saved_restaurant.restaurant.images.attached? %>
+          <div class="card-body">
+            <h5 class="card-title"><%= saved_restaurant.restaurant.name %></h5>
+            <p class="card-text"><%= saved_restaurant.restaurant.address %></p>
+            <p class="card-text">Rating: <%= saved_restaurant.restaurant.rating %></p>
+            <a href="<%= restaurant_path(saved_restaurant.restaurant) %>" class="btn btn-primary">View Restaurant</a>
+          </div>
+      </div>
     <% end %>
-  </div>
   <h1>Recommended</h1>
 </div>
