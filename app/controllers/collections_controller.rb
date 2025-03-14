@@ -4,7 +4,7 @@ class CollectionsController < ApplicationController
     @collections = @user.collections
 
     if params[:name].present?
-      @restaurants = Collection.find_by(name: params[:name]).restaurants
+      @restaurants = Collection.find_by(user: current_user, name: params[:name]).restaurants
     else
       @restaurants = @user.restaurants
     end
