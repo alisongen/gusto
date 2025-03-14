@@ -24,3 +24,16 @@
 @import "components/review_list";
 @import "components/map";
 @import "pages/show_restaurant"
+
+.main-content {
+  flex: 1;
+  overflow-y: auto;
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: white;
+}
