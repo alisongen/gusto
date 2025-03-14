@@ -1,12 +1,9 @@
 class CollectionsController < ApplicationController
   def index
     @user = current_user
+    @collections = @user.collections
+    @restaurants = @user.restaurants
 
-    if params[:collection]
-
-    else
-      @restaurants = @user.restaurants
-    end
     @markers = @restaurants.geocoded.map do |restaurant|
       {
         lat: restaurant.latitude,
@@ -15,8 +12,6 @@ class CollectionsController < ApplicationController
         marker_html: render_to_string(partial: "marker")
       }
     end
-
-    @collections = @user.collections
   end
 
   def show
