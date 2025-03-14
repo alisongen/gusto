@@ -24,12 +24,9 @@
     <% end %>
   </div>
 
-  <h1>Favorites</h1>
-  <%# Création d'une div afin d'afficher la collection "Favorites" %>
+  <h1><%= link_to @collection.name, collections_path(name: @collection.name) %> </h1>
   <div>
-    <%# Je fais une itération sur "@saved_restaurants" %>
-    <% @saved_restaurants.each do |saved_restaurant| %>
-      <%# Et pour chaque "saved_restaurant", je créé un lien qui me renvoie vers la show du restaurant %>
+    <% @collection.saved_restaurants.each do |saved_restaurant| %>
       <% 6.times do %>
         <p>
           <%= link_to saved_restaurant.restaurant.name, restaurant_path(saved_restaurant.restaurant) %>
@@ -37,5 +34,6 @@
       <% end %>
     <% end %>
   </div>
+  
   <h1>Recommended</h1>
 </div>

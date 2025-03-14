@@ -5,6 +5,7 @@ export default class extends Controller {
   static targets = ["toggleelement"]
 
   toggle(event) {
+    console.log(event.params)
     const index = event.params.index
 
     this.toggleelementTargets.forEach((target) => {
