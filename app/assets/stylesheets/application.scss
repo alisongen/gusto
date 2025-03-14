@@ -23,6 +23,7 @@
 @import "components/bouton";
 @import "components/review_list";
 @import "components/map";
+@import "components/link";
 @import "pages/show_restaurant";
 @import "pages/home";
 
@@ -37,4 +38,6 @@ body {
   flex-direction: column;
   min-height: 100vh;
   background-color: white;
+  margin-top: 60px;
+  margin-bottom: 80px;
 }

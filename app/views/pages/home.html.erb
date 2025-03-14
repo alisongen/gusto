@@ -31,11 +31,12 @@
       </div>
     <% end %>
 
-
-  <div class="home-title"><h1>Favorites</h1></div>
+  <div class="home-title">
+    <h1><%= link_to @collection.name, collections_path(name: @collection.name) %> </h1>
+  </div>
   <%# Création d'une div afin d'afficher la collection "Favorites" %>
   <div class="card-container">
-    <% @saved_restaurants.each do |saved_restaurant| %>
+    <% @collection.saved_restaurants.each do |saved_restaurant| %>
       <div class="card">
          <%= image_tag saved_restaurant.restaurant.images.sample, class: "card-img-top" if saved_restaurant.restaurant.images.attached? %>
           <div class="card-body">
