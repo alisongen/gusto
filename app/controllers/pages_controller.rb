@@ -9,10 +9,8 @@ class PagesController < ApplicationController
     @restaurants = Restaurant.search_by_name(params[:query]) if params[:query].present?
     # J'assigne à ma variable d'instance "@user" le "current_user"
     @user = User.first
-    # J'associe à ma variable "@restaurants" les "restaurants" de mon "@user"
-    @restaurants = @user.restaurants
-    # CODE TEST
-    @restaurant = @restaurants.first
+    #
+    @collection = @user.collections.where(name: "Favoris").first
   end
 
   def dashboard
