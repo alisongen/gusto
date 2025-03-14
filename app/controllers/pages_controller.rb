@@ -8,6 +8,7 @@ class PagesController < ApplicationController
     # J'assigne à ma variable d'instance "@user" le "current_user"
     @user = current_user
     @collection = @user.collections.where(name: "Favoris").first
+    @saved_restaurants = @user.saved_restaurants
   end
 
   def dashboard
