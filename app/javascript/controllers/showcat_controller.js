@@ -10,7 +10,6 @@ export default class extends Controller {
   }
 
   toggle(event) {
-    console.log(this.allLinkTarget)
     // Affiche la section sélectionnée
     if (event.currentTarget.textContent === "All") {
       this.allTarget.classList.remove("d-none");
