@@ -1,5 +1,5 @@
-<%= form_with model: @restaurant do |f| %>
-  <%= f.label :name, "Collection name" %>
-  <%= f.text_field :name, required: true %>
-  <%= f.submit "Create"%>
+<h1>Create new collection</h1>
+<%= simple_form_for(@collection) do |f| %>
+  <%= f.input :name, label: 'Name' %>
+  <%= f.submit 'Create' %>
 <% end %>

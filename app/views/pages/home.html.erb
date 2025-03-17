@@ -1,50 +1,49 @@
-<h1>Pages#home</h1>
-<!-- vérifier cloudinary -->
-<%# <%= simple_form_for(@saved_restaurant) do |f| %>
-  <!-- [...] -->
-  <%# <%= f.input :photos, as: :file, input_html: { multiple: true } %>
-  <!-- [...] -->
-  <%# <%= f.button :submit %>
-<%# <% end %>
-
-  <!-- afficher les photos cloudinary -->
-<%# <% @restaurant.photos.each do |photo| %>
-  <%# <%= cl_image_tag(photo.key, width: 300, height: 200, crop: "scale", effect: "cartoonify")  %>
-<%# <% end %>
-
-<div data-controller="reset">
-  <%# J'affiche ma partial search-bar %>
-  <%= render "search-bar" %>
-  <%# Je gère l'affichage des résultats %>
-  <%# Si la valeur "query" dans params est présente %>
-  <% if params[:query].present? %>
-    <%# Je créé une div qui affichera mes résultats %>
-    <div data-reset-target="list">
-      <%# Si je trouve des restaurants dans les résultats de ma recherche %>
-      <% if @restaurants.any? %>
+<div class="main-content">
+  <div data-controller="reset">
+    <%# J'affiche ma partial search-bar %>
+    <%= render "search-bar" %>
+    <%# Je gère l'affichage des résultats %>
+    <%# Si la valeur "query" dans params est présente %>
+    <% if params[:query].present? %>
+      <%# Je créé une div qui affichera mes résultats %>
+      <div data-reset-target="list">
+        <%# Si je trouve des restaurants dans les résultats de ma recherche %>
+        <% if @restaurants.any? %>
           <%# Alors je fais une itération sur "@restaurants" %>
-          <% @restaurants.each do |restaurant| %>
-            <%# Et pour chaque "restaurant", j'affiche les infos (name et address), la possibilité de l'ajouter à une collection via l'icon %>
-            <%# et le lien cers la show du restaurant %>
-            <p><%= link_to restaurant.name, restaurant_path(restaurant) %><i class="fa-solid fa-bookmark"></i></p>
-          <% end %>
-      <%# Sinon %>
-      <% else %>
-        <%# On affiche le message suivant %>
-        <p>Sorry, no restaurant found.</p>
-      <% end %>
-    </div>
-  <% end %>
-</div>
+          <%= render "components/research_cards", restaurants: @restaurants %>
 
-<h1><%= link_to "Favorites", collections_path() %> </h1>
-<%# Création d'une div afin d'afficher la collection "Favorites" %>
-<div>
-  <%# Je fais une itération sur "@restaurants" %>
-  <% @restaurants.each do |restaurant| %>
-    <%# Et pour chaque "saved_restaurant", je créé un lien qui me renvoie vers la show du restaurant %>
-    <p><%= link_to restaurant.name, restaurant_path(restaurant) %></p>
-  <% end %>
-</div>
+        <%# Sinon %>
+        <% else %>
+          <%# On affiche le message suivant %>
+          <p>Sorry, no restaurant found.</p>
+        <% end %>
+      </div>
+    <% end %>
 
-<h1>Recommended</h1>
+  <!-- Ancienne version, à supprimer?
+  <div class="home-title">
+    <%# <h1><%= link_to @collection.name, collections_path(name: @collection.name) %> </h1> %>
+  </div>
+  <%# Création d'une div afin d'afficher la collection "Favorites" %>
+  <%#= render "components/favorite_cards", collection: @collection %>
+  <%= render "components/favorite_cards", collection: @collection %>
+   -->
+
+  <div class="title-container">
+    <h1>Saved Restaurants</h1>
+    <%= link_to collections_path, class: "bouton-link" do %>
+      <span>All</span>
+      <i class="fa-solid fa-arrow-right"></i>
+    <% end %>
+  </div>
+
+  <div class="restaurant-cards">
+    <%# Afficher les deux derniers Saved Restaurant enregistrés par l'user%>
+    <% @saved_restaurants.last(2).reverse.each do |saved_restaurant| %>
+      <%= render "components/restaurant_card", saved_restaurant: saved_restaurant%>
+    <% end %>
+  </div>
+
+  <h1>Recommended</h1>
+
+</div>

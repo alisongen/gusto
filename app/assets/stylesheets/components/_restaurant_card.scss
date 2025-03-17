@@ -1,0 +1,30 @@
+@media screen and (max-width: 767px) {
+  .restaurant-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 20px;
+  }
+
+  .restaurant-card {
+    display: flex;
+    flex-direction: column;
+    width: calc(50% - 6px);
+    padding: 10px;
+    background-color: white;
+    border: solid 1px #EBEBEB;
+    border-radius: 10px;
+  }
+
+  .restaurant-image {
+    height: 151px;
+  }
+
+  .restaurant-title {
+
+  }
+
+  .restaurant-text {
+
+  }
+}

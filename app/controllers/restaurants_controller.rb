@@ -5,7 +5,10 @@ class RestaurantsController < ApplicationController
 
   def show
     @restaurant = Restaurant.find(params[:id])
+    @images = @restaurant.images
+    @image = @images.sample
     @collections = Collection.where(user_id: current_user.id)
+    @saved_restaurants = SavedRestaurant.where(user_id: current_user.id)
   end
 
   def update_collection
@@ -13,6 +16,8 @@ class RestaurantsController < ApplicationController
     @collection = Collection.find(params[:collection_id])
     @saved_restaurant = SavedRestaurant.find_or_create_by(restaurant: @restaurant, user: current_user)
     @collection.saved_restaurants << @saved_restaurant
-    # TODO: Faire le redirection
+    @collection.save!
+    #redirect_to collections_path(name: @collection.name)
+    redirect_to dashboard_path
   end
 end

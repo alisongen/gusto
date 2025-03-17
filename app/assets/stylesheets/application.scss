@@ -1,3 +1,9 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 // Graphical variables
 @import "config/fonts";
 @import "config/colors";
@@ -17,3 +23,26 @@
 @import "components/bouton";
 @import "components/review_list";
 @import "components/map";
+@import "pages/show_restaurant";
+@import "pages/home";
+@import "components/position";
+@import "components/vignette";
+@import "components/link";
+@import "components/card";
+@import "components/restaurant_card";
+@import "components/title_container";
+
+.main-content {
+  flex: 1;
+  overflow-y: auto;
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: white;
+  margin-top: 60px;
+  margin-bottom: 80px;
+}

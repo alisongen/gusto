@@ -1,29 +1,23 @@
-<h1><%= @user.username %></h1>
+<h1 class="m-3 text-center"><%= @user.username %></h1>
 
 
-<div>
+<div class="d-flex justify-content-center align-items-center">
   <%  if (@user.avatar.attached?) %>
-    <%= link_to "/dashboard/", class: "navbar-brand" do %>
-      <%= cl_image_tag @_user.avatar.key, class: "avatar-large", alt: "avatar" %>
-    <% end %>
+    <img src="<% cl_image_path @user.avatar.key %>" class="avatar-large img-fluid rounded-start" alt="avatar">
   <% else %>
-    <%= link_to "/dashboard/", class: "navbar-brand" do %>
-      <%= image_tag "https://png.pngtree.com/png-vector/20221018/ourmid/pngtree-master-chef-logo-illustration-png-image_6351381.png", class: "avatar", alt: "avatar" %>
-    <% end %>
+    <img src="https://png.pngtree.com/png-vector/20221018/ourmid/pngtree-master-chef-logo-illustration-png-image_6351381.png" class="avatar-large img-fluid rounded-start" alt="avatar">
   <% end %>
 </div>
 
 <div data-controller="showcat">
-  <div>
-    <button data-action="focus->showcat#toggle" >All</button>
-    <button data-action="focus->showcat#toggle">Collections</button>
-    <button>Reviews/Photos</button>
+  <div class="d-flex justify-content-between align-items-center m-3">
+    <button class="btn btn-ghost" data-action="focus->showcat#toggle" >All</button>
+    <button class="btn btn-ghost" data-action="focus->showcat#toggle">Collections</button>
+    <button class="btn btn-ghost">Reviews/Photos</button>
   </div>
 
   <div data-showcat-target="all">
-    <% @saved_restaurants.each do |saved_restaurant| %>
-      <p><%= link_to saved_restaurant.restaurant.name, restaurant_path(saved_restaurant.restaurant) %></p>
-    <% end %>
+    <%= render "components/favorite_cards", collection: @collection %>
   </div>
 
   <div class="d-none" data-showcat-target="collections">

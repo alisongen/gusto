@@ -1,13 +1,15 @@
 @media screen and (max-width: 767px) {
   .details-container {
     width: 100%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
   }
 
   .details-list{
     border-radius : 20px;
     border : solid #E6E6E6;
-    margin: 20px;
-    padding: 10px;
   }
 
   .detail {
@@ -15,9 +17,15 @@
     align-items: center;
     gap: 20px;
     border-bottom: solid #E6E6E6;
+    margin: 10px;
+  }
+
+  .detail:last-child {
+    border-bottom: none;
   }
 
   .detail-info p {
     margin: 0;
+    border-bottom: 10px;
   }
 }

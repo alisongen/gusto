@@ -1,10 +1,14 @@
 @media screen and (max-width: 767px) {
   .bouton-large {
     text-decoration: none;
-    width: 100%;
+    display: flex;
+    width: calc(100% - 40px);
     background-color: black;
     color: white;
     padding: 15px;
+    margin: 20px;
+    justify-content: center;
+    border-radius: 10px;
   }
 
   .bouton-icon {
@@ -14,6 +18,71 @@
     width: 45px;
     height: 45px;
     border-radius: 10px;
-    background-color: aqua;
+    background-color: black;
+    text-decoration: none;
+  }
+
+  .btn-ghost {
+    width: 32%;
+    height: 35px;
+    color: black;
+    border: 1px solid #7e7e7e;
+    padding: 8px 24px;
+    border-radius: 50px;
+    font-weight: bold;
+    opacity: 1;
+    background-color: white;
+    &:focus{
+      background-color: black;
+      color: white !important;
+    }
+  }
+
+  .no-padding{
+    padding: 0;
+  }
+
+  .btn-link{
+    width: 32%;
+    height: 35px;
+    background-color: black;
+    border: 1px solid #7e7e7e;
+    font-weight: bold;
+    padding: 8px 24px;
+    border-radius: 50px;
+    opacity: 1;
+    text-decoration: none !important;
+    color: white !important;
+  }
+
+  .btn-no-link {
+    width: 32%;
+    height: 35px;
+    background-color: white;
+    border: 1px solid #7e7e7e;
+    font-weight: bold;
+    padding: 8px 24px;
+    border-radius: 50px;
+    opacity: 1;
+    text-decoration: none !important;
+    color: black !important;
+  }
+
+  .btn-collection{
+    width: 90%;
+    height: 45px;
+    background-color: white;
+    border: 1px solid #7e7e7e;
+    font-weight: bold;
+    padding: 8px 24px;
+    opacity: 1;
+    text-decoration: none !important;
+    color: black !important;
+  }
+  
+  //BTN LINK WITH NO STYLE
+  .bouton-link {
+    text-decoration: none;
+    color: black;
   }
 }
