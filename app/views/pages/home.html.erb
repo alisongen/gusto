@@ -11,6 +11,7 @@
         <% if @restaurants.any? %>
           <%# Alors je fais une itération sur "@restaurants" %>
           <%= render "components/research_cards", restaurants: @restaurants %>
+
         <%# Sinon %>
         <% else %>
           <%# On affiche le message suivant %>
@@ -19,11 +20,30 @@
       </div>
     <% end %>
 
+  <!-- Ancienne version, à supprimer?
   <div class="home-title">
-    <h1><%= link_to @collection.name, collections_path(name: @collection.name) %> </h1>
+    <%# <h1><%= link_to @collection.name, collections_path(name: @collection.name) %> </h1> %>
   </div>
   <%# Création d'une div afin d'afficher la collection "Favorites" %>
+  <%#= render "components/favorite_cards", collection: @collection %>
   <%= render "components/favorite_cards", collection: @collection %>
+   -->
+
+  <div class="title-container">
+    <h1>Saved Restaurants</h1>
+    <%= link_to collections_path, class: "bouton-link" do %>
+      <span>All</span>
+      <i class="fa-solid fa-arrow-right"></i>
+    <% end %>
+  </div>
+
+  <div class="restaurant-cards">
+    <%# Afficher les deux derniers Saved Restaurant enregistrés par l'user%>
+    <% @saved_restaurants.last(2).reverse.each do |saved_restaurant| %>
+      <%= render "components/restaurant_card", saved_restaurant: saved_restaurant%>
+    <% end %>
+  </div>
 
   <h1>Recommended</h1>
+
 </div>

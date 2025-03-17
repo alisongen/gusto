@@ -5,11 +5,10 @@
   <% end %>
 </div>
 <div class="restaurant-image">
-  <%= render "components/imageCarousel", image: @image %>
+  <%= render "components/image_carousel", image: @image %>
 </div>
-<%= render "components/restaurantDetails" %>
+<%= render "components/restaurant_details" %>
 
-<!---->
 <!-- Modal pour choisir la catégorie qui s'ouvre en mode pop-up -->
 <div class="modal fade" id="collectionModal" tabindex="-1" aria-labelledby="collectionModalLabel" aria-hidden="true">
   <div class="modal-dialog">

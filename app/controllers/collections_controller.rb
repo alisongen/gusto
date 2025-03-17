@@ -2,6 +2,7 @@ class CollectionsController < ApplicationController
   def index
     @user = current_user
     @collections = @user.collections
+    @friendships = @user.friendships
 
     if params[:name].present?
       @restaurants = Collection.find_by(user: current_user, name: params[:name]).restaurants
@@ -24,12 +25,10 @@ class CollectionsController < ApplicationController
   end
 
   def new
-    @restaurant = Restaurant.find(params[:restaurant_id])
     @collection = Collection.new
   end
 
   def create
-    @restaurant = Restaurant.find(params[:restaurant_id])
     @user = current_user
     @collection = Collection.new(collection_params)
     @collection.user_id = @user.id
