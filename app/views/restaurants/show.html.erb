@@ -87,11 +87,15 @@
 
 <% @reviews.each do |review| %>
   <% if (review.saved_restaurant.restaurant == @restaurant && (review.user == current_user || @friends.include?(review.user))) %>
-    <%= review.user.username %>
-    <%= review.content %>
-    <%= review.user_rating %>
-    <%= link_to friendship_path(friendship), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "text-black" do %>
-      <i class="fa-solid fa-trash-can"></i>
-    <% end %>
+    <p>
+      <%= review.user.username %>
+      <%= review.content %>
+      <%= review.user_rating %>
+      <% if (review.user == current_user) %>
+        <%= link_to review_path(review), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "text-black" do %>
+          <i class="fa-solid fa-trash-can"></i>
+        <% end %>
+      <% end %>
+    </p>
   <% end %>
 <% end %>
