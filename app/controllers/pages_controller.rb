@@ -36,7 +36,7 @@ class PagesController < ApplicationController
     #
     friends = User.where(id: ids)
     # pouvoir sortir tous les saved restaurants de ces amis
-    @friends_saved_restaurants = SavedRestaurant.where(user_id: friends.ids)
+    @friends_saved_restaurants = SavedRestaurant.where(user_id: friends.ids).includes(:collections)
     # pouvoir sortir toutes les reviews de ces amis
     @friends_reviews = Review.where(user_id: friends.ids)
     # pouvoir sortir toutes les photos de ces amis
