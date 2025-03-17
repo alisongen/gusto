@@ -1,5 +1,5 @@
 <div class="card-container">
-  <% if  %>
+  <% if %>
     <% collection.saved_restaurants.each do |saved_restaurant| %>
       <div class="card">
         <%= image_tag saved_restaurant.restaurant.images.sample, class: "card-img-top" if saved_restaurant.restaurant.images.attached? %>
@@ -11,4 +11,5 @@
         </div>
       </div>
     <% end %>
+  <% end %>
 </div>
