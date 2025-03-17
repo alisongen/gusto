@@ -1,11 +1,13 @@
 class CollectionsController < ApplicationController
   def index
     @user = User.first
-    if params[:collection]
-
+    if params[:collection_name]
+      collection = @user.collections.find_by(name: params[:collection_name])
+      @restaurants = collection.restaurants
     else
       @restaurants = @user.restaurants
     end
+    # raise
     @markers = @restaurants.geocoded.map do |restaurant|
       {
         lat: restaurant.latitude,
@@ -16,6 +18,13 @@ class CollectionsController < ApplicationController
     end
 
     @collections = @user.collections
+    if params[:collection_name]
+      respond_to do |format|
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.set_dataset_attribute("#mapbox-collection", "map-markers-value", @markers)
+        end
+      end
+    end
   end
 
   def show

@@ -7,6 +7,11 @@ export default class extends Controller {
     apiKey: String,
     markers: Array
   }
+
+  initialize() {
+    this.markers = []
+  }
+
   connect() {
     mapboxgl.accessToken = this.apiKeyValue
 
@@ -16,8 +21,15 @@ export default class extends Controller {
     })
 
     this.#addMarkersToMap()
-
     this.#fitMapToMarkers()
+  }
+
+  markersValueChanged() {
+    setTimeout(() => {
+      this.#removeMarkersToMap()
+      this.#addMarkersToMap()
+      this.#fitMapToMarkers()
+  }, 300);
   }
 
   #addMarkersToMap() {
@@ -27,10 +39,12 @@ export default class extends Controller {
       const customMarker = document.createElement("div")
       customMarker.innerHTML = marker.marker_html
 
-      new mapboxgl.Marker(customMarker)
+      const mapBoxMarker = new mapboxgl.Marker(customMarker)
         .setLngLat([marker.lng, marker.lat])
         .setPopup(popup)
         .addTo(this.map)
+
+      this.markers.push(mapBoxMarker)
     })
   }
 
@@ -38,5 +52,13 @@ export default class extends Controller {
     const bounds = new mapboxgl.LngLatBounds()
     this.markersValue.forEach(marker => bounds.extend([ marker.lng, marker.lat ]))
     this.map.fitBounds(bounds, { padding: 70, maxZoom: 15, duration: 0 })
+  }
+
+  #removeMarkersToMap() {
+    if (this.markers.length > 0) {
+      this.markers.forEach((marker) => {
+        marker.remove()
+      })
+    }
   }
 }

@@ -38,7 +38,7 @@ User.destroy_all
 puts 'Users supprimés 🎊'
 p ''
 puts 'Création de 100 restaurants 👨🏻‍🎨'
-100.times do
+30.times do
   restaurant = Restaurant.new(
     name: Faker::Restaurant.name,
     description: Faker::Restaurant.description,

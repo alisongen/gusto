@@ -12,5 +12,7 @@ export default class extends Controller {
     })
 
     this.toggleelementTargets[index].classList.remove('d-none')
+
+    console.log("show fav")
   }
 }

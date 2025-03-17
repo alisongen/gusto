@@ -1,6 +1,7 @@
 <h1>Collections</h1>
 
 <div style="width: 100%; height: 600px;"
+  id="mapbox-collection"
   data-controller="map"
   data-map-markers-value="<%= @markers.to_json %>"
   data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
@@ -20,7 +21,7 @@
 
   <div class="d-none" data-showcat-target="collections" data-controller="showfav">
     <% @collections.each_with_index do |collection, index| %>
-      <button data-action="focus->showfav#toggle" data-showfav-index-param=<%= index %>><%= collection.name %></button>
+      <%= link_to collection.name, collections_path(collection_name: collection.name), data: { action:"focus->showfav#toggle", showfav_index_param: index, turbo_stream: true }  %>
       <div class="d-none" data-showfav-target="toggleelement">
         <% collection.saved_restaurants.each do |saved_restaurant| %>
           <p><%= link_to saved_restaurant.restaurant.name, restaurant_path(saved_restaurant.restaurant) %></p>
