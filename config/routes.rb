@@ -5,7 +5,10 @@ Rails.application.routes.draw do
   resources :restaurants, only: :show do
     resources :collections, only: [:new, :create, :index]
     resources :reviews, only: [:create]
+    resources :saved_restaurants, only: [:create]
   end
+
+  resources :saved_restaurants, only: [:update]
 
   resources :restaurants do
       patch "update_collection", to: "restaurants#update_collection", as: :collection

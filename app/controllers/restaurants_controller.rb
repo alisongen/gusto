@@ -4,10 +4,23 @@ class RestaurantsController < ApplicationController
   end
 
   def show
+    @user = current_user
+    # trouver les relations entre nous et qqun d'autre qui ont le statut accepté
+    all_accepted_friendships = Friendship.where(status: 1).where(user: current_user).or(Friendship.where(status: 1).where(friend: current_user))
+    # Sortir les id de ceux-là
+    ids = all_accepted_friendships.map do |friendship|
+      if friendship.user == current_user
+        friendship.friend.id
+      else
+        friendship.user.id
+      end
+    end
+    @friends = User.where(id: ids)
     @restaurant = Restaurant.find(params[:id])
     @images = @restaurant.images
     @image = @images.sample
     @collections = Collection.where(user_id: current_user.id)
+    @saved_restaurant = SavedRestaurant.where(restaurant_id: params[:id], user_id: current_user.id).first
     @saved_restaurants = SavedRestaurant.where(user_id: current_user.id)
     @review = Review.new
     @reviews = Review.all
