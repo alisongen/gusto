@@ -12,7 +12,7 @@ class PagesController < ApplicationController
       format.json { render json: @restaurants } # Permet aussi d'utiliser en API
     end
     # @collection = @user.collections.where(name: "Favoris")
-    # @saved_restaurants = @user.saved_restaurants
+    @saved_restaurants = @user.saved_restaurants
   end
 
   def dashboard
