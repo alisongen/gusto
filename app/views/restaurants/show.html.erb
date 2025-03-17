@@ -8,7 +8,6 @@
   <%= render "components/imageCarousel", image: @image %>
 </div>
 <%= render "components/restaurantDetails" %>
-<%= link_to "Add a review", root_path, class: "bouton-large" %>
 
 <!---->
 <!-- Modal pour choisir la catégorie qui s'ouvre en mode pop-up -->
@@ -51,3 +50,25 @@
 <%# @saved_restaurant.photos.each do |photo| %>
   <%#= cl_image_tag(photo.key, width: 300, height: 200, crop: "scale", effect: "cartoonify")  %>
 <%# end %>
+
+<h1>Reviews</h1>
+
+<div class="container">
+  <div class="row">
+    <div class="col-xs-4">
+      <%= simple_form_for [@restaurant, @review] do |f| %>
+        <%= f.input :content %>
+        <%= f.input :user_rating, collection: (1..5).to_a, label: "Rate your experience" %>
+        <%= f.submit "Send your review" %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<% @reviews.each do |review| %>
+  <% if (review.saved_restaurant.restaurant == @restaurant && review.user == current_user || review.user) %>
+    <%= review.user.username %>
+    <%= review.content %>
+    <%= review.user_rating %>
+  <% end %>
+<% end %>

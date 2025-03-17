@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   resources :restaurants, only: :show do
     resources :collections, only: [:new, :create, :index]
+    resources :reviews, only: [:create]
   end
 
   resources :restaurants do

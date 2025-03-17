@@ -9,6 +9,8 @@ class RestaurantsController < ApplicationController
     @image = @images.sample
     @collections = Collection.where(user_id: current_user.id)
     @saved_restaurants = SavedRestaurant.where(user_id: current_user.id)
+    @review = Review.new
+    @reviews = Review.all
   end
 
   def update_collection
