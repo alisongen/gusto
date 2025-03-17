@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   end
 
   resources :saved_restaurants, only: [:update]
+  resources :reviews, only: [:destroy]
 
   resources :restaurants do
     patch "update_collection", to: "restaurants#update_collection", as: :collection
