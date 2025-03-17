@@ -201,6 +201,23 @@ end
 
 puts 'Finished saved_restos ✅'
 p ''
+
+puts 'Création de 5 reviews pour chaque User 👨🏻‍🎨'
+users.each do |user|
+  5.times do
+    restaurant = restaurants.sample
+    Review.create!(
+      content: Faker::Restaurant.review,
+      rating: Faker::Number.within(range: 1..5),
+      user: user,
+      restaurant: restaurant
+    )
+  end
+end
+
+puts 'Finished reviews ✅'
+p ''
+
 puts "Les restaurants commencent à l'ID #{Restaurant.first.id}"
 puts "Les users commencent à l'ID #{User.first.id}"
 puts "L'ID de l'admin est #{admin.id}"
@@ -208,3 +225,4 @@ puts "Les friendships commencent à l'ID #{Friendship.first.id}"
 puts "Les collections commencent à l'ID #{Collection.first.id}"
 puts "Les saved_restos commencent à l'ID #{SavedRestaurant.first.id}"
 puts "Les saved_restos_collection commencent à l'ID #{SavedRestaurantsCollection.first.id}"
+puts "Les reviews commencent à l'ID #{Review.first.id}"
