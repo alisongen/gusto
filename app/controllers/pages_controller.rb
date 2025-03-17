@@ -24,7 +24,7 @@ class PagesController < ApplicationController
   def feed
     @user = current_user
     # trouver les relations entre nous et qqun d'autre qui ont le statut accepté
-    all_accepted_friendships = Friendship.where(status: 1).where(user: current_user).or(Friendship.where(friend: current_user))
+    all_accepted_friendships = Friendship.where(status: 1).where(user: current_user).or(Friendship.where(status: 1).where(friend: current_user))
     # Sortir les id de ceux-là
     ids = all_accepted_friendships.map do |friendship|
       if friendship.user == current_user
@@ -40,7 +40,6 @@ class PagesController < ApplicationController
     # pouvoir sortir toutes les reviews de ces amis
     @friends_reviews = Review.where(user_id: friends.ids)
     # pouvoir sortir toutes les photos de ces amis
-    # @friends_photos = 
-    raise
+    # @friends_photos =
   end
 end
