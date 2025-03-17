@@ -1,7 +1,7 @@
 <div class="main-content">
   <div data-controller="reset">
     <%# J'affiche ma partial search-bar %>
-    <%= render "search-bar" %>
+    <%= render "components/searchbar_restaurant" %>
     <%# Je gère l'affichage des résultats %>
     <%# Si la valeur "query" dans params est présente %>
     <% if params[:query].present? %>
