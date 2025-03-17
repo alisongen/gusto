@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     patch "update_collection", to: "restaurants#update_collection", as: :collection
   end
 
+  get 'restaurants/google/:place_id', to: 'restaurants#show', as: :google_restaurant
   # À VÉRIFIER
   resources :collections, only: [:new, :create, :index, :show]
 

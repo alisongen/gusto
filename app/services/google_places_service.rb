@@ -1,17 +1,29 @@
-require 'open-uri'
-require 'json'
-
 class GooglePlacesService
-  BASE_URL = "https://maps.googleapis.com/maps/api/place/textsearch/json"
+  BASE_URL = 'https://places.googleapis.com/v1/places:searchText'
 
   def initialize(query)
     @query = query
     @api_key = ENV['GOOGLE_PLACES_API_KEY']
+
   end
 
-  def results
-    url = "#{BASE_URL}?query=#{URI.encode_www_form_component(@query)}&key=#{@api_key}"
-    response = URI.open(url).read
-    JSON.parse(response)["results"]
+  def call
+    headers = {
+      "Content-Type" => "application/json",
+      "X-Goog-Api-Key" => @api_key,
+      "X-Goog-FieldMask" => "places.displayName,places.formattedAddress,places.types,places.rating,places.photos",
+      "includedType" => "restaurant"
+    }
+
+    body = {
+      "textQuery" => @query
+    }.to_json
+
+    response = HTTParty.post(BASE_URL, headers: headers, body: body)
+    if response.success?
+      response.parsed_response
+    else
+      { error: response.code, message: response.parsed_response }
+    end
   end
 end
