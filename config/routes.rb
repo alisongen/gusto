@@ -3,14 +3,16 @@ Rails.application.routes.draw do
   root to: "pages#home"
 
   resources :restaurants, only: :show do
-    resources :collections, only: [:new, :create, :index]
+    # resources :collections, only: [:new, :create, :index]
+    resources :collections, only: [:index]
   end
 
   resources :restaurants do
-      patch "update_collection", to: "restaurants#update_collection", as: :collection
+    patch "update_collection", to: "restaurants#update_collection", as: :collection
   end
 
-  resources :collections
+  # À VÉRIFIER
+  resources :collections, only: [:new, :create, :index, :show]
 
   resources :friendships, except: %i[edit update new]
   get "friendships", to: "friendship#new"

@@ -24,12 +24,10 @@ class CollectionsController < ApplicationController
   end
 
   def new
-    @restaurant = Restaurant.find(params[:restaurant_id])
     @collection = Collection.new
   end
 
   def create
-    @restaurant = Restaurant.find(params[:restaurant_id])
     @user = current_user
     @collection = Collection.new(collection_params)
     @collection.user_id = @user.id
