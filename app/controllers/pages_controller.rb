@@ -20,4 +20,23 @@ class PagesController < ApplicationController
     @collections = @user.collections
     @collection = @user.collections.where(name: "Favoris").first
   end
+
+  def feed
+    @user = current_user
+    all_friendships = Friendship.where(status: 1).where(user: current_user).or(Friendship.where(friend: current_user))
+    ids = all_friendships.map do |friendship|
+      if friendship.user == current_user
+        friendship.friend.id
+      else
+        friendship.user.id
+      end
+    end
+
+    friends = User.where(id: ids)
+    # trouver les amis qui ont le statut accepté
+    # Sortir les id de ceux-là
+    # pouvoir sortir tous les saved restaurants de ces amis
+    @saved_restaurants = SavedRestaurants.where(user_id: friends_id)
+
+  end
 end
