@@ -13,6 +13,7 @@
 @import "bootstrap";
 @import "font-awesome";
 @import url("https://api.mapbox.com/mapbox-gl-js/v3.1.2/mapbox-gl.css");
+@import "star-rating.js/dist/star-rating.css";
 
 // Your CSS partials
 @import "components/index";
@@ -30,7 +31,11 @@
 @import "components/link";
 @import "components/card";
 @import "components/restaurant_card";
+@import "components/feed/review_feed_card";
+@import "components/feed/saved_restaurant_feed_card";
+@import "components/feed/feed_items";
 @import "components/title_container";
+@import "components/searchbar";
 
 .main-content {
   flex: 1;
