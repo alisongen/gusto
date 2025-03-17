@@ -210,7 +210,7 @@ users.each do |user|
       content: Faker::Restaurant.review,
       user_rating: Faker::Number.within(range: 1..5),
       user: user,
-      restaurant: restaurant
+      saved_restaurant: restaurant
     )
   end
 end
