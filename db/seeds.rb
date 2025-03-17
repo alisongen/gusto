@@ -208,7 +208,7 @@ users.each do |user|
     restaurant = restaurants.sample
     Review.create!(
       content: Faker::Restaurant.review,
-      rating: Faker::Number.within(range: 1..5),
+      user_rating: Faker::Number.within(range: 1..5),
       user: user,
       restaurant: restaurant
     )
