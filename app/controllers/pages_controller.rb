@@ -2,13 +2,17 @@ class PagesController < ApplicationController
   skip_before_action :authenticate_user!, only: []
 
   def home
-    # J'assigne à ma variable d'instance "@restaurants" les restaurants correspondant à ma recherche
-    # si une valeur "query" est présente dans mes params
-    @restaurants = Restaurant.search_by_name(params[:query]) if params[:query].present?
     # J'assigne à ma variable d'instance "@user" le "current_user"
     @user = current_user
-    @collection = @user.collections.where(name: "Favoris").first
-    @saved_restaurants = @user.saved_restaurants
+    # J'assigne à ma variable d'instance "@restaurants" les restaurants correspondant à ma recherche
+    # si une valeur "query" est présente dans mes params
+    @restaurants = GooglePlacesService.new(params[:query]).results if params[:query].present?
+    respond_to do |format|
+      format.html # Rendu pour une page HTML
+      format.json { render json: @restaurants } # Permet aussi d'utiliser en API
+    end
+    # @collection = @user.collections.where(name: "Favoris")
+    # @saved_restaurants = @user.saved_restaurants
   end
 
   def dashboard
