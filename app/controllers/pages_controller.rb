@@ -35,11 +35,13 @@ class PagesController < ApplicationController
     end
     #
     friends = User.where(id: ids)
-    # pouvoir sortir tous les saved restaurants de ces amis
-    @friends_saved_restaurants = SavedRestaurant.where(user_id: friends.ids).includes(:collections)
-    # pouvoir sortir toutes les reviews de ces amis
-    @friends_reviews = Review.where(user_id: friends.ids)
-    # pouvoir sortir toutes les photos de ces amis
+    # pouvoir sortir tous les saved restaurants de ces amis en antéchrono
+    @friends_saved_restaurants = SavedRestaurant.where(user_id: friends.ids).includes(:collections).order(created_at: :desc)
+    # pouvoir sortir toutes les reviews de ces amis en antéchrono
+    @friends_reviews = Review.where(user_id: friends.ids).order(created_at: :desc)
+    # pouvoir sortir toutes les photos de ces amis en antéchrono
     # @friends_photos =
+    # Concaténer les arrays et les trier par date de création
+    @feed_items = (@friends_saved_restaurants + @friends_reviews).sort_by(&:created_at).reverse
   end
 end

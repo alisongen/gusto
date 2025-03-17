@@ -1,5 +1,9 @@
-<div class="restaurant-cards">
-  <% @friends_saved_restaurants.each do |saved_resto| %>
-    <%= render 'components/saved_restaurant_feed_card', saved_restaurant: saved_resto%>
+<div class="feed-items">
+  <% @feed_items.each do |item| %>
+    <% if item.is_a?(SavedRestaurant) %>
+      <%= render 'components/saved_restaurant_feed_card', saved_restaurant: item %>
+    <% elsif item.is_a?(Review) %>
+      <%= render 'components/review_feed_card', review: item %>
+    <% end %>
   <% end %>
 </div>
