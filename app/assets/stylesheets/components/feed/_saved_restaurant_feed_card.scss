@@ -1,0 +1,30 @@
+@media screen and (max-width: 767px) {
+  .restaurant-feed-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 20px;
+  }
+
+  .restaurant-feed-card {
+    display: flex;
+    flex-direction: column;
+    width: calc(50% - 6px);
+    padding: 10px;
+    background-color: white;
+    border: solid 1px #EBEBEB;
+    border-radius: 10px;
+  }
+
+  .restaurant-feed-image {
+    height: 151px;
+  }
+
+  .restaurant-feed-title {
+
+  }
+
+  .restaurant-feed-text {
+
+  }
+}
