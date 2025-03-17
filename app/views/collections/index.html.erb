@@ -1,31 +1,36 @@
-<h1 class="text-center">Collections</h1>
+<h1 class="text-center py-3 fw-bold">Collections</h1>
 
-<div data-controller="showcat">
+<div data-controller="showcat" class="relative">
   <div class="row">
-    <div class="col-12 d-flex justify-content-between mx-auto" style="width: 85%;">
-      <button data-action="focus->showcat#toggle"><%= link_to "All", collections_path(), class: "text-deco-none" %></button>
-      <button data-action="focus->showcat#toggle">Collections</button>
-      <button data-action="focus->showcat#toggle">Friends</button>
+    <div class="col-12 d-flex justify-content-between mx-auto my-3" style="width: 85%;">
+      <%= link_to "All", collections_path(),
+      data: { action: "click->showcat#toggle", showcat_target: "allLink" },
+      class: "btn-link no-padding d-flex align-items-center justify-content-center" %>
+      <button data-action="click->showcat#toggle" class="btn-ghost no-padding">Collections</button>
+      <button <%#data-action="focus->showcat#toggle"%> class="btn-ghost no-padding">Friends</button>
     </div>
   </div>
 
-  <div class="mx-auto rounded-5" style="width: 85%; height: 350px;"
+  <div class="mx-auto rounded-5" style="width: 85%; height: 350px; box-shadow: 0 4px 7px rgba(0, 0, 0, 0.3);"
     data-controller="map"
     data-map-markers-value="<%= @markers.to_json %>"
     data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
   </div>
 
-  <div data-showcat-target="all">
+  <div class="d-none" data-showcat-target="all">
     <% @restaurants.each do |restaurant| %>
-      <p><%= link_to restaurant.name, restaurant_path(restaurant) %></p>
+      <div class="card-vignette rounded-5 mx-auto border border-1 my-3">
+        <p><%= link_to restaurant.name, restaurant_path(restaurant),  class: "text-deco-none" %></p>
+        <p><%= restaurant.rating %> </p>
+        <p><%= restaurant.address %> </p>
+      </div>
     <% end %>
   </div>
 
-  <div class="d-none" data-showcat-target="collections" data-controller="showfav">
+
+  <div class="d-none absolute bg-white mx-auto d-flex flex-column align-items-center my-2 rounded-5" style="width: 60%; box-shadow: 0 4px 7px rgba(0, 0, 0, 0.3);" data-showcat-target="collections">
     <% @collections.each_with_index do |collection, index| %>
-      <button data-action="focus->showfav#toggle" data-showfav-index-param=<%= index %>>
-        <%= link_to collection.name, collections_path(name: collection.name) %>
-      </button>
+      <%= link_to collection.name, collections_path(name: collection.name), class: "btn-collection no-padding d-flex align-items-center justify-content-center my-2 rounded-5" %>
       <div class="d-none" data-showfav-target="toggleelement">
         <% collection.saved_restaurants.each do |saved_restaurant| %>
           <p><%= link_to saved_restaurant.restaurant.name, restaurant_path(saved_restaurant.restaurant) %></p>
@@ -34,9 +39,12 @@
     <% end %>
   </div>
 
-  <%# <div class="d-none" data-showcat-target="friends">
-    <% @frienships.each do |friendship| %>
-      <%# <p><%= friendship.user.username </p> %>
+
+
+  <%# <div class="d-none" data-showcat-target="friends"> %>
+    <%# <% @frienships.each do |friendship| %>
+      <%# <p><%= friendship.user.username </p>%>
     <%# <% end %>
-  <%# </div>  %>
+  <%# </div> %>
+
 </div>
