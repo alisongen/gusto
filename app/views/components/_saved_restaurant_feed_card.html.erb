@@ -1,0 +1,9 @@
+<div class="restaurant-card">
+  <%#= image_tag saved_restaurant.restaurant.images %>
+  <%= image_tag saved_restaurant.restaurant.images.sample, class: "restaurant-image" %>
+  <h5 class="restaurant-title"><%= saved_restaurant.user.username %>a ajouté</h5>
+  <p class="restaurant-text"><%= saved_restaurant.restaurant.name %></p>
+  <% saved_restaurant.collections.each do |collection| %>
+    <p class="restaurant-text">à <%= collection.name %></p> <!--TODO: Possible d'afficher que la Ville+CodePostal-->
+  <% end %>
+</div>
