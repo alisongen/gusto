@@ -6,3 +6,43 @@
     <a href="/friendships/"><i class="fa-solid fa-user-group"></i></a>
   </div>
 </div>
+
+<div class="footer">
+  <div class="footer-nav">
+    <%= link_to root_path, class: "nav-item #{'active' if current_page?(root_path)}" do %>
+      <% if current_page?(root_path) %>
+        <%= image_tag "home-active.svg" %>
+      <% else %>
+        <%= image_tag "home.svg" %>
+      <% end %>
+      <span>HOME</span>
+    <% end %>
+
+    <%= link_to  collections_path, class: "nav-item #{'active' if current_page?(collections_path)}" do %>
+      <% if current_page?(collections_path) %>
+        <%= image_tag "maps-active.svg" %>
+      <% else %>
+        <%= image_tag "maps.svg" %>
+      <% end %>
+      <span>MAPS</span>
+    <% end %>
+
+    <%= link_to feed_path, class: "nav-item #{'active' if current_page?(feed_path)}" do %>
+      <% if current_page?(feed_path) %>
+        <%= image_tag "feed-active.svg" %>
+      <% else %>
+        <%= image_tag "feed.svg" %>
+      <% end %>
+      <span>FEED</span>
+    <% end %>
+
+    <%= link_to friendships_path, class: "nav-item #{'active' if current_page?(friendships_path)}" do %>
+      <% if current_page?(friendships_path) %>
+        <%= image_tag "friends-active.svg" %>
+      <% else %>
+        <%= image_tag "friends.svg" %>
+      <% end %>
+      <span>FRIENDS</span>
+    <% end %>
+  </div>
+</div>
