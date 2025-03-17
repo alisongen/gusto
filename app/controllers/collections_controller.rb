@@ -2,6 +2,7 @@ class CollectionsController < ApplicationController
   def index
     @user = current_user
     @collections = @user.collections
+    @friendships = @user.friendships
 
     if params[:name].present?
       @restaurants = Collection.find_by(name: params[:name]).restaurants
