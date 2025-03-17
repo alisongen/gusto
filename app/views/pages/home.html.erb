@@ -11,6 +11,7 @@
         <% if @restaurants.any? %>
           <%# Alors je fais une itération sur "@restaurants" %>
           <%= render "components/research_cards", restaurants: @restaurants %>
+
         <%# Sinon %>
         <% else %>
           <%# On affiche le message suivant %>
@@ -23,7 +24,9 @@
     <h1><%= link_to @collection.name, collections_path(name: @collection.name) %> </h1>
   </div>
   <%# Création d'une div afin d'afficher la collection "Favorites" %>
+  <%#= render "components/favorite_cards", collection: @collection %>
   <%= render "components/favorite_cards", collection: @collection %>
 
   <h1>Recommended</h1>
+
 </div>
