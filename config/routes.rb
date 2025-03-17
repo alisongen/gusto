@@ -21,5 +21,5 @@ Rails.application.routes.draw do
   patch "friendships/:id/decline", to: "friendships#decline", as: :decline
 
   get "dashboard", to: "pages#dashboard"
-  get "actuality", to: "pages#actuality"
+  get "feed", to: "pages#feed"
 end
