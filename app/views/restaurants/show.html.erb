@@ -49,23 +49,27 @@
 <%# @saved_restaurant.photos.each do |photo| %>
   <%#= cl_image_tag(photo.key, width: 300, height: 200, crop: "scale", effect: "cartoonify")  %>
 <%# end %>
+<% @saved_restaurants.each do |saved_restaurant| %>
+  <% if (saved_restaurant.restaurant == @restaurant) %>
 
-<% @saved_restaurant.photos.each do |photo| %>
-  <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
-<% end %>
+    <% @saved_restaurant.photos.each do |photo| %>
+      <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
+    <% end %>
 
-<h1>Add my photos</h1>
+    <h1>Add my photos</h1>
 
-<div class="container">
-  <div class="row">
-    <div class="col-xs-4">
-      <%= simple_form_for @saved_restaurant do |f| %>
-        <%= f.input :photos, input_html: { multiple: true } %>
-        <%= f.submit "Send your photos" %>
-      <% end %>
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-4">
+          <%= simple_form_for @saved_restaurant do |f| %>
+            <%= f.input :photos, input_html: { multiple: true } %>
+            <%= f.submit "Send your photos" %>
+          <% end %>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
+  <% end %>
+<% end %>
 
 <h1>Reviews</h1>
 
@@ -86,5 +90,8 @@
     <%= review.user.username %>
     <%= review.content %>
     <%= review.user_rating %>
+    <%= link_to friendship_path(friendship), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "text-black" do %>
+      <i class="fa-solid fa-trash-can"></i>
+    <% end %>
   <% end %>
 <% end %>
