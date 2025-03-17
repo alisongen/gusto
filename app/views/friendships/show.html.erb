@@ -17,9 +17,7 @@
   </div>
 
   <div data-showcat-target="all">
-    <% @saved_restaurants.each do |saved_restaurant| %>
-      <p><%= link_to saved_restaurant.restaurant.name, restaurant_path(saved_restaurant.restaurant) %></p>
-    <% end %>
+    <%= render "components/favorite_cards", collection: @collection %>
   </div>
 
   <div class="d-none" data-showcat-target="collections">
