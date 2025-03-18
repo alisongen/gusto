@@ -7,7 +7,7 @@
   border: 2px solid transparent;
 }
 
-.color-button:has(input:checked) {
+.color-button input:checked + .color-button {
   border-color: #ff5530;
 }
 
