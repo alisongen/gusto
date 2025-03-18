@@ -5,7 +5,8 @@ class FriendshipsController < ApplicationController
     @friendships = Friendship.all
     @users = User.all
     @users = @users.where("username ILIKE ?", "%#{params[:query]}%") if params[:query].present?
-
+    @pending_friendships = @friendships.select { |f| f.status == "pending" }
+    @accepted_friendships = @friendships.select { |f| f.status == "accepted" }
   end
 
   def show
