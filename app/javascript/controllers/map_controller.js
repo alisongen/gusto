@@ -67,7 +67,7 @@ export default class extends Controller {
       );
 
       // durée dynamique basée sur la distance, avec un max pour éviter que cela soit trop long
-      duration = Math.min(Math.max(distance * 5000, 500), 5000);
+      duration = Math.min(Math.max(distance * 3000, 500), 5000);
     }
 
     this.map.fitBounds(bounds, { padding: 70, maxZoom: 15, duration: duration })
