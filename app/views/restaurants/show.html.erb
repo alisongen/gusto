@@ -1,5 +1,5 @@
 <div class="restaurant-header">
-  <h1><%= @restaurant["name"] %></h1>
+  <h1><%= @restaurant.dig("displayName", "text") %></h1>
   <%= link_to "#", data: { bs_toggle: "modal", bs_target: "#collectionModal" }, class: "bouton-icon " do %>
     <i class="fa-solid fa-bookmark" style="color: white;"></i>
   <% end %>

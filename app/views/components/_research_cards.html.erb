@@ -11,7 +11,7 @@
         <h5 class="card-title"><%= restaurant[1][index]["displayName"]["text"] %></h5>
         <p class="card-text"><%= restaurant[1][index]["formattedAddress"] %></p>
         <p class="card-text">Rating: <%= restaurant[1][index]["rating"] %></p>
-        <a href="<%= restaurant_path(restaurant) %>" class="card-btn btn-primary">View Restaurant</a>
+        <a href="<%= restaurant_path(restaurant[1][index]["id"]) %>" class="card-btn btn-primary">View Restaurant</a>
       </div>
     </div>
   <% end %>

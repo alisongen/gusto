@@ -15,7 +15,7 @@
       <i class="fa-solid fa-utensils"></i>
       <div class="detail-info">
         <p>Category</p>
-        <p><%= @restaurant.category %></p>
+        <p><%= @restaurant[1]["primaryTypeDisplayName"]["text"] %></p>
       </div>
     </div>
     <!-- Afficher l'adresse -->
@@ -23,7 +23,7 @@
       <i class="fa-solid fa-utensils"></i>
       <div class="detail-info">
         <p>Address</p>
-        <p><%= @restaurant.address %></p>
+        <p><%= @restaurant[1]["primaryTypeDisplayName"]["text"] %></p>
       </div>
     </div>
     <!-- Afficher le téléphone -->
@@ -31,7 +31,7 @@
       <i class="fa-solid fa-utensils"></i>
       <div class="detail-info">
         <p>Phone number</p>
-        <p><%= @restaurant.phone_number %></p>
+        <p><%= @restaurant[1]["nationalPhoneNumber"] %></p>
       </div>
     </div>
     <!-- Afficher le site internet -->
@@ -39,7 +39,7 @@
       <i class="fa-solid fa-utensils"></i>
       <div class="detail-info">
         <p>Website</p>
-        <p><%= @restaurant.website %></p>
+        <p><%= @restaurant[1]["websiteUri"] %></p>
       </div>
       <i class="fa-solid fa-arrow-up-right-from-square"></i>
     </div>
