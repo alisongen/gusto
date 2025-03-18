@@ -4,10 +4,10 @@
   <div class="row">
     <div class="col-12 d-flex justify-content-between mx-auto my-3" style="width: 85%;">
       <%= link_to "All", collections_path(),
-        data: { action: "click->showcat#toggle", showcat_target: "allLink", turbo_stream: true },
-        class: "btn-link no-padding d-flex align-items-center justify-content-center" %>
-      <button id="collection-toggle" data-action="click->showcat#toggle" class="btn-ghost no-padding">Collections</button>
-      <button data-action="click->showcat#toggle" class="btn-ghost no-padding">Friends</button>
+      data: { action: "click->showcat#toggle", showcat_target: "allLink", turbo_stream: true },
+      class: "btn-link no-padding d-flex align-items-center justify-content-center" %>
+      <button data-action="click->showcat#toggle" data-showcat-target="colLink" class="btn-no-link no-padding d-flex align-items-center justify-content-center">Collections</button>
+      <button data-action="click->showcat#toggle" data-showcat-target="friendLink" class="btn-no-link no-padding d-flex align-items-center justify-content-center">Friends</button>
     </div>
   </div>
 
@@ -30,7 +30,7 @@
 
   <div id="collection-filters" class="d-none absolute bg-white mx-auto d-flex flex-column align-items-center my-2 rounded-5" style="width: 60%; box-shadow: 0 4px 7px rgba(0, 0, 0, 0.3);" data-showcat-target="collections">
     <% @collections.each_with_index do |collection, index| %>
-      <%= link_to collection.name, collections_path(name: collection.name), data: { turbo_stream: true }  %>
+      <%= link_to collection.name, collections_path(name: collection.name), data: { turbo_stream: true }, class: , class: "btn-collection no-padding d-flex align-items-center justify-content-center my-2 rounded-5"  %>
       <div class="d-none">
         <% collection.saved_restaurants.each do |saved_restaurant| %>
           <p><%= link_to saved_restaurant.restaurant.name, restaurant_path(saved_restaurant.restaurant) %></p>
