@@ -4,6 +4,7 @@ class PagesController < ApplicationController
   def home
     # J'assigne à ma variable d'instance "@user" le "current_user"
     @user = current_user
+    @saved_restaurants = @user.saved_restaurants
     # J'assigne à ma variable d'instance "@restaurants" les restaurants correspondant à ma recherche
     # si une valeur "query" est présente dans mes params
     @restaurants = GooglePlacesService.new(params[:query]).results if params[:query].present?
@@ -12,7 +13,17 @@ class PagesController < ApplicationController
       format.json { render json: @restaurants } # Permet aussi d'utiliser en API
     end
     # @collection = @user.collections.where(name: "Favoris")
-    @saved_restaurants = @user.saved_restaurants
+    @friends = @user.friends
+    @friends_restaurants = []
+    @reco_restaurants = []
+    @friends.each do |friend|
+      @friends_restaurants += friend.saved_restaurants
+    end
+    @friends_restaurants.each do |restaurant|
+      @info_restaurant = Restaurant.find(restaurant.restaurant_id)
+      @reco_restaurants << @info_restaurant
+    end
+    @reco_restaurants.uniq!
   end
 
   def dashboard
@@ -23,6 +34,22 @@ class PagesController < ApplicationController
     # Récupération des collections de mon @user
     @collections = @user.collections
     @collection = @user.collections.where(name: "Favoris").first
+    @new_collection = Collection.new
+    @colors = [
+      "#4B3B47", # Eggplant
+      "#FFBD33", # Orange
+      "#FFD133", # Yellow
+      "#A3E635", # Lime Green
+      "#33FF57", # Green
+      "#33FFBD", # Mint
+      "#33D1FF", # Sky Blue
+      "#3357FF", # Blue
+      "#8A33FF", # Purple
+      "#FF33F0", # Pink
+      "#FF3380", # Hot Pink
+      "#FF3366"  # Red
+    ]
+    @emojis = [ "🍔", "🥞", "🧁", "🍣", "☕️", "🥗", "🍻", "🥩", "🌯", "💙", "🎉", "🍽️" ]
   end
 
   def feed
@@ -44,8 +71,12 @@ class PagesController < ApplicationController
     # pouvoir sortir toutes les reviews de ces amis en antéchrono
     @friends_reviews = Review.where(user_id: friends.ids).order(created_at: :desc)
     # pouvoir sortir toutes les photos de ces amis en antéchrono
-    # @friends_photos =
+    @friends_photos = @friends_saved_restaurants.map do |saved_restaurant|
+      saved_restaurant.photos.map do |photo|
+        { photo: photo, saved_restaurant: saved_restaurant, created_at: photo.created_at }
+      end
+    end.flatten
     # Concaténer les arrays et les trier par date de création
-    @feed_items = (@friends_saved_restaurants + @friends_reviews).sort_by(&:created_at).reverse
+    @feed_items = (@friends_saved_restaurants + @friends_reviews + @friends_photos).sort_by { |item| item[:created_at] || item.created_at }.reverse
   end
 end

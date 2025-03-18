@@ -1,5 +1,17 @@
 <h1>Create new collection</h1>
 <%= simple_form_for(@collection) do |f| %>
   <%= f.input :name, label: 'Name' %>
+  <div class="colors-iteration mb-4">
+    <% @colors.each_with_index do |color, index| %>
+      <input type="radio" id="color_<%= index %>" name="collection[color]" value="<%= color %>" class="input-none">
+      <label for="color_<%= index %>" style="background-color:<%= color %>;" class="color-button"></label>
+    <% end %>
+  </div>
+  <div class="emojis-iteration mb-4">
+    <% @emojis.each_with_index do |emoji, index| %>
+      <input type="radio" id="emoji_<%= index %>" name="collection[emoji]" value="<%= emoji %>" class="input-none">
+      <label for="emoji_<%= index %>" class="emoji-button"><%= emoji %></label>
+    <% end %>
+  </div>
   <%= f.submit 'Create' %>
 <% end %>

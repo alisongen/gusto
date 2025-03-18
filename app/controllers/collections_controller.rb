@@ -34,14 +34,21 @@ class CollectionsController < ApplicationController
 
   def new
     @collection = Collection.new
+    set_colors_and_emojis
   end
 
   def create
     @user = current_user
     @collection = Collection.new(collection_params)
     @collection.user_id = @user.id
-    @collection.save
-    redirect_to collection_path(@collection)
+    if @collection.save
+      redirect_to dashboard_path
+    else
+      set_colors_and_emojis
+      set_collections
+      @show_modal = true
+      render 'pages/dashboard', status: :unprocessable_entity
+    end
   end
 
   def edit
@@ -61,6 +68,19 @@ class CollectionsController < ApplicationController
   private
 
   def collection_params
-    params.require(:collection).permit(:name)
+    params.require(:collection).permit(:name, :color, :emoji)
+  end
+
+  def set_colors_and_emojis
+    @colors = [
+      "#4B3B47", "#FFBD33", "#FFD133", "#A3E635", "#33FF57",
+      "#33FFBD", "#33D1FF", "#3357FF", "#8A33FF", "#FF33F0",
+      "#FF3380", "#FF3366"
+    ]
+    @emojis = [ "🍔", "🥞", "🧁", "🍣", "☕️", "🥗", "🍻", "🥩", "🌯", "💙", "🎉", "🍽️" ]
+  end
+
+  def set_collections
+    @collections = @user.collections
   end
 end

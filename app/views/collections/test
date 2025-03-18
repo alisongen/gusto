@@ -1,0 +1,105 @@
+<body cz-shortcut-listen="true">
+    <div class="navbar-container">
+  <div class="navbar">
+
+    <!-- Section centrale avec logo -->
+    <div class="navbar-brand">
+      <img alt="Logo Gusto" src="/assets/logoGusto-0f07a22f58e9e8a19080f97021509459e1011470cb44891144beb031b33fa798.svg">
+    </div>
+
+    <!-- Si l'utilisateur est connecté -->
+      <!-- Vérifie si l'utilisateur a un avatar attaché -->
+        <a class="navbar-profil" href="/dashboard/">
+          <img class="avatar" alt="avatar" src="https://png.pngtree.com/png-vector/20221018/ourmid/pngtree-master-chef-logo-illustration-png-image_6351381.png">
+</a>
+    <!-- >
+    <div class="d-flex justify-content-end" id="navbarSupportedContent">
+      <ul class="navbar-nav">
+          <li class="nav-item">
+            <a data-turbo-method="delete" class="nav-link" href="/users/sign_out">Disconnect</a>
+          </li>
+      </ul>
+    </div>
+    -->
+
+  </div>
+</div>
+
+
+
+    <h1>Create new collection</h1>
+<form class="simple_form new_collection" id="new_collection" novalidate="novalidate" action="/collections" accept-charset="UTF-8" method="post"><input type="hidden" name="authenticity_token" value="CSAxPHEs7jJWH6fX-dq9bH7ZXD5cOGKDIU3lW55qnq_9-LkNqoadDx2lDD7GtcJ4DECtDU8MkJZl4Ppk8rdanA" autocomplete="off">
+  <div class="mb-3 string optional collection_name"><label class="form-label string optional" for="collection_name">Name</label><input class="form-control string optional" type="text" name="collection[name]" id="collection_name"></div>
+  <div class="colors-iteration">
+      <label for="color" style="background-color:#4B3B47;" class="color-button">
+        <input type="radio" id="color" name="color" value="#4B3B47" class="input-none">
+      </label>
+      <label for="color" style="background-color:#FFBD33;" class="color-button">
+        <input type="radio" id="color" name="color" value="#FFBD33" class="input-none">
+      </label>
+      <label for="color" style="background-color:#FFD133;" class="color-button">
+        <input type="radio" id="color" name="color" value="#FFD133" class="input-none">
+      </label>
+      <label for="color" style="background-color:#A3E635;" class="color-button">
+        <input type="radio" id="color" name="color" value="#A3E635" class="input-none">
+      </label>
+      <label for="color" style="background-color:#33FF57;" class="color-button">
+        <input type="radio" id="color" name="color" value="#33FF57" class="input-none">
+      </label>
+      <label for="color" style="background-color:#33FFBD;" class="color-button">
+        <input type="radio" id="color" name="color" value="#33FFBD" class="input-none">
+      </label>
+      <label for="color" style="background-color:#33D1FF;" class="color-button">
+        <input type="radio" id="color" name="color" value="#33D1FF" class="input-none">
+      </label>
+      <label for="color" style="background-color:#3357FF;" class="color-button">
+        <input type="radio" id="color" name="color" value="#3357FF" class="input-none">
+      </label>
+      <label for="color" style="background-color:#8A33FF;" class="color-button">
+        <input type="radio" id="color" name="color" value="#8A33FF" class="input-none">
+      </label>
+      <label for="color" style="background-color:#FF33F0;" class="color-button">
+        <input type="radio" id="color" name="color" value="#FF33F0" class="input-none">
+      </label>
+      <label for="color" style="background-color:#FF3380;" class="color-button">
+        <input type="radio" id="color" name="color" value="#FF3380" class="input-none">
+      </label>
+      <label for="color" style="background-color:#FF3366;" class="color-button">
+        <input type="radio" id="color" name="color" value="#FF3366" class="input-none">
+      </label>
+  </div>
+  <input type="submit" name="commit" value="Create" data-disable-with="Create">
+</form>
+
+    <div class="footer">
+  <div class="footer-links">
+    <a href="/"><i class="fa-solid fa-house"></i></a>
+    <a href="/dashboard/"><i class="fa-solid fa-heart"></i></a>
+    <a href="/"><i class="fa-solid fa-bell"></i></a>
+    <a href="/friendships/"><i class="fa-solid fa-user-group"></i></a>
+  </div>
+</div>
+
+<div class="footer">
+  <div class="footer-nav">
+    <a class="nav-item " href="/">
+        <img src="/assets/home-c7b10c65b08e9beda2dedeb54cbc2e37a9f0ce7e7b6d0096379e0bf5a24a3fc5.svg">
+      <span>HOME</span>
+</a>
+    <a class="nav-item " href="/collections">
+        <img src="/assets/maps-50e54b4424a30ff3f52b466e26c9185b9764d643e727cec9539c5b299e2c459f.svg">
+      <span>MAPS</span>
+</a>
+    <a class="nav-item " href="/feed">
+        <img src="/assets/feed-33981f56b9439f75ebddf27f5a39666d0d5ba91042573bc05d0aeeb90e78ee8c.svg">
+      <span>FEED</span>
+</a>
+    <a class="nav-item " href="/friendships">
+        <img src="/assets/friends-4cd5809657859f8993be69df610044487b19f3667b3e426320aec4f5648dd1d7.svg">
+      <span>FRIENDS</span>
+</a>  </div>
+</div>
+
+
+
+</body>

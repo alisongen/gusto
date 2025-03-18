@@ -10,13 +10,14 @@ Rails.application.routes.draw do
   end
 
   resources :saved_restaurants, only: [:update]
+  resources :reviews, only: [:destroy]
 
   resources :restaurants do
     patch "update_collection", to: "restaurants#update_collection", as: :collection
   end
 
   # À VÉRIFIER
-  resources :collections, only: [:new, :create, :index, :show]
+  resources :collections, only: [:new, :create, :index, :show, :destroy]
 
   resources :friendships, except: %i[edit update new]
   get "friendships", to: "friendship#new"

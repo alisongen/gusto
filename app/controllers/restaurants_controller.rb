@@ -35,4 +35,11 @@ class RestaurantsController < ApplicationController
     #redirect_to collections_path(name: @collection.name)
     redirect_to dashboard_path
   end
+
+  def destroy
+    @saved_restaurant = SavedRestaurant.find(params[:format])
+    @photo = @saved_restaurant.photos.find(params[:id])
+    @photo.destroy
+    redirect_to restaurant_path()
+  end
 end

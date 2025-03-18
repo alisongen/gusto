@@ -36,11 +36,13 @@
 @import "components/feed/feed_items";
 @import "components/title_container";
 @import "components/searchbar";
+@import "components/modal_form";
+@import "components/friend_card";
 
 .main-content {
   flex: 1;
   overflow-y: auto;
-  padding-top: 60px;
+  padding-top: 80px;
   padding-bottom: 60px;
 }
 body {
@@ -48,6 +50,5 @@ body {
   flex-direction: column;
   min-height: 100vh;
   background-color: white;
-  margin-top: 60px;
   margin-bottom: 80px;
 }
