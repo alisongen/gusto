@@ -1,13 +1,17 @@
-.color-button {
+.color-button, .emoji-button {
   width: 55px;
   height: 55px;
   border-radius: 25%;
   display: inline-block;
   cursor: pointer;
-  border: 2px solid transparent;
+  border: 3px solid transparent;
+  text-align: center;
+  line-height: 55px; /* Centrer verticalement les émojis */
+  background-color: #f0f0f0; /* Fond légèrement grisé */
+  font-size: 30px;
 }
 
-.color-button input:checked + .color-button {
+.input-none:checked + .color-button, .input-none:checked + .emoji-button {
   border-color: #ff5530;
 }
 
@@ -15,7 +19,7 @@
   display: none;
 }
 
-.colors-iteration {
+.colors-iteration, .emojis-iteration {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
