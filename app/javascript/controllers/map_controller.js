@@ -26,7 +26,6 @@ export default class extends Controller {
 
   markersValueChanged() {
     setTimeout(() => {
-
       this.#removeMarkersToMap()
       this.#addMarkersToMap()
       this.#fitMapToMarkers()

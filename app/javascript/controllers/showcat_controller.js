@@ -19,7 +19,9 @@ export default class extends Controller {
       this.allLinkTarget.classList.add("btn-link");
     } else if (event.currentTarget.textContent === "Collections") {
       this.collectionsTarget.classList.remove("d-none");
-      this.allTarget.classList.add("d-none");
+      // this.allTarget.classList.add("d-none");
+      this.allTarget.classList.remove("d-none");
+
       this.friendsTarget.classList.add("d-none");
       this.allLinkTarget.classList.remove("btn-link");
       this.allLinkTarget.classList.add("btn-no-link");

@@ -4,8 +4,8 @@
   <div class="row">
     <div class="col-12 d-flex justify-content-between mx-auto my-3" style="width: 85%;">
       <%= link_to "All", collections_path(),
-      data: { action: "click->showcat#toggle", showcat_target: "allLink" },
-      class: "btn-link no-padding d-flex align-items-center justify-content-center" %>
+        data: { action: "click->showcat#toggle", showcat_target: "allLink", turbo_stream: true },
+        class: "btn-link no-padding d-flex align-items-center justify-content-center" %>
       <button id="collection-toggle" data-action="click->showcat#toggle" class="btn-ghost no-padding">Collections</button>
       <button data-action="click->showcat#toggle" class="btn-ghost no-padding">Friends</button>
     </div>
