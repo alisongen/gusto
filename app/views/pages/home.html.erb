@@ -44,6 +44,14 @@
     <% end %>
   </div>
 
-  <h1>Recommended</h1>
+  <div class="title-container">
+    <h2>Recommendations</h1>
+  </div>
+
+  <div class="restaurant-cards">
+    <% @reco_restaurants.each do |restaurant| %>
+      <%= render "components/recommendation_card", restaurant: restaurant%>
+    <% end %>
+  </div>
 
 </div>

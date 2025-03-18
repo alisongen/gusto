@@ -1,8 +1,16 @@
 @media screen and (max-width: 767px) {
   .title-container {
+    margin-top: 30px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .title-container h1,
+  .title-container h2 {
+    all: unset;
+    font-size: 22px;
   }
 }

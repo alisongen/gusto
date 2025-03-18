@@ -4,6 +4,7 @@ class PagesController < ApplicationController
   def home
     # J'assigne à ma variable d'instance "@user" le "current_user"
     @user = current_user
+    @saved_restaurants = @user.saved_restaurants
     # J'assigne à ma variable d'instance "@restaurants" les restaurants correspondant à ma recherche
     # si une valeur "query" est présente dans mes params
     @restaurants = GooglePlacesService.new(params[:query]).results if params[:query].present?
@@ -12,7 +13,17 @@ class PagesController < ApplicationController
       format.json { render json: @restaurants } # Permet aussi d'utiliser en API
     end
     # @collection = @user.collections.where(name: "Favoris")
-    @saved_restaurants = @user.saved_restaurants
+    @friends = @user.friends
+    @friends_restaurants = []
+    @reco_restaurants = []
+    @friends.each do |friend|
+      @friends_restaurants += friend.saved_restaurants
+    end
+    @friends_restaurants.each do |restaurant|
+      @info_restaurant = Restaurant.find(restaurant.restaurant_id)
+      @reco_restaurants << @info_restaurant
+    end
+    @reco_restaurants.uniq!
   end
 
   def dashboard
