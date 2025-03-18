@@ -1,0 +1,23 @@
+.color-button {
+  width: 55px;
+  height: 55px;
+  border-radius: 25%;
+  display: inline-block;
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+
+.color-button:has(input:checked) {
+  border-color: #ff5530;
+}
+
+.input-none {
+  display: none;
+}
+
+.colors-iteration {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
