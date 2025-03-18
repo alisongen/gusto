@@ -1,3 +1,58 @@
+<!-- Idéalement code à mettre dans Friendships Controller -->
+<% User.all.each do |user| %>
+  <% friends = [] %>
+  <% @friendships.each do |friendship| %>
+    <% if (current_user == User.find(friendship.user_id)) %>
+      <% friends.insert(-1, friendship.friend_id) %>
+    <% end %>
+  <% end %>
+  <% unless (user == current_user || friends.include?(user.id)) %>
+    <%# user.username %>
+    <%# link_to "Add", friendships_path(user), data: {turbo_method: :post, turbo_confirm: "Are you sure?"}, class: "btn btn-success" %>
+  <% end %>
+<% end %>
+
+<div class="main-content">
+  <!-- Barre de recherche -->
+  <div data-controller="reset">
+    <%# J'affiche ma partial search-bar %>
+    <%= render "components/searchbar_friend" %>
+    <%# Je gère l'affichage des résultats %>
+    <%# Si la valeur "query" dans params est présente %>
+    <% if params[:query].present? %>
+    <%# Je créé une div qui affichera mes résultats %>
+    <div data-reset-target="list">
+      <%# Si je trouve des restaurants dans les résultats de ma recherche %>
+      <% @users.each do |user| %>
+        <% friends = [] %>
+        <% @friendships.each do |friendship| %>
+          <% if (current_user == User.find(friendship.user_id)) %>
+            <% friends.insert(-1, friendship.friend_id) %>
+          <% end %>
+        <% end %>
+        <% unless (user == current_user || friends.include?(user.id)) %>
+          <% if friends.any? %>
+              <%= user.username %>
+              <%= link_to "Add", friendships_path(user), data: {turbo_method: :post, turbo_confirm: "Are you sure?"}, class: "btn btn-success" %>
+          <%# Sinon %>
+          <% else %>
+            <%# On affiche le message suivant %>
+            <p>Sorry, no friends found.</p>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+  </div>
+
+
+</div>
+
+<!-- Barre de recherche -->
+
+
+
+<!--
 <div class="container m-3">
   <h1>Add a friend</h1>
   <% User.all.each do |user| %>
@@ -13,6 +68,7 @@
     <% end %>
   <% end %>
 </div>
+
 <div class="m-3" data-controller="reset">
   <%# J'affiche ma partial search-bar %>
   <%= render "components/searchbar_friend" %>
@@ -43,6 +99,7 @@
     </div>
   <% end %>
 </div>
+
 <div class="container m-3">
   <h1 class="mb-3">Pending requests</h1>
   <% @friendships.each do |friendship| %>
@@ -100,3 +157,6 @@
   </ul>
   <% end %>
 </div>
+
+<div>
+-->
