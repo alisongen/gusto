@@ -4,14 +4,14 @@
     <%# et le lien cers la show du restaurant %>
     <%= link_to restaurant_path(restaurant) do %>
     <div class="card">
-      <% if restaurant["photos"].present? %>
-        <%= image_tag "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=#{restaurant["photos"].first["photo_reference"]}&key=#{ENV['GOOGLE_PLACES_API_KEY']}", class: "card-img-top" %>
-      <% end %>
+<%# https://lh3.googleusercontent.com/places/ANXAkqFE188bvuUs7cu_JFArdxK7kuCOVoyM03gu5hU9b8B-Cp-Ty2qwoZ4UxuOWrbifCdGKemjIQuqo7qnLs4BtxdqVLxbnPnr-18U=s4800-w1024-h768" %>
+
+
       <div class="card-body">
-        <h5 class="card-title"><%= restaurant["name"] %></h5>
-        <p class="card-text"><%= restaurant["formatted_address"] %></p>
-        <p class="card-text">Rating: <%= restaurant["rating"] %></p>
-        <%# <a href="<%= restaurant_path(restaurant) " class="card-btn btn-primary">View Restaurant</a> %>
+        <h5 class="card-title"><%= restaurant[1][0]["displayName"]["text"] %></h5>
+        <p class="card-text"><%= restaurant[1][0]["formattedAddress"] %></p>
+        <p class="card-text">Rating: <%= restaurant[1][0]["rating"] %></p>
+        <%# <%= link_to "View Restaurant", google_restaurant_path(restaurant["place_id"]), class:"card-btn btn-primary" %>
       </div>
     </div>
     <% end %>

@@ -1,14 +1,14 @@
 <div class="details-container">
   <!-- Afficher la description -->
-  <div class="description">
-    <p>Description</p>
-    <% if @restaurant.description.length <= 120 %>
-      <p><%= @restaurant.description %></p>
-    <% else %>
-      <p><%= truncate(@restaurant.description, length: 120) %></p>
+  <%# <div class="description"> %>
+    <%# <p>Description</p> %>
+    <%# <% if @restaurant.description.length <= 120 %>
+      <%# <p><%= @restaurant.description </p> %>
+    <%# <% else %>
+      <%# <p><%= truncate(@restaurant.description, length: 120) </p> %>
       <!-- TODO: JS pour afficher un bouton "See more"/"See less" -->
-    <% end %>
-  </div>
+    <%# <% end %>
+  <%# </div> %>
   <div class="details-list">
     <!-- Afficher la catégorie -->
     <div class="detail">
