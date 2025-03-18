@@ -21,7 +21,7 @@ export default class extends Controller {
     })
 
     this.#addMarkersToMap()
-    this.#fitMapToMarkers()
+    this.#fitMapToMarkers(true)
   }
 
   markersValueChanged() {
@@ -48,21 +48,27 @@ export default class extends Controller {
     })
   }
 
-  #fitMapToMarkers() {
+  #fitMapToMarkers(initial_connect) {
     const bounds = new mapboxgl.LngLatBounds()
     this.markersValue.forEach(marker => bounds.extend([ marker.lng, marker.lat ]))
 
-    const currentCenter = this.map.getCenter(); // Get current map center
-    const newCenter = bounds.getCenter(); // Get new bounds center
+    let duration = 0
+    // pas d'animation au chargement de la page
+    if (!initial_connect) {
+      // on récupère le centre de la map
+      const currentCenter = this.map.getCenter();
+      // on récupère le centre des limites
+      const newCenter = bounds.getCenter();
 
-    // Calculate distance between current center and new center
-    const distance = Math.sqrt(
-      Math.pow(currentCenter.lng - newCenter.lng, 2) +
-      Math.pow(currentCenter.lat - newCenter.lat, 2)
-    );
+      // calcule la distance entre l'ancien centre et le nouveau
+      const distance = Math.sqrt(
+        Math.pow(currentCenter.lng - newCenter.lng, 2) +
+        Math.pow(currentCenter.lat - newCenter.lat, 2)
+      );
 
-    // Set a dynamic duration based on distance (clamped for reasonable speed)
-    const duration = Math.min(Math.max(distance * 5000, 500), 5000); // 0.5s to 3s
+      // durée dynamique basée sur la distance, avec un max pour éviter que cela soit trop long
+      duration = Math.min(Math.max(distance * 5000, 500), 5000);
+    }
 
     this.map.fitBounds(bounds, { padding: 70, maxZoom: 15, duration: duration })
   }
