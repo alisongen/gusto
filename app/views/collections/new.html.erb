@@ -1,5 +1,13 @@
 <h1>Create new collection</h1>
 <%= simple_form_for(@collection) do |f| %>
   <%= f.input :name, label: 'Name' %>
+  <div class="colors-iteration">
+    <%#= iteration sur array de color %>
+    <% @colors.each do |color| %>
+      <label for="color" style="background-color:<%= color %>;" class= "color-button">
+        <input type="radio" id="color" name="color" value=<%= color %> class="input-none">
+      </label>
+    <% end %>
+  </div>
   <%= f.submit 'Create' %>
 <% end %>
