@@ -51,7 +51,20 @@ export default class extends Controller {
   #fitMapToMarkers() {
     const bounds = new mapboxgl.LngLatBounds()
     this.markersValue.forEach(marker => bounds.extend([ marker.lng, marker.lat ]))
-    this.map.fitBounds(bounds, { padding: 70, maxZoom: 15, duration: 0 })
+
+    const currentCenter = this.map.getCenter(); // Get current map center
+    const newCenter = bounds.getCenter(); // Get new bounds center
+
+    // Calculate distance between current center and new center
+    const distance = Math.sqrt(
+      Math.pow(currentCenter.lng - newCenter.lng, 2) +
+      Math.pow(currentCenter.lat - newCenter.lat, 2)
+    );
+
+    // Set a dynamic duration based on distance (clamped for reasonable speed)
+    const duration = Math.min(Math.max(distance * 5000, 500), 5000); // 0.5s to 3s
+
+    this.map.fitBounds(bounds, { padding: 70, maxZoom: 15, duration: duration })
   }
 
   #removeMarkersToMap() {
