@@ -37,7 +37,7 @@
         <%= link_to friendship_path(friendship), class: "btn-delete", data: { turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
           <%= image_tag "delete.svg", class: "btn-delete" %>
         <% end %>
-        <%= link_to friendship_path(friendship), class: "btn-arrow", data: { turbo_method: "PATCH" } do %>
+        <%= link_to friendship_path(friendship), class: "btn-arrow" do %>
           <%= image_tag "arrow.svg", class: "btn-arrow" %>
         <% end %>
       </div>
