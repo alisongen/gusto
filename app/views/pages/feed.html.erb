@@ -4,6 +4,8 @@
       <%= render 'components/saved_restaurant_feed_card', saved_restaurant: item %>
     <% elsif item.is_a?(Review) %>
       <%= render 'components/review_feed_card', review: item %>
+    <% elsif item.is_a?(Hash) && item[:photo].present? %>
+      <%= render 'components/photo_feed_card', photo: item[:photo], saved_restaurant: item[:saved_restaurant] %>
     <% end %>
   <% end %>
 </div>

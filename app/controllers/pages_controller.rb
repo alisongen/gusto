@@ -44,8 +44,12 @@ class PagesController < ApplicationController
     # pouvoir sortir toutes les reviews de ces amis en antéchrono
     @friends_reviews = Review.where(user_id: friends.ids).order(created_at: :desc)
     # pouvoir sortir toutes les photos de ces amis en antéchrono
-    # @friends_photos =
+    @friends_photos = @friends_saved_restaurants.map do |saved_restaurant|
+      saved_restaurant.photos.map do |photo|
+        { photo: photo, saved_restaurant: saved_restaurant, created_at: photo.created_at }
+      end
+    end.flatten
     # Concaténer les arrays et les trier par date de création
-    @feed_items = (@friends_saved_restaurants + @friends_reviews).sort_by(&:created_at).reverse
+    @feed_items = (@friends_saved_restaurants + @friends_reviews + @friends_photos).sort_by { |item| item[:created_at] || item.created_at }.reverse
   end
 end
