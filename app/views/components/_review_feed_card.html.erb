@@ -1,5 +1,5 @@
 <div class="review-feed-card">
-  <%= image_tag review.saved_restaurant.restaurant.images.sample, class: "restaurant-image" %>
+  <%= image_tag review.saved_restaurant.restaurant.images.sample, class: "review-feed-image" %>
   <h5 class="review-feed-title"><%= review.user.username %> a laissé une review</h5>
   <p class="review-feed-text"><%= review.content %></p>
   <p class="review-feed-rating">Note : <%= review.user_rating %></p>
