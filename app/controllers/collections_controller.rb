@@ -40,7 +40,7 @@ class CollectionsController < ApplicationController
       "#FF3380", # Hot Pink
       "#FF3366"  # Red
     ]
-    @emojis = [ "🍔", "🥞", "🌭", "🍿", "🍣", "🍜", "🍩", "🍪", "🍫", "🍦", "🍰"]
+    @emojis = [ "🍔", "🥞", "🧁", "🍣", "☕️", "🥗", "🍻", "🥩", "🌯", "💙", "🎉", "🍽️"]
   end
 
   def create

@@ -7,7 +7,7 @@
       <label for="color_<%= index %>" style="background-color:<%= color %>;" class="color-button"></label>
     <% end %>
   </div>
-  <div class="emojis-iteration">
+  <div class="emojis-iteration mb-4">
     <% @emojis.each_with_index do |emoji, index| %>
       <input type="radio" id="emoji_<%= index %>" name="collection[emoji]" value="<%= emoji %>" class="input-none">
       <label for="emoji_<%= index %>" class="emoji-button"><%= emoji %></label>
