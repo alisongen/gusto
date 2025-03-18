@@ -1,3 +1,5 @@
+
+
 class RestaurantsController < ApplicationController
   def index
     @restaurants = Restaurant.all
@@ -28,12 +30,19 @@ class RestaurantsController < ApplicationController
 
   def update_collection
     @restaurant = Restaurant.find(params[:restaurant_id])
-    @collection = Collection.find(params[:collection_id])
     @saved_restaurant = SavedRestaurant.find_or_create_by(restaurant: @restaurant, user: current_user)
-    @collection.saved_restaurants << @saved_restaurant
-    @collection.save!
+    @collections = Collection.where(user_id: current_user.id)
+    @collections.each do |collect|
+      if (params["#{collect.name}"].present? && !SavedRestaurantsCollection.where(saved_restaurant_id: @saved_restaurant.id, collection_id: collect.id).present?)
+        @collection = Collection.find(params["#{collect.name}"])
+        SavedRestaurantsCollection.create(collection_id: collect.id, saved_restaurant_id: @saved_restaurant.id)
+      elsif (SavedRestaurantsCollection.where(saved_restaurant_id: @saved_restaurant.id, collection_id: collect.id).present?)
+        @saved_restaurants_collection = SavedRestaurantsCollection.where(saved_restaurant_id: @saved_restaurant.id, collection_id: collect.id)
+        @saved_restaurants_collection.first.destroy
+      end
+    end
     #redirect_to collections_path(name: @collection.name)
-    redirect_to dashboard_path
+    redirect_to restaurant_path(@restaurant)
   end
 
   def destroy

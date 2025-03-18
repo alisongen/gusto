@@ -1,5 +1,5 @@
 <div class="restaurant-header">
-  <h1><%= @restaurant.name %></h1>
+  <h1><%= @restaurant["name"] %></h1>
   <%= link_to "#", data: { bs_toggle: "modal", bs_target: "#collectionModal" }, class: "bouton-icon " do %>
     <i class="fa-solid fa-bookmark" style="color: white;"></i>
   <% end %>
@@ -18,18 +18,21 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <%= form_with url: restaurant_collection_path(restaurant_id: @restaurant.id), method: :patch, local: true do |f| %>
+        <%= form_with url: restaurant_collection_path(@collections, restaurant_id: @restaurant.id), method: :patch, local: true do |f| %>
           <div class="mb-3">
-            <label for="collectionSelect" class="form-label">Select Collection</label>
-            <select class="form-select" id="collectionSelect" name="collection_id">
               <% @collections.each do |collection| %>
-                <option value="<%= collection.id %>"><%= collection.name %></option>
+                <% if (SavedRestaurantsCollection.where(saved_restaurant_id: @saved_restaurant.id, collection_id: collection.id).present?) %>
+                  <label for="collection"><%= collection.name %></label>
+                  <input id="<%= collection.id %>" name="<%= collection.name %>" type="checkbox" value="<%= collection.id %>" checked/>
+                <% else %>
+                  <label for="collection"><%= collection.name %></label>
+                  <input id="<%= collection.id %>" name="<%= collection.name %>" type="checkbox" value="<%= collection.id %>"/>
+                <% end %>
               <% end %>
-            </select>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <%= f.submit "Add to Collection", class: "btn btn-primary" %>
+            <%= f.submit "Save", class: "btn btn-primary" %>
           </div>
         <% end %>
       </div>

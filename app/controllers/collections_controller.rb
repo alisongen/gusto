@@ -56,7 +56,6 @@ class CollectionsController < ApplicationController
   end
 
   def update
-    # TO DO
   end
 
   def destroy
