@@ -6,7 +6,7 @@ class PagesController < ApplicationController
     @user = current_user
     # J'assigne à ma variable d'instance "@restaurants" les restaurants correspondant à ma recherche
     # si une valeur "query" est présente dans mes params
-    @restaurants = GooglePlacesService.new(params[:query]).call if params[:query].present?
+    @restaurants = GetGooglePlacesDataService.new(params[:query]).call if params[:query].present?
     respond_to do |format|
       format.html # Rendu pour une page HTML
       format.json { render json: @restaurants } # Permet aussi d'utiliser en API

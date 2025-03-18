@@ -1,20 +1,18 @@
-class GooglePlacesService
+class GetGooglePlacesDataService
   BASE_URL = 'https://places.googleapis.com/v1/places:searchText'
 
   def initialize(query)
     @query = query
     @api_key = ENV['GOOGLE_PLACES_API_KEY']
-
   end
 
   def call
     headers = {
       "Content-Type" => "application/json",
       "X-Goog-Api-Key" => @api_key,
-      "X-Goog-FieldMask" => "places.displayName,places.formattedAddress,places.types,places.rating,places.photos",
-      "includedType" => "restaurant"
+      "X-Goog-FieldMask" => "places.id,places.displayName,places.formattedAddress,places.addressComponents,places.rating,places.nationalPhoneNumber,places.websiteUri,places.primaryTypeDisplayName,places.photos,places.googleMapsLinks"
     }
-
+#
     body = {
       "textQuery" => @query
     }.to_json

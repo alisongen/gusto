@@ -3,10 +3,9 @@
     <%# Et pour chaque "restaurant", j'affiche les infos (name et address), la possibilité de l'ajouter à une collection via l'icon %>
     <%# et le lien cers la show du restaurant %>
     <div class="card">
-      <% if restaurant[1][0]["photos"].present? %>
-        <% photo_reference = restaurant[1][0]["photos"][0]["authorAttributions"][0]["photoUri"] %>
-        <%= image_tag "#{photo_reference}", class: "card-img-top" %>
-      <% end %>
+<%# https://lh3.googleusercontent.com/places/ANXAkqFE188bvuUs7cu_JFArdxK7kuCOVoyM03gu5hU9b8B-Cp-Ty2qwoZ4UxuOWrbifCdGKemjIQuqo7qnLs4BtxdqVLxbnPnr-18U=s4800-w1024-h768" %>
+
+
       <div class="card-body">
         <h5 class="card-title"><%= restaurant[1][0]["displayName"]["text"] %></h5>
         <p class="card-text"><%= restaurant[1][0]["formattedAddress"] %></p>
