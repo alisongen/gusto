@@ -6,8 +6,8 @@
       <%= link_to "All", collections_path(),
       data: { action: "click->showcat#toggle", showcat_target: "allLink" },
       class: "btn-link no-padding d-flex align-items-center justify-content-center" %>
-      <button data-action="click->showcat#toggle" class="btn-ghost no-padding">Collections</button>
-      <button data-action="click->showcat#toggle" class="btn-ghost no-padding">Friends</button>
+      <button data-action="click->showcat#toggle" data-showcat-target="colLink" class="btn-no-link no-padding d-flex align-items-center justify-content-center">Collections</button>
+      <button data-action="click->showcat#toggle" data-showcat-target="friendLink" class="btn-no-link no-padding d-flex align-items-center justify-content-center">Friends</button>
     </div>
   </div>
 
