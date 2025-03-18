@@ -22,11 +22,20 @@
     border-radius: 5px;
   }
 
-  .restaurant-title {
+  .restaurant-card-title {
+    padding-top: 10px;
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  .restaurant-card-text {
 
   }
 
-  .restaurant-text {
-
+  .restaurant-card-rating{
+    padding-top: 10px;
+    display: flex;
+    flex-direction: row;
+    gap: 0px;
   }
 }

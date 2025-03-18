@@ -54,6 +54,9 @@
 
     <% @saved_restaurant.photos.each do |photo| %>
       <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
+      <%= link_to restaurant_path(photo, @saved_restaurant), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "text-black" do %>
+        <i class="fa-solid fa-trash-can"></i>
+      <% end %>
     <% end %>
 
     <h1>Add my photos</h1>
