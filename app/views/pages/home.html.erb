@@ -1,7 +1,7 @@
 <div class="main-content">
   <div data-controller="reset">
     <%# J'affiche ma partial search-bar %>
-    <%= render "search-bar" %>
+    <%= render "components/searchbar_restaurant" %>
     <%# Je gère l'affichage des résultats %>
     <%# Si la valeur "query" dans params est présente %>
     <% if params[:query].present? %>
@@ -25,7 +25,7 @@
   </div>
   <%# Création d'une div afin d'afficher la collection "Favorites" %>
   <%#= render "components/favorite_cards", collection: @collection %>
-  <%= render "components/favorite_cards", collection: @collection %>
+  <%#= render "components/favorite_cards", collection: @collection %>
    -->
 
   <div class="title-container">
@@ -43,6 +43,14 @@
     <% end %>
   </div>
 
-  <h1>Recommended</h1>
+  <div class="title-container">
+    <h2>Recommendations</h1>
+  </div>
+
+  <div class="restaurant-cards">
+    <% @reco_restaurants.each do |restaurant| %>
+      <%= render "components/recommendation_card", restaurant: restaurant%>
+    <% end %>
+  </div>
 
 </div>

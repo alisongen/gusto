@@ -1,1 +1,15 @@
-
+<div class="card-container">
+  <% if %>
+    <% collection.saved_restaurants.each do |saved_restaurant| %>
+      <div class="card">
+        <%= image_tag saved_restaurant.restaurant.images.sample, class: "card-img-top" if saved_restaurant.restaurant.images.attached? %>
+        <div class="card-body">
+          <h5 class="card-title"><%= saved_restaurant.restaurant.name %></h5>
+          <p class="card-text"><%= saved_restaurant.restaurant.address %></p>
+          <p class="card-text">Rating: <%= saved_restaurant.restaurant.rating %></p>
+          <a href="<%= restaurant_path(saved_restaurant.restaurant) %>" class="card-btn btn-primary">View Restaurant</a>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>

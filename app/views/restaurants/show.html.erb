@@ -8,9 +8,7 @@
   <%= render "components/image_carousel", image: @image %>
 </div>
 <%= render "components/restaurant_details" %>
-<%= link_to "Add a review", root_path, class: "bouton-large" %>
 
-<!---->
 <!-- Modal pour choisir la catégorie qui s'ouvre en mode pop-up -->
 <div class="modal fade" id="collectionModal" tabindex="-1" aria-labelledby="collectionModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -51,3 +49,56 @@
 <%# @saved_restaurant.photos.each do |photo| %>
   <%#= cl_image_tag(photo.key, width: 300, height: 200, crop: "scale", effect: "cartoonify")  %>
 <%# end %>
+<% @saved_restaurants.each do |saved_restaurant| %>
+  <% if (saved_restaurant.restaurant == @restaurant) %>
+
+    <% @saved_restaurant.photos.each do |photo| %>
+      <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
+      <%= link_to restaurant_path(photo, @saved_restaurant), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "text-black" do %>
+        <i class="fa-solid fa-trash-can"></i>
+      <% end %>
+    <% end %>
+
+    <h1>Add my photos</h1>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-4">
+          <%= simple_form_for @saved_restaurant do |f| %>
+            <%= f.input :photos, input_html: { multiple: true } %>
+            <%= f.submit "Send your photos" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>
+
+<h1>Reviews</h1>
+
+<div class="container">
+  <div class="row">
+    <div class="col-xs-4">
+      <%= simple_form_for [@restaurant, @review] do |f| %>
+        <%= f.input :content %>
+        <%= f.input :user_rating, collection: (1..5).to_a, label: "Rate your experience" %>
+        <%= f.submit "Send your review" %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<% @reviews.each do |review| %>
+  <% if (review.saved_restaurant.restaurant == @restaurant && (review.user == current_user || @friends.include?(review.user))) %>
+    <p>
+      <%= review.user.username %>
+      <%= review.content %>
+      <%= review.user_rating %>
+      <% if (review.user == current_user) %>
+        <%= link_to review_path(review), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "text-black" do %>
+          <i class="fa-solid fa-trash-can"></i>
+        <% end %>
+      <% end %>
+    </p>
+  <% end %>
+<% end %>

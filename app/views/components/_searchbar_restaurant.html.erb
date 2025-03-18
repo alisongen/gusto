@@ -1,0 +1,24 @@
+<div class="search-bar">
+    <%#= Input %>
+    <%= form_with url: "/", class: "search-form", method: :get do %>
+      <div class="search-container">
+        <%= text_field_tag :query,
+              params[:query],
+              class: "search-input",
+              placeholder: "Search for a restaurant...",
+              data: {
+                reset_target: "textField",
+                action: 'input->reset#changeInput'
+              }
+        %>
+        <%#= Effacer la recherche %>
+        <%= button_tag(type: 'button', data: { action: "click->reset#clear", reset_target: 'button' }, class: "reset-btn #{ 'd-none' if params[:query].blank? }") do %>
+          <i class="fa-solid fa-x icon"></i>
+        <% end %>
+      </div>
+      <%#= Bouton de recherche %>
+      <%= button_tag type: "submit", class: "search-btn" do %>
+        <i class="fa-solid fa-magnifying-glass" style="color: #ffffff;"></i>
+      <% end %>
+    <% end %>
+</div>

@@ -6,13 +6,26 @@ class RestaurantsController < ApplicationController
   end
 
   def show
-    url = "https://maps.googleapis.com/maps/api/place/details/json?place_id=#{params[:place_id]}&key=#{ENV['GOOGLE_PLACES_API_KEY']}"
-    response = URI.open(url).read
-    @restaurant = JSON.parse(response)["result"]
-    @images = @restaurant["photos"]&.map { |photo| "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=#{photo["photo_reference"]}&key=#{ENV['GOOGLE_PLACES_API_KEY']}" }
-    @image = @images.sample if @images.present?
+    @user = current_user
+    # trouver les relations entre nous et qqun d'autre qui ont le statut accepté
+    all_accepted_friendships = Friendship.where(status: 1).where(user: current_user).or(Friendship.where(status: 1).where(friend: current_user))
+    # Sortir les id de ceux-là
+    ids = all_accepted_friendships.map do |friendship|
+      if friendship.user == current_user
+        friendship.friend.id
+      else
+        friendship.user.id
+      end
+    end
+    @friends = User.where(id: ids)
+    @restaurant = Restaurant.find(params[:id])
+    @images = @restaurant.images
+    @image = @images.sample
     @collections = Collection.where(user_id: current_user.id)
+    @saved_restaurant = SavedRestaurant.where(restaurant_id: params[:id], user_id: current_user.id).first
     @saved_restaurants = SavedRestaurant.where(user_id: current_user.id)
+    @review = Review.new
+    @reviews = Review.all
   end
 
   def update_collection
@@ -23,5 +36,12 @@ class RestaurantsController < ApplicationController
     @collection.save!
     #redirect_to collections_path(name: @collection.name)
     redirect_to dashboard_path
+  end
+
+  def destroy
+    @saved_restaurant = SavedRestaurant.find(params[:format])
+    @photo = @saved_restaurant.photos.find(params[:id])
+    @photo.destroy
+    redirect_to restaurant_path()
   end
 end

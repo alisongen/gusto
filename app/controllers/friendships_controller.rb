@@ -2,10 +2,10 @@ class FriendshipsController < ApplicationController
   before_action :set_friendship, only: [:show, :destroy, :accept, :decline]
 
   def index
-    
-    raise
     @friendships = Friendship.all
-    @newfriends = Friendship.search_by_username(params[:query]) if params[:query].present?
+    @users = User.all
+    @users = @users.where("username ILIKE ?", "%#{params[:query]}%") if params[:query].present?
+
   end
 
   def show

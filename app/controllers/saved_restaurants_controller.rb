@@ -23,11 +23,17 @@ class SavedRestaurantsController < ApplicationController
   end
 
   def update
-    @saved_restaurant = SavedRestaurant.first
+    @saved_restaurant = SavedRestaurant.find(params[:id])
+    if params[:saved_restaurant][:photos].present?
+      # On attache les nouvelles photos sans toucher aux photos existantes
+      params[:saved_restaurant][:photos].each do |photo|
+        @saved_restaurant.photos.attach(photo)
+      end
+    end
     if @saved_restaurant.update(saved_restaurant_params)
-      redirect_to root_path, notice: "Photo ajoutée avec succès !"
+      redirect_to restaurant_path, notice: "Photo ajoutée avec succès !"
     else
-      render :edit, status: :unprocessable_entity
+      render "restaurants/show", status: :unprocessable_entity
     end
   end
 
@@ -37,6 +43,6 @@ class SavedRestaurantsController < ApplicationController
 private
 
   def saved_restaurant_params
-    params.require(:saved_restaurant).permit(photos: [])
+    params.require(:saved_restaurant).permit()
   end
 end

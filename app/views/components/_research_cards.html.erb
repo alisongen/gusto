@@ -2,6 +2,7 @@
   <% @restaurants.each do |restaurant| %>
     <%# Et pour chaque "restaurant", j'affiche les infos (name et address), la possibilité de l'ajouter à une collection via l'icon %>
     <%# et le lien cers la show du restaurant %>
+    <%= link_to restaurant_path(restaurant) do %>
     <div class="card">
 <%# https://lh3.googleusercontent.com/places/ANXAkqFE188bvuUs7cu_JFArdxK7kuCOVoyM03gu5hU9b8B-Cp-Ty2qwoZ4UxuOWrbifCdGKemjIQuqo7qnLs4BtxdqVLxbnPnr-18U=s4800-w1024-h768" %>
 
@@ -13,5 +14,6 @@
         <%# <%= link_to "View Restaurant", google_restaurant_path(restaurant["place_id"]), class:"card-btn btn-primary" %>
       </div>
     </div>
+    <% end %>
   <% end %>
 </div>
