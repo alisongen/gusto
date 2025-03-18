@@ -1,0 +1,61 @@
+.friend-cards {
+  margin-top: 20px;
+  width: 100%;
+}
+
+.friend-card {
+  // margin-right: 20px;
+  // margin-left: 20px;
+  padding: 10px 20px 10px 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.friend-card-avatar {
+  height: 50px;
+  width: 50px;
+}
+
+.friend-card-infos {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.friend-card-info {
+}
+
+.friend-card-image{
+  width: 50px;
+  height: 50px;
+}
+
+.btn-accept {
+  background-color: #39B90D;
+}
+
+.btn-decline {
+  background-color: #E52020;
+}
+
+.btn-delete {
+  width: 30px;
+  height: 30px;
+}
+
+.btn-arrow {
+  width: 30px;
+  height: 30px;
+  background-color: #FF5631;
+  border-radius: 5px;
+}
+
+.card-btn {
+  width: 30px;
+  height: 30px
+}
