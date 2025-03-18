@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   end
 
   # À VÉRIFIER
-  resources :collections, only: [:new, :create, :index, :show]
+  resources :collections, only: [:new, :create, :index, :show, :destroy]
 
   resources :friendships, except: %i[edit update new]
   get "friendships", to: "friendship#new"
