@@ -33,6 +33,9 @@
   <div class="d-none" data-showcat-target="collections">
     <% @collections.each do |collection| %>
       <p><%= link_to collection.name, collections_path %></p>
+      <%= link_to collection_path(collection), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "text-black" do %>
+        <i class="fa-solid fa-trash-can"></i>
+      <% end %>
     <% end %>
   </div>
 </div>

@@ -3,7 +3,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: 12px;
-    padding: 20px;
+    padding: 20px 20px 0px 20px,
   }
 
   .restaurant-card {
@@ -16,15 +16,26 @@
     border-radius: 10px;
   }
 
-  .restaurant-image {
+  .restaurant-card-image {
     height: 151px;
+    width: 100%;
+    border-radius: 5px;
   }
 
-  .restaurant-title {
+  .restaurant-card-title {
+    padding-top: 10px;
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  .restaurant-card-text {
 
   }
 
-  .restaurant-text {
-
+  .restaurant-card-rating{
+    padding-top: 10px;
+    display: flex;
+    flex-direction: row;
+    gap: 0px;
   }
 }

@@ -1,0 +1,16 @@
+<div class="restaurant-card">
+  <%= image_tag restaurant.images.sample, class: "restaurant-card-image" %>
+  <h5 class="restaurant-card-title"><%= restaurant.name %></h5>
+  <p class="restaurant-card-text"><%= restaurant.category %></p>
+  <p class="restaurant-card-text"><%= restaurant.address %></p> <!--TODO: Possible d'afficher que la Ville+CodePostal-->
+  <div class="restaurant-card-rating">
+    <% full_stars = restaurant.rating.floor %>
+    <% empty_stars = 5 - full_stars %>
+    <% full_stars.times do %>
+      <%= image_tag "star-fill.svg", width: 20, height: 20 %>
+    <% end %>
+    <% empty_stars.times do %>
+      <%= image_tag "star.svg", width: 20, height: 20 %>
+    <% end %>
+  </div>
+</div>
