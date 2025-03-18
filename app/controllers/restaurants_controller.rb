@@ -5,6 +5,14 @@ class RestaurantsController < ApplicationController
     @restaurants = Restaurant.all
   end
 
+  # GET /ezhfuhef/:restaurant_id
+  def set_restaurant
+    # call api en utilisant l'restaurant_id pour récupérer les informations du restaurant
+    # Avec ces informations je fabrique mon instance SI elle n'existe pas deja
+    # restaurant = Restaurant.find_or_create(datas de la reponse api)
+    # je redirect_to vers la restaurant_path(restaurant)
+  end
+
   def show
     @user = current_user
     # trouver les relations entre nous et qqun d'autre qui ont le statut accepté
