@@ -42,6 +42,7 @@
   Create new collection
 </button>
 
+<!-- Modal -->
 <div class="modal fade" id="collectionModal" tabindex="-1" aria-labelledby="collectionModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -50,7 +51,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <%= simple_form_for(@collection) do |f| %>
+        <%= simple_form_for(@collection, url: collections_path, method: :post, data: { turbo: false }) do |f| %>
           <div class="mb-3">
             <%= f.input :name, label: 'Name' %>
           </div>
@@ -81,3 +82,12 @@
     </div>
   </div>
 </div>
+
+<% if @show_modal %>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var myModal = new bootstrap.Modal(document.getElementById('collectionModal'));
+      myModal.show();
+    });
+  </script>
+<% end %>
