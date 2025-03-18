@@ -6,5 +6,5 @@ class Collection < ApplicationRecord
   has_many :restaurants, through: :saved_restaurants
 
   validates :color, presence: true
-  validates :emoji, presence: true
+  # validates :emoji, presence: true
 end
