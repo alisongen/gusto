@@ -202,15 +202,15 @@ end
 puts 'Finished saved_restos ✅'
 p ''
 
-puts 'Création de 5 reviews pour chaque User 👨🏻‍🎨'
+puts 'Création de 10 reviews pour chaque User 👨🏻‍🎨'
 users.each do |user|
-  5.times do
-    restaurant = restaurants.sample
+  10.times do
+    saved_restaurant = user.saved_restaurants.sample
     Review.create!(
       content: Faker::Restaurant.review,
       user_rating: Faker::Number.within(range: 1..5),
       user: user,
-      saved_restaurant: restaurant
+      saved_restaurant: saved_restaurant
     )
   end
 end
