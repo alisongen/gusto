@@ -16,9 +16,10 @@ class RestaurantsController < ApplicationController
       end
     end
     @friends = User.where(id: ids)
+    # Récupération des données du restaurant via l'API
     restaurant_data = GetGooglePlaceDetailsService.new(params[:id]).call
+    # Création d'un modèle restaurant avec les données récupérées
     @restaurant = Restaurant.find_or_create_by(name: restaurant_data.dig("displayName", "text"), address: restaurant_data.dig("formattedAddress"), category: restaurant_data.dig("primaryTypeDisplayName", "text"), rating: restaurant_data.dig("rating"), phone_number: restaurant_data.dig("nationalPhoneNumber"), website: restaurant_data.dig("websiteUri"))
-    puts "Données récupérées :", @restaurant.inspect
     respond_to do |format|
       format.html # Rendu pour une page HTML
       format.json { render json: @restaurants } # Permet aussi d'utiliser en API

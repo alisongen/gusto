@@ -1,7 +1,5 @@
 <div class="card-container">
   <% @restaurants["places"].each do |restaurant| %>
-    <%# Et pour chaque "restaurant", j'affiche les infos (name et address), la possibilité de l'ajouter à une collection via l'icon %>
-    <%# et le lien cers la show du restaurant %>
     <div class="card">
     <% img_uri = GetGooglePhotosDataService.new(restaurant.dig("photos").first.dig("name")).call %>
       <% if restaurant.dig("photos").present? %>
