@@ -5,7 +5,8 @@ class CollectionsController < ApplicationController
     @friendships = @user.friendships
 
     if params[:name].present?
-      @restaurants = Collection.find_by(user: current_user, name: params[:name]).restaurants
+      @collection_name = params[:name]
+      @restaurants = Collection.find_by(user: current_user, name: params[:name]).restaurants.distinct
     else
       @restaurants = @user.restaurants
     end
@@ -17,6 +18,15 @@ class CollectionsController < ApplicationController
         info_window_html: render_to_string(partial: "info_window", locals: { restaurant: restaurant }),
         marker_html: render_to_string(partial: "marker")
       }
+    end
+
+    # raise
+
+    @collections = @user.collections
+    if params[:name]
+      respond_to do |format|
+        format.turbo_stream
+      end
     end
   end
 
@@ -48,7 +58,6 @@ class CollectionsController < ApplicationController
   end
 
   def update
-    # TO DO
   end
 
   def destroy

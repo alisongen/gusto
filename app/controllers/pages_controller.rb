@@ -1,5 +1,4 @@
 class PagesController < ApplicationController
-  skip_before_action :authenticate_user!, only: []
 
   def home
     # J'assigne à ma variable d'instance "@user" le "current_user"

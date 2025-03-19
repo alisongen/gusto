@@ -146,10 +146,62 @@ admin = User.new(
   admin.save!
   puts '...'
   puts 'Finish the Admin ✅'
+puts "Création de l'gautier 👨🏻‍🎨"
+
+gautier = User.new(
+  email: "gautier@gautier",
+  password: "gautiergautier",
+  city: "gautier-city",
+  username: "gautier",
+  first_name: "gautier",
+  last_name: "gautier",
+  )
+  gautier.save!
+  puts '...'
+  puts 'Finish the gautier ✅'
+puts "Création de l'gil 👨🏻‍🎨"
+
+gil = User.new(
+  email: "gil@gil",
+  password: "gilgil",
+  city: "gil-city",
+  username: "gil",
+  first_name: "gil",
+  last_name: "gil",
+  )
+  gil.save!
+  puts '...'
+  puts 'Finish the gil ✅'
+puts "Création de l'alison 👨🏻‍🎨"
+
+alison = User.new(
+  email: "alison@alison",
+  password: "alisonalison",
+  city: "alison-city",
+  username: "alison",
+  first_name: "alison",
+  last_name: "alison",
+  )
+  alison.save!
+  puts '...'
+  puts 'Finish the alison ✅'
+puts "Création de l'bruno 👨🏻‍🎨"
+
+bruno = User.new(
+  email: "bruno@bruno",
+  password: "brunobruno",
+  city: "bruno-city",
+  username: "bruno",
+  first_name: "bruno",
+  last_name: "bruno",
+  )
+  bruno.save!
+  puts '...'
+  puts 'Finish the bruno ✅'
 
   p ''
-  puts 'Création de 33 friendships 👨🏻‍🎨'
-  30.times do
+  puts 'Création de 100 friendships 👨🏻‍🎨'
+  100.times do
     users = User.all
     user = users.sample
     friend = users.sample
@@ -168,13 +220,29 @@ puts 'Finished friendships ✅'
 p ''
 puts 'Création de 5 collections pour chaque User 👨🏻‍🎨'
 collections = ['A tester', 'Trop bon le soir', 'Date', 'Bon brunch', 'Favoris' ]
-
+emojis = [ "🍔", "🥞", "🧁", "🍣", "☕️", "🥗", "🍻", "🥩", "🌯", "💙", "🎉", "🍽️" ]
+colors = [
+      "#4B3B47", # Eggplant
+      "#FFBD33", # Orange
+      "#FFD133", # Yellow
+      "#A3E635", # Lime Green
+      "#33FF57", # Green
+      "#33FFBD", # Mint
+      "#33D1FF", # Sky Blue
+      "#3357FF", # Blue
+      "#8A33FF", # Purple
+      "#FF33F0", # Pink
+      "#FF3380", # Hot Pink
+      "#FF3366"  # Red
+    ]
 users = User.all
 users.each do |user|
   collections.each do |collection|
     Collection.create!(
       name: collection,
-      user: user
+      user: user,
+      emoji: emojis.sample,
+      color: colors.sample
       )
     end
   end

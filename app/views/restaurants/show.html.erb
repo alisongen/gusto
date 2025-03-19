@@ -18,18 +18,21 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <%= form_with url: restaurant_collection_path(restaurant_id: @restaurant.id), method: :patch, local: true do |f| %>
+        <%= form_with url: restaurant_collection_path(@collections, restaurant_id: @restaurant.id), method: :patch, local: true do |f| %>
           <div class="mb-3">
-            <label for="collectionSelect" class="form-label">Select Collection</label>
-            <select class="form-select" id="collectionSelect" name="collection_id">
               <% @collections.each do |collection| %>
-                <option value="<%= collection.id %>"><%= collection.name %></option>
+                <% if (SavedRestaurantsCollection.where(saved_restaurant_id: @saved_restaurant.id, collection_id: collection.id).present?) %>
+                  <label for="collection"><%= collection.name %></label>
+                  <input id="<%= collection.id %>" name="<%= collection.name %>" type="checkbox" value="<%= collection.id %>" checked/>
+                <% else %>
+                  <label for="collection"><%= collection.name %></label>
+                  <input id="<%= collection.id %>" name="<%= collection.name %>" type="checkbox" value="<%= collection.id %>"/>
+                <% end %>
               <% end %>
-            </select>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <%= f.submit "Add to Collection", class: "btn btn-primary" %>
+            <%= f.submit "Save", class: "btn btn-primary" %>
           </div>
         <% end %>
       </div>
@@ -59,9 +62,9 @@
       <% end %>
     <% end %>
 
-    <h1>Add my photos</h1>
 
     <div class="container">
+      <h1>Add my photos</h1>
       <div class="row">
         <div class="col-xs-4">
           <%= simple_form_for @saved_restaurant do |f| %>
@@ -74,31 +77,39 @@
   <% end %>
 <% end %>
 
-<h1>Reviews</h1>
 
-<div class="container">
-  <div class="row">
+<div class="container mt-3">
+  <h1>Reviews</h1>
+  <div class="row mb-3">
     <div class="col-xs-4">
-      <%= simple_form_for [@restaurant, @review] do |f| %>
+      <%= simple_form_for([@restaurant, @review], data: { controller: "submit" }) do |f| %>
         <%= f.input :content %>
-        <%= f.input :user_rating, collection: (1..5).to_a, label: "Rate your experience" %>
+        <%= f.input :user_rating, collection: (1..5).to_a, label: "Rate your experience", input_html: {data: { controller: "star-rating", action: "click->form-submit#submit"} }  %>
         <%= f.submit "Send your review" %>
       <% end %>
     </div>
   </div>
-</div>
-
-<% @reviews.each do |review| %>
-  <% if (review.saved_restaurant.restaurant == @restaurant && (review.user == current_user || @friends.include?(review.user))) %>
-    <p>
-      <%= review.user.username %>
-      <%= review.content %>
-      <%= review.user_rating %>
-      <% if (review.user == current_user) %>
-        <%= link_to review_path(review), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "text-black" do %>
-          <i class="fa-solid fa-trash-can"></i>
+  <% @reviews.each do |review| %>
+    <% if (review.saved_restaurant.restaurant == @restaurant && (review.user == current_user || @friends.include?(review.user))) %>
+      <p>
+        <%= review.user.username %>:
+        <%= review.content %>
+        <div class="restaurant-card-rating">
+          <% full_stars = review.user_rating.floor %>
+          <% empty_stars = 5 - full_stars %>
+          <% full_stars.times do %>
+            <%= image_tag "star-fill.svg", width: 20, height: 20 %>
+          <% end %>
+          <% empty_stars.times do %>
+            <%= image_tag "star.svg", width: 20, height: 20 %>
+          <% end %>
+        </div>
+        <% if (review.user == current_user) %>
+          <%= link_to review_path(review), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "text-black" do %>
+            <i class="fa-solid fa-trash-can"></i>
+          <% end %>
         <% end %>
-      <% end %>
-    </p>
+      </p>
+    <% end %>
   <% end %>
-<% end %>
+</div>

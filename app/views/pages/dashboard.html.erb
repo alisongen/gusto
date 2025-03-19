@@ -15,7 +15,7 @@
 
 <div class="d-flex justify-content-between align-items-center m-3">
   <button class="btn btn-dark btn-lg">Modify Profil</button>
-  <button class="btn btn-dark btn-lg text-danger">Disconnect</button>
+  <%= button_to "Log Out", destroy_user_session_path, method: :delete, class: "btn btn-dark btn-lg text-danger" %>
 </div>
 
 

@@ -250,9 +250,6 @@ Devise.setup do |config|
   # devise role declared in your routes (usually :user).
   # config.default_scope = :user
 
-  # Set this configuration to false if you want /users/sign_out to sign out
-  # only the current scope. By default, Devise signs out all scopes.
-  # config.sign_out_all_scopes = true
 
   # ==> Navigation configuration
   # Lists the formats that should be treated as navigational. Formats like
@@ -267,6 +264,12 @@ Devise.setup do |config|
 
   # The default HTTP method used to sign out a resource. Default is :delete.
   config.sign_out_via = :delete
+  # Set this configuration to false if you want /users/sign_out to sign out
+  # only the current scope. By default, Devise signs out all scopes.
+  config.sign_out_all_scopes = true
+  # Rediriger vers la page de connexion après la déconnexion
+  # config.sign_out_redirect_url = new_user_session_path
+
 
   # ==> OmniAuth
   # Add a new OmniAuth provider. Check the wiki for more information on setting
