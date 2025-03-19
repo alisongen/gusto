@@ -4,10 +4,9 @@
 }
 
 .friend-card {
-  // margin-right: 20px;
-  // margin-left: 20px;
   padding: 10px 20px 10px 20px;
   display: flex;
+  align-items: center;
   justify-content: space-between;
 }
 
@@ -35,27 +34,55 @@ a {
   height: 50px;
 }
 
-.btn-accept {
+.friend-card-btn{
+  display: flex;
+  gap: 10px;
+}
+
+.friend-btn-accept {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 5px;
+  border: none;
   background-color: #39B90D;
 }
 
-.btn-decline {
+.friend-btn-decline {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 5px;
+  border: none;
   background-color: #E52020;
 }
 
-.btn-delete {
-  width: 30px;
-  height: 30px;
-}
-
-.btn-arrow {
-  width: 30px;
-  height: 30px;
-  background-color: #FF5631;
+.friend-btn-delete {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
   border-radius: 5px;
+  border: none;
 }
 
-.card-btn {
-  width: 30px;
-  height: 30px
+.friend-btn-see {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 5px;
+  border: none;
+  background-color: #FF5631;
+}
+
+.friend-btn-icon{
+  width: 20px;
+  height: 20px;
 }
