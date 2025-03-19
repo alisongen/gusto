@@ -3,7 +3,7 @@
     <%= @collection_emoji %>
   </div>
 <% else %>
-  <div style="width: 40px; height: 40px; background-color: <%= restaurant.saved_restaurants.first.collections.first.color %>;" class="fs-1 text-center d-flex align-items-center rounded-circle">
+  <div style="width: 40px; height: 40px; background-color: <%= restaurant.saved_restaurants.first.collections.first.color %>;" class="fs-1 text-center d-flex justify-content-center align-items-center rounded-circle">
     <%= restaurant.saved_restaurants.first.collections.first.emoji %>
   </div>
 <% end %>
