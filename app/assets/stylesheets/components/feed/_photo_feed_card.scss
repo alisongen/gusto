@@ -38,4 +38,14 @@
   .photo-feed-text {
     margin: 5px 0;
   }
+
+  .review-feed-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .review-feed-time {
+    margin: 0;
+  }
 }
