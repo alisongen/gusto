@@ -24,18 +24,24 @@ class RestaurantsController < ApplicationController
       end
     end
     @friends = User.where(id: ids)
-    restaurant_data = GetGooglePlaceDetailsService.new(params[:id]).call
-    @restaurant = Restaurant.find_or_create_by(name: restaurant_data.dig("displayName", "text"), address: restaurant_data.dig("formattedAddress"), category: restaurant_data.dig("primaryTypeDisplayName", "text"), rating: restaurant_data.dig("rating"), phone_number: restaurant_data.dig("nationalPhoneNumber"), website: restaurant_data.dig("websiteUri"))
-    puts "Données récupérées :", @restaurant.inspect
-    respond_to do |format|
-      format.html # Rendu pour une page HTML
-      format.json { render json: @restaurants } # Permet aussi d'utiliser en API
+
+    if Restaurant.find_by(id: params[:id])
+      @restaurant = Restaurant.find(params[:id])
+    else
+      restaurant_data = GetGooglePlaceDetailsService.new(params[:id]).call
+      @restaurant = Restaurant.create(name: restaurant_data.dig("displayName", "text"), address: restaurant_data.dig("formattedAddress"), category: restaurant_data.dig("primaryTypeDisplayName", "text"), rating: restaurant_data.dig("rating"), phone_number: restaurant_data.dig("nationalPhoneNumber"), website: restaurant_data.dig("websiteUri"))
+      puts "Données récupérées :", @restaurant.inspect
+      respond_to do |format|
+        format.html # Rendu pour une page HTML
+        format.json { render json: @restaurants } # Permet aussi d'utiliser en API
+      end
     end
+
     # @images = @restaurant.images
     # @image = @images.sample
     @collections = Collection.where(user_id: current_user.id)
-    @saved_restaurant = SavedRestaurant.where(restaurant_id: params[:id], user_id: current_user.id).first
-    @saved_restaurants = SavedRestaurant.where(user_id: current_user.id)
+    @saved_restaurant = SavedRestaurant.find_by(restaurant: @restaurant, user: current_user)
+    @saved_restaurants = SavedRestaurant.where(user: current_user)
     @review = Review.new
     @reviews = Review.all
   end
