@@ -30,6 +30,11 @@
     flex: 1;
   }
 
+  .restaurant-feed-text-content {
+    display: flex;
+    flex-direction: column;
+  }
+
   .restaurant-feed-title {
     font-size: 1.2em;
     font-weight: bold;
@@ -39,17 +44,8 @@
     margin: 5px 0;
   }
 
-  .restaurant-feed-info {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .restaurant-feed-rating {
-    margin: 0;
-  }
-
   .restaurant-feed-time {
-    margin: 0;
+    align-self: flex-end;
+    margin-top: auto;
   }
 }
