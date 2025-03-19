@@ -18,11 +18,11 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <%= form_with url: restaurant_collection_path(@collections, restaurant_id: @restaurant.id), method: :patch, local: true do |f| %>
+        <%= form_with url: restaurant_collection_path(@restaurant), method: :patch, local: true do |f| %>
           <div class="mb-3">
-              <% if @saved_restaurant.present? %>
+
                 <% @collections.each do |collection| %>
-                  <% if (SavedRestaurantsCollection.where(saved_restaurant_id: @saved_restaurant.id, collection_id: collection.id).present?) %>
+                  <% if (SavedRestaurantsCollection.where(saved_restaurant: @saved_restaurant, collection: collection).present?) %>
                     <label for="collection"><%= collection.name %></label>
                     <input id="<%= collection.id %>" name="<%= collection.name %>" type="checkbox" value="<%= collection.id %>" checked/>
                   <% else %>
@@ -30,9 +30,7 @@
                     <input id="<%= collection.id %>" name="<%= collection.name %>" type="checkbox" value="<%= collection.id %>"/>
                   <% end %>
                 <% end %>
-              <% else %>
-                <p>Pas de saved_restaurant</p>
-              <% end %>
+
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -85,37 +83,39 @@
 
 
 <div class="container mt-3">
-  <h1>Reviews</h1>
-  <div class="row mb-3">
-    <div class="col-xs-4">
-      <%= simple_form_for([@restaurant, @review], data: { controller: "submit" }) do |f| %>
-        <%= f.input :content %>
-        <%= f.input :user_rating, collection: (1..5).to_a, label: "Rate your experience", input_html: {data: { controller: "star-rating", action: "click->form-submit#submit"} }  %>
-        <%= f.submit "Send your review" %>
-      <% end %>
-    </div>
-  </div>
-  <% @reviews.each do |review| %>
-    <% if (review.saved_restaurant.restaurant == @restaurant && (review.user == current_user || @friends.include?(review.user))) %>
-      <p>
-        <%= review.user.username %>:
-        <%= review.content %>
-        <div class="restaurant-card-rating">
-          <% full_stars = review.user_rating.floor %>
-          <% empty_stars = 5 - full_stars %>
-          <% full_stars.times do %>
-            <%= image_tag "star-fill.svg", width: 20, height: 20 %>
-          <% end %>
-          <% empty_stars.times do %>
-            <%= image_tag "star.svg", width: 20, height: 20 %>
-          <% end %>
-        </div>
-        <% if (review.user == current_user) %>
-          <%= link_to review_path(review), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "text-black" do %>
-            <i class="fa-solid fa-trash-can"></i>
-          <% end %>
+  <% if (!@saved_restaurant.nil? && @saved_restaurant.restaurant == @restaurant) %>
+    <h1>Reviews</h1>
+    <div class="row mb-3">
+      <div class="col-xs-4">
+        <%= simple_form_for([@saved_restaurant, @review], data: { controller: "submit" }) do |f| %>
+          <%= f.input :content %>
+          <%= f.input :user_rating, collection: (1..5).to_a, label: "Rate your experience", input_html: {data: { controller: "star-rating", action: "click->form-submit#submit"} }  %>
+          <%= f.submit "Send your review" %>
         <% end %>
-      </p>
+      </div>
+    </div>
+    <% @reviews.each do |review| %>
+      <% if (review.saved_restaurant.restaurant == @restaurant && (review.user == current_user || @friends.include?(review.user))) %>
+        <p>
+          <%= review.user.username %>:
+          <%= review.content %>
+          <div class="restaurant-card-rating">
+            <% full_stars = review.user_rating.floor %>
+            <% empty_stars = 5 - full_stars %>
+            <% full_stars.times do %>
+              <%= image_tag "star-fill.svg", width: 20, height: 20 %>
+            <% end %>
+            <% empty_stars.times do %>
+              <%= image_tag "star.svg", width: 20, height: 20 %>
+            <% end %>
+          </div>
+          <% if (review.user == current_user) %>
+            <%= link_to review_path(review), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "text-black" do %>
+              <i class="fa-solid fa-trash-can"></i>
+            <% end %>
+          <% end %>
+        </p>
+      <% end %>
     <% end %>
   <% end %>
 </div>

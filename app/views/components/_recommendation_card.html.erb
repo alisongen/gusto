@@ -1,4 +1,4 @@
-<div class="restaurant-card">
+<%= link_to  restaurant_path(restaurant), class: "restaurant-card" do %>
   <%= image_tag restaurant.images.sample, class: "restaurant-card-image" %>
   <h5 class="restaurant-card-title"><%= restaurant.name %></h5>
   <p class="restaurant-card-text"><%= restaurant.category %></p>
@@ -13,4 +13,4 @@
       <%= image_tag "star.svg", width: 20, height: 20 %>
     <% end %>
   </div>
-</div>
+<% end %>

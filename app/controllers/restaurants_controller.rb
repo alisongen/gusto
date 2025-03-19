@@ -24,19 +24,24 @@ class RestaurantsController < ApplicationController
       end
     end
     @friends = User.where(id: ids)
-    # Récupération des données du restaurant via l'API
-    restaurant_data = GetGooglePlaceDetailsService.new(params[:id]).call
-    # Création d'un modèle restaurant avec les données récupérées
-    @restaurant = Restaurant.find_or_create_by(name: restaurant_data.dig("displayName", "text"), address: restaurant_data.dig("formattedAddress"), category: restaurant_data.dig("primaryTypeDisplayName", "text"), rating: restaurant_data.dig("rating"), phone_number: restaurant_data.dig("nationalPhoneNumber"), website: restaurant_data.dig("websiteUri"))
-    respond_to do |format|
-      format.html # Rendu pour une page HTML
-      format.json { render json: @restaurants } # Permet aussi d'utiliser en API
+
+    if Restaurant.find_by(id: params[:id])
+      @restaurant = Restaurant.find(params[:id])
+    else
+      restaurant_data = GetGooglePlaceDetailsService.new(params[:id]).call
+      @restaurant = Restaurant.find_or_create_by(name: restaurant_data.dig("displayName", "text"), address: restaurant_data.dig("formattedAddress"), category: restaurant_data.dig("primaryTypeDisplayName", "text"), rating: restaurant_data.dig("rating"), phone_number: restaurant_data.dig("nationalPhoneNumber"), website: restaurant_data.dig("websiteUri"))
+
+      respond_to do |format|
+        format.html # Rendu pour une page HTML
+        format.json { render json: @restaurants } # Permet aussi d'utiliser en API
+      end
     end
+
     # @images = @restaurant.images
     # @image = @images.sample
     @collections = Collection.where(user_id: current_user.id)
-    @saved_restaurant = @restaurant
-    @saved_restaurants = SavedRestaurant.where(user_id: current_user.id)
+    @saved_restaurant = SavedRestaurant.find_by(restaurant: @restaurant, user: current_user)
+    @saved_restaurants = SavedRestaurant.where(user: current_user)
     @review = Review.new
     @reviews = Review.all
   end
@@ -44,18 +49,17 @@ class RestaurantsController < ApplicationController
   def update_collection
     @restaurant = Restaurant.find(params[:restaurant_id])
     @saved_restaurant = SavedRestaurant.find_or_create_by(restaurant: @restaurant, user: current_user)
-    @collections = Collection.where(user_id: current_user.id)
-    @collections.each do |collect|
-      if (params["#{collect.name}"].present? && !SavedRestaurantsCollection.where(saved_restaurant_id: @saved_restaurant.id, collection_id: collect.id).present?)
-        @collection = Collection.find(params["#{collect.name}"])
-        SavedRestaurantsCollection.create(collection_id: collect.id, saved_restaurant_id: @saved_restaurant.id)
-      elsif (SavedRestaurantsCollection.where(saved_restaurant_id: @saved_restaurant.id, collection_id: collect.id).present? && !params["#{collect.name}"].present?)
-        @saved_restaurants_collection = SavedRestaurantsCollection.where(saved_restaurant_id: @saved_restaurant.id, collection_id: collect.id)
-        @saved_restaurants_collection.first.destroy
+    @collections = Collection.where(user: current_user)
+
+    @collections.each do |collection|
+      @saved_restaurants_collection = SavedRestaurantsCollection.find_or_create_by(saved_restaurant: @saved_restaurant, collection: collection)
+
+      if !params[collection.name.to_s].present? && @saved_restaurants_collection
+        @saved_restaurants_collection.destroy
       end
     end
-    #redirect_to collections_path(name: @collection.name)
-    redirect_to restaurant_path(@restaurant)
+
+    redirect_to collections_path, format: :html
   end
 
   def destroy
