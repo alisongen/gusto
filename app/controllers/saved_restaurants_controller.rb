@@ -31,7 +31,7 @@ class SavedRestaurantsController < ApplicationController
       end
     end
     if @saved_restaurant.update(saved_restaurant_params)
-      redirect_to restaurant_path, notice: "Photo ajoutée avec succès !"
+      redirect_to restaurant_path(@saved_restaurant.restaurant), notice: "Photo ajoutée avec succès !"
     else
       render "restaurants/show", status: :unprocessable_entity
     end

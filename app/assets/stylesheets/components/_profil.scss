@@ -81,9 +81,31 @@
   border: none;
   width: 109px;
   height: 46px;
-  flex: 1
+  //flex: 1
 }
 
 .profil-content {
   margin-top: 20px;
+}
+
+.collection-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.photo-cards {
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.review-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.active {
+  border-bottom: 2px orange solid;
+  color: orange;
 }

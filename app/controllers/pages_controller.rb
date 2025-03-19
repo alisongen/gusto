@@ -52,6 +52,12 @@ class PagesController < ApplicationController
     @emojis = [ "🍔", "🥞", "🧁", "🍣", "☕️", "🥗", "🍻", "🥩", "🌯", "💙", "🎉", "🍽️" ]
   end
 
+  def switch_window
+    @tab = params[:tab_name]
+    @collections = current_user.collections
+    respond_to(&:turbo_stream)
+  end
+
   def feed
     @user = current_user
     # trouver les relations entre nous et qqun d'autre qui ont le statut accepté

@@ -1,0 +1,37 @@
+<%= turbo_stream.update('profil-content') do %>
+  <% if @tab == "collections" %>
+    <div class="collection-cards">
+      <%= render partial: "components/collection_card", collection: @collections, as: :collection %>
+    </div>
+  <% elsif @tab == "photos" %>
+    <div class="photo-cards">
+      <% current_user.saved_restaurants.each do |saved_restaurant| %>
+        <% saved_restaurant.photos.each do |photo| %>
+          <%= render "components/photo_card", photo: photo%>
+        <% end %>
+      <% end %>
+    </div>
+  <% elsif @tab == 'reviews' %>
+    <div class="review-cards">
+      <% current_user.saved_restaurants.each do |saved_restaurant| %>
+          <% saved_restaurant.reviews.each do |review|%>
+            <%= render partial: "components/review_card", locals: { saved_restaurant: saved_restaurant, review: review } %>
+          <% end %>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>
+
+ <% if @tab == "collections" %>
+  <%= turbo_stream.add_css_class("#collections-tab-button", "active") %>
+  <%= turbo_stream.remove_css_class("#photos-tab-button", "active") %>
+  <%= turbo_stream.remove_css_class("#reviews-tab-button", "active") %>
+<% elsif @tab == "photos" %>
+  <%= turbo_stream.add_css_class("#photos-tab-button", "active") %>
+  <%= turbo_stream.remove_css_class("#reviews-tab-button", "active") %>
+  <%= turbo_stream.remove_css_class("#collections-tab-button", "active") %>
+<% elsif @tab == 'reviews' %>
+  <%= turbo_stream.add_css_class("#reviews-tab-button", "active") %>
+  <%= turbo_stream.remove_css_class("#photos-tab-button", "active") %>
+  <%= turbo_stream.remove_css_class("#collections-tab-button", "active") %>
+<% end %>

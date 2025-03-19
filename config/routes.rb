@@ -30,5 +30,6 @@ Rails.application.routes.draw do
   patch "friendships/:id/decline", to: "friendships#decline", as: :decline
 
   get "dashboard", to: "pages#dashboard"
+  post 'dashboard/switch-window/:tab_name', to: "pages#switch_window", as: :switch_tab
   get "feed", to: "pages#feed"
 end
