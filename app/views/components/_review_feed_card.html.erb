@@ -6,7 +6,7 @@
     <div class="review-feed-info">
 
       <div class="restaurant-card-rating">
-        <% full_stars = review.user_rating %>
+        <% full_stars = review.user_rating.to_i %>
         <% empty_stars = 5 - full_stars %>
         <% full_stars.times do %>
           <%= image_tag "star-fill.svg", width: 20, height: 20 %>
