@@ -29,8 +29,8 @@ class RestaurantsController < ApplicationController
       @restaurant = Restaurant.find(params[:id])
     else
       restaurant_data = GetGooglePlaceDetailsService.new(params[:id]).call
-      @restaurant = Restaurant.create(name: restaurant_data.dig("displayName", "text"), address: restaurant_data.dig("formattedAddress"), category: restaurant_data.dig("primaryTypeDisplayName", "text"), rating: restaurant_data.dig("rating"), phone_number: restaurant_data.dig("nationalPhoneNumber"), website: restaurant_data.dig("websiteUri"))
-      puts "Données récupérées :", @restaurant.inspect
+      @restaurant = Restaurant.find_or_create_by(name: restaurant_data.dig("displayName", "text"), address: restaurant_data.dig("formattedAddress"), category: restaurant_data.dig("primaryTypeDisplayName", "text"), rating: restaurant_data.dig("rating"), phone_number: restaurant_data.dig("nationalPhoneNumber"), website: restaurant_data.dig("websiteUri"))
+
       respond_to do |format|
         format.html # Rendu pour une page HTML
         format.json { render json: @restaurants } # Permet aussi d'utiliser en API
@@ -49,18 +49,17 @@ class RestaurantsController < ApplicationController
   def update_collection
     @restaurant = Restaurant.find(params[:restaurant_id])
     @saved_restaurant = SavedRestaurant.find_or_create_by(restaurant: @restaurant, user: current_user)
-    @collections = Collection.where(user_id: current_user.id)
-    @collections.each do |collect|
-      if (params["#{collect.name}"].present? && !SavedRestaurantsCollection.where(saved_restaurant_id: @saved_restaurant.id, collection_id: collect.id).present?)
-        @collection = Collection.find(params["#{collect.name}"])
-        SavedRestaurantsCollection.create(collection_id: collect.id, saved_restaurant_id: @saved_restaurant.id)
-      elsif (SavedRestaurantsCollection.where(saved_restaurant_id: @saved_restaurant.id, collection_id: collect.id).present? && !params["#{collect.name}"].present?)
-        @saved_restaurants_collection = SavedRestaurantsCollection.where(saved_restaurant_id: @saved_restaurant.id, collection_id: collect.id)
-        @saved_restaurants_collection.first.destroy
+    @collections = Collection.where(user: current_user)
+
+    @collections.each do |collection|
+      @saved_restaurants_collection = SavedRestaurantsCollection.find_or_create_by(saved_restaurant: @saved_restaurant, collection: collection)
+
+      if !params[collection.name.to_s].present? && @saved_restaurants_collection
+        @saved_restaurants_collection.destroy
       end
     end
-    #redirect_to collections_path(name: @collection.name)
-    redirect_to restaurant_path(@restaurant)
+
+    redirect_to collections_path, format: :html
   end
 
   def destroy
