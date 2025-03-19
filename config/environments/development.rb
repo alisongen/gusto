@@ -76,7 +76,7 @@ Rails.application.configure do
   config.action_controller.raise_on_missing_callback_actions = true
 
   # enable ngrok
-  config.hosts.clear
+  config.hosts << "localhost"
   config.hosts << /.*\.ngrok\.io$/
   config.hosts << /.*\.ngrok-free\.app$/
 end
