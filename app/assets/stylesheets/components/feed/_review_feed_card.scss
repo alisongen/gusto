@@ -1,15 +1,14 @@
 @media screen and (max-width: 767px) {
   .reviews-feed-cards {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     gap: 12px;
     padding: 20px;
   }
 
   .review-feed-card {
     display: flex;
-    flex-direction: column;
-    width: calc(50% - 6px);
+    width: 100%;
     padding: 10px;
     background-color: white;
     border: solid 1px #EBEBEB;
@@ -17,14 +16,41 @@
   }
 
   .review-feed-image {
-    height: 151px;
+    max-height: 100px;
+    width: 110px;
+    object-fit: cover;
+    border-radius: 10px 0 0 10px;
+  }
+
+  .review-feed-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 10px;
+    flex: 1;
   }
 
   .review-feed-title {
-
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 0%;
   }
 
   .review-feed-text {
+    margin: 5px 0;
+  }
 
+  .review-feed-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .review-feed-rating {
+    margin: 0;
+  }
+
+  .review-feed-time {
+    margin: 0;
   }
 }

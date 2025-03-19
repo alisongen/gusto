@@ -1,1 +1,9 @@
-<%= image_tag "logo.png", height: 30, width: 30, alt: "Logo" %>
+<% if (@collection_emoji.present?) %>
+  <div style="width: 40px; height: 40px; background-color: <%= @collection_color %>;" class="fs-1 text-center d-flex align-items-center rounded-circle">
+    <%= @collection_emoji %>
+  </div>
+<% else %>
+  <div style="width: 40px; height: 40px; background-color: <%= restaurant.saved_restaurants.first.collections.first.color %>;" class="fs-1 text-center d-flex align-items-center rounded-circle">
+    <%= restaurant.saved_restaurants.first.collections.first.emoji %>
+  </div>
+<% end %>

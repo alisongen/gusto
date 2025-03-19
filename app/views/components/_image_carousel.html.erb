@@ -1,6 +1,6 @@
-<div class="carousel">
+<%# <div class="carousel">
   <%= cl_image_tag image.key, class: "carousel-image" %>
-</div>
+<%# </div> %>
 
 <%#=# <div class="carousel"> %>
   <%# images.each do |image| %>
@@ -9,8 +9,8 @@
 <%#= </div>  %>
 
 <!-- Le futur carousel de la show du restaurant -->
-<%#=# <div class="carousel"> %>
-  <%# @restaurant.images.each do |image|%>
-    <%#= cl_image_tag image.key, class: "carousel-image" %>
-  <%# end %>
-<%#= <div> %>
+<div class="carousel">
+  <% restaurant.images.each do |image|%>
+    <%= cl_image_tag image.key, class: "carousel-image" %>
+  <% end %>
+<div>

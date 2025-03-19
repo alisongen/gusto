@@ -1,3 +1,5 @@
+require "open-uri"
+
 class RestaurantsController < ApplicationController
   def index
     @restaurants = Restaurant.all
@@ -14,30 +16,30 @@ class RestaurantsController < ApplicationController
   def show
     @user = current_user
     # trouver les relations entre nous et qqun d'autre qui ont le statut accepté
-    all_accepted_friendships = Friendship.where(status: 1).where(user: current_user).or(Friendship.where(status: 1).where(friend: current_user))
-    # Sortir les id de ceux-là
-    ids = all_accepted_friendships.map do |friendship|
-      if friendship.user == current_user
-        friendship.friend.id
-      else
-        friendship.user.id
-      end
-    end
-    @friends = User.where(id: ids)
+    @friends = current_user.friends
 
     if Restaurant.find_by(id: params[:id])
       @restaurant = Restaurant.find(params[:id])
     else
       restaurant_data = GetGooglePlaceDetailsService.new(params[:id]).call
-      @restaurant = Restaurant.create(name: restaurant_data.dig("displayName", "text"), address: restaurant_data.dig("formattedAddress"), category: restaurant_data.dig("primaryTypeDisplayName", "text"), rating: restaurant_data.dig("rating"), phone_number: restaurant_data.dig("nationalPhoneNumber"), website: restaurant_data.dig("websiteUri"))
-      puts "Données récupérées :", @restaurant.inspect
+      @restaurant = Restaurant.find_or_create_by(name: restaurant_data.dig("displayName", "text"), address: restaurant_data.dig("formattedAddress"), category: restaurant_data.dig("primaryTypeDisplayName", "text"), rating: restaurant_data.dig("rating"), phone_number: restaurant_data.dig("nationalPhoneNumber"), website: restaurant_data.dig("websiteUri"))
+
       respond_to do |format|
         format.html # Rendu pour une page HTML
         format.json { render json: @restaurants } # Permet aussi d'utiliser en API
       end
+
+      @photos = restaurant_data["photos"].map do |photo_data|
+        img_uri = GetGooglePhotosDataService.new(photo_data["name"]).call
+        if @restaurant.images.attached? == false
+          photo_file = URI.parse(img_uri).open
+          @restaurant.images.attach(io: photo_file, filename: "#{img_uri}.png", content_type: "image/png")
+          @restaurant.save
+        end
+      end
     end
 
-    # @images = @restaurant.images
+    @images = @restaurant.images
     # @image = @images.sample
     @collections = Collection.where(user_id: current_user.id)
     @saved_restaurant = SavedRestaurant.find_by(restaurant: @restaurant, user: current_user)
@@ -49,18 +51,17 @@ class RestaurantsController < ApplicationController
   def update_collection
     @restaurant = Restaurant.find(params[:restaurant_id])
     @saved_restaurant = SavedRestaurant.find_or_create_by(restaurant: @restaurant, user: current_user)
-    @collections = Collection.where(user_id: current_user.id)
-    @collections.each do |collect|
-      if (params["#{collect.name}"].present? && !SavedRestaurantsCollection.where(saved_restaurant_id: @saved_restaurant.id, collection_id: collect.id).present?)
-        @collection = Collection.find(params["#{collect.name}"])
-        SavedRestaurantsCollection.create(collection_id: collect.id, saved_restaurant_id: @saved_restaurant.id)
-      elsif (SavedRestaurantsCollection.where(saved_restaurant_id: @saved_restaurant.id, collection_id: collect.id).present? && !params["#{collect.name}"].present?)
-        @saved_restaurants_collection = SavedRestaurantsCollection.where(saved_restaurant_id: @saved_restaurant.id, collection_id: collect.id)
-        @saved_restaurants_collection.first.destroy
+    @collections = Collection.where(user: current_user)
+
+    @collections.each do |collection|
+      @saved_restaurants_collection = SavedRestaurantsCollection.find_or_create_by(saved_restaurant: @saved_restaurant, collection: collection)
+
+      if !params[collection.name.to_s].present? && @saved_restaurants_collection
+        @saved_restaurants_collection.destroy
       end
     end
-    #redirect_to collections_path(name: @collection.name)
-    redirect_to restaurant_path(@restaurant)
+
+    redirect_to collections_path, format: :html
   end
 
   def destroy
