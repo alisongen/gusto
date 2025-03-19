@@ -1,0 +1,13 @@
+<div class="collection-card">
+  <div class="collection-image">
+  </div>
+  <div class="collection-info">
+    <h3><%= collection.name %></h3>
+    <div class="collection-info-btn">
+      <p><%= collection.saved_restaurants.count %> restaurants</p>
+      <%= link_to collection_path(collection), class: "btn-delete", data: { turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
+        <%= image_tag "delete.svg", class: "btn-delete" %>
+      <% end %>
+    </div>
+  </div>
+</div>
