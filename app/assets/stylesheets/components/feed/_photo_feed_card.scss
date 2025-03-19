@@ -8,7 +8,6 @@
 
   .photo-feed-card {
     display: flex;
-    flex-direction: column;
     width: 100%;
     padding: 10px;
     background-color: white;
@@ -17,16 +16,26 @@
   }
 
   .photo-feed-image {
-    height: 151px;
+    height: 100%;
     width: 110px;
+    object-fit: cover;
+    border-radius: 10px 0 0 10px;
+  }
 
+  .photo-feed-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 10px;
+    flex: 1;
   }
 
   .photo-feed-title {
-
+    font-size: 1.2em;
+    font-weight: bold;
   }
 
   .photo-feed-text {
-
+    margin: 5px 0;
   }
 }
