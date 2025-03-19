@@ -10,12 +10,15 @@ class ReviewsController < ApplicationController
   end
 
   def create
-    @restaurant = Restaurant.find(params[:restaurant_id])
+    # @restaurant = Restaurant.find(params[:restaurant_id])
+    @saved_restaurant = SavedRestaurant.find(params[:saved_restaurant_id])
     @review = Review.new(review_params)
-    @review.user_id = current_user.id
-    @review.saved_restaurant_id = SavedRestaurant.where(restaurant_id: params[:restaurant_id], user_id: current_user.id).first.id
+    @review.user = current_user
+    # @review.saved_restaurant = SavedRestaurant.where(restaurant_id: params[:restaurant_id], user_id: current_user.id).first
+    @review.saved_restaurant = @saved_restaurant
     if @review.save
-      redirect_to restaurant_path(@restaurant)
+      # redirect_to restaurant_path(@restaurant)
+      redirect_to restaurant_path(@saved_restaurant.restaurant)
     else
       flash[:alert] = "Something went wrong."
       render "restaurants/show", status: :unprocessable_entity
