@@ -12,9 +12,10 @@ class GetGooglePlacesDataService
       "X-Goog-Api-Key" => @api_key,
       "X-Goog-FieldMask" => "places.id,places.displayName,places.formattedAddress,places.addressComponents,places.rating,places.nationalPhoneNumber,places.websiteUri,places.primaryTypeDisplayName,places.photos"
     }
-#
+
     body = {
-      "textQuery" => @query
+      "textQuery" => @query,
+      "includedType" => "restaurant"
     }.to_json
 
     response = HTTParty.post(BASE_URL, headers: headers, body: body)
