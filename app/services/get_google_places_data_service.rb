@@ -10,7 +10,7 @@ class GetGooglePlacesDataService
     headers = {
       "Content-Type" => "application/json",
       "X-Goog-Api-Key" => @api_key,
-      "X-Goog-FieldMask" => "places.id,places.displayName,places.formattedAddress,places.addressComponents,places.rating,places.nationalPhoneNumber,places.websiteUri,places.primaryTypeDisplayName,places.photos,places.googleMapsLinks"
+      "X-Goog-FieldMask" => "places.id,places.displayName,places.formattedAddress,places.addressComponents,places.rating,places.nationalPhoneNumber,places.websiteUri,places.primaryTypeDisplayName,places.photos"
     }
 #
     body = {

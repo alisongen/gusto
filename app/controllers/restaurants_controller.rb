@@ -1,5 +1,3 @@
-
-
 class RestaurantsController < ApplicationController
   def index
     @restaurants = Restaurant.all
@@ -18,8 +16,9 @@ class RestaurantsController < ApplicationController
       end
     end
     @friends = User.where(id: ids)
-    place_id = params[:id]
-    @restaurant = GetGooglePlaceDetailsService.new(place_id).call
+    restaurant_data = GetGooglePlaceDetailsService.new(params[:id]).call
+    @restaurant = Restaurant.find_or_create_by(name: restaurant_data.dig("displayName", "text"), address: restaurant_data.dig("formattedAddress"), category: restaurant_data.dig("primaryTypeDisplayName", "text"), rating: restaurant_data.dig("rating"), phone_number: restaurant_data.dig("nationalPhoneNumber"), website: restaurant_data.dig("websiteUri"))
+    puts "Données récupérées :", @restaurant.inspect
     respond_to do |format|
       format.html # Rendu pour une page HTML
       format.json { render json: @restaurants } # Permet aussi d'utiliser en API

@@ -11,7 +11,7 @@ class GetGooglePlaceDetailsService
     headers = {
       "Content-Type" => "application/json",
       "X-Goog-Api-Key" => @api_key,
-      "X-Goog-FieldMask" => "displayName,formattedAddress,rating,nationalPhoneNumber,websiteUri,primaryTypeDisplayName,photos,googleMapsUri"
+      "X-Goog-FieldMask" => "id,displayName,formattedAddress,rating,nationalPhoneNumber,websiteUri,primaryTypeDisplayName,photos,googleMapsUri"
     }
 
     response = HTTParty.get(url, headers: headers)

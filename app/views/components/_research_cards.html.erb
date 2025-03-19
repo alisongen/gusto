@@ -1,17 +1,17 @@
 <div class="card-container">
-  <% @restaurants.each_with_index do |restaurant, index| %>
+  <% @restaurants["places"].each do |restaurant| %>
     <%# Et pour chaque "restaurant", j'affiche les infos (name et address), la possibilité de l'ajouter à une collection via l'icon %>
     <%# et le lien cers la show du restaurant %>
     <div class="card">
-    <% img_uri = GetGooglePhotosDataService.new(restaurant[1][index].dig("photos").first.dig("name")).call %>
-      <% if restaurant[1][index].dig("photos").present? %>
+    <% img_uri = GetGooglePhotosDataService.new(restaurant.dig("photos").first.dig("name")).call %>
+      <% if restaurant.dig("photos").present? %>
         <%= image_tag img_uri, class: "card-img-top" %>
       <% end %>
       <div class="card-body">
-        <h5 class="card-title"><%= restaurant[1][index]["displayName"]["text"] %></h5>
-        <p class="card-text"><%= restaurant[1][index]["formattedAddress"] %></p>
-        <p class="card-text">Rating: <%= restaurant[1][index]["rating"] %></p>
-        <a href="<%= restaurant_path(restaurant[1][index]["id"]) %>" class="card-btn btn-primary">View Restaurant</a>
+        <h5 class="card-title"><%= restaurant["displayName"]["text"] %></h5>
+        <p class="card-text"><%= restaurant["formattedAddress"] %></p>
+        <p class="card-text">Rating: <%= restaurant["rating"] %></p>
+        <a href="<%= restaurant_path(restaurant["id"]) %>" class="card-btn btn-primary">View Restaurant</a>
       </div>
     </div>
   <% end %>

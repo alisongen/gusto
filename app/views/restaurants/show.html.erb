@@ -1,11 +1,11 @@
 <div class="restaurant-header">
-  <h1><%= @restaurant.dig("displayName", "text") %></h1>
+  <h1><%= @restaurant.name %></h1>
   <%= link_to "#", data: { bs_toggle: "modal", bs_target: "#collectionModal" }, class: "bouton-icon " do %>
     <i class="fa-solid fa-bookmark" style="color: white;"></i>
   <% end %>
 </div>
 <div class="restaurant-image">
-  <%= render "components/image_carousel", image: @image %>
+  <%# <%= render "components/image_carousel", image: @image %> 
 </div>
 <%= render "components/restaurant_details" %>
 
