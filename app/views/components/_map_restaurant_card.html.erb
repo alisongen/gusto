@@ -3,6 +3,7 @@
     <%#= image_tag saved_restaurant.restaurant.images %>
     <%= image_tag restaurant.images.sample, class: "restaurant-feed-image rounded" %>
     <div class="restaurant-feed-content">
+      <p class="restaurant-feed-category"><%= restaurant.saved_restaurants.first.collections.first.name %></p>
       <h5 class="restaurant-feed-title"><%= restaurant.name %></h5>
       <p class="restaurant-feed-address"><%= restaurant.address %></p>
       <div class="restaurant-card-rating">
