@@ -22,8 +22,8 @@
       </div>
     </div>
 <% elsif ((current_user == User.find(friendship.user_id) || current_user == User.find(friendship.friend_id)) && friendship.status == "accepted") %>
-  <% friend = User.find(friendship.friend_id) %>
-    <% if (friend == current_user) %>
+  <% friend = User.find(friendship.user_id) %>
+    <% if (friend != current_user) %>
       <div class="friend-card-infos">
         <% if friend.avatar.attached? %>
           <%= cl_image_tag friend.avatar.key %>
