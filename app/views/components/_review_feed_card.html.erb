@@ -2,7 +2,7 @@
   <%= image_tag review.saved_restaurant.restaurant.images.sample, class: "review-feed-image" %>
   <div class="review-feed-content">
     <h5 class="review-feed-title"><%= review.user.username %> a laissé une review</h5>
-    <p class="review-feed-text"><%= review.content %></p>
+    <p class="review-feed-text"><%= truncate(review.content, length: 66) %></p>
     <p class="review-feed-rating">Note : <%= review.user_rating %></p>
     <p class="review-feed-text">
       <% elapsed_time = Time.now - review.created_at %>
