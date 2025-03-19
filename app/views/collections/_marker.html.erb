@@ -1,1 +1,7 @@
-<%= image_tag "logo.png", height: 30, width: 30, alt: "Logo" %>
+<% if (@collection_emoji.present?) %>
+  <div style="width: 40px; height: 40px; background-color: <%= @collection_color %>;" class="fs-1 text-center d-flex align-items-center rounded-5">
+    <%= @collection_emoji %>
+  </div>
+<% else %>
+  <%= image_tag "https://png.pngtree.com/png-vector/20221018/ourmid/pngtree-master-chef-logo-illustration-png-image_6351381.png", height: 30, width: 30, alt: "Logo" %>
+<% end %>
