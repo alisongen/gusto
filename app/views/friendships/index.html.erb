@@ -7,12 +7,11 @@
     <% end %>
   <% end %>
   <% unless (user == current_user || friends.include?(user.id)) %>
-    <%# user.username %>
-    <%# link_to "Add", friendships_path(user), data: {turbo_method: :post, turbo_confirm: "Are you sure?"}, class: "btn btn-success" %>
   <% end %>
 <% end %>
 
 <div class="main-content">
+
   <!-- Barre de recherche -->
   <div data-controller="reset">
     <%# J'affiche ma partial search-bar %>
@@ -20,37 +19,57 @@
     <%# Je gère l'affichage des résultats %>
     <%# Si la valeur "query" dans params est présente %>
     <% if params[:query].present? %>
-    <%# Je créé une div qui affichera mes résultats %>
-    <div data-reset-target="list">
-      <%# Si je trouve des restaurants dans les résultats de ma recherche %>
-      <% @users.each do |user| %>
-        <% friends = [] %>
-        <% @friendships.each do |friendship| %>
-          <% if (current_user == User.find(friendship.user_id)) %>
-            <% friends.insert(-1, friendship.friend_id) %>
+      <%# Je créé une div qui affichera mes résultats %>
+      <div data-reset-target="list">
+        <%# Si je trouve des restaurants dans les résultats de ma recherche %>
+        <% @users.each do |user| %>
+          <% friends = [] %>
+          <% @friendships.each do |friendship| %>
+            <% if (current_user == User.find(friendship.user_id)) %>
+              <% friends.insert(-1, friendship.friend_id) %>
+            <% end %>
+          <% end %>
+          <% unless (user == current_user || friends.include?(user.id)) %>
+            <% if friends.any? %>
+                <%= user.username %>
+                <%= link_to "Add", friendships_path(user), data: {turbo_method: :post, turbo_confirm: "Are you sure?"}, class: "btn btn-success" %>
+            <%# Sinon %>
+            <% else %>
+              <%# On affiche le message suivant %>
+              <p>Sorry, no friends found.</p>
+            <% end %>
           <% end %>
         <% end %>
-        <% unless (user == current_user || friends.include?(user.id)) %>
-          <% if friends.any? %>
-              <%= user.username %>
-              <%= link_to "Add", friendships_path(user), data: {turbo_method: :post, turbo_confirm: "Are you sure?"}, class: "btn btn-success" %>
-          <%# Sinon %>
-          <% else %>
-            <%# On affiche le message suivant %>
-            <p>Sorry, no friends found.</p>
-          <% end %>
-        <% end %>
-      <% end %>
-    </div>
-  <% end %>
+      </div>
+    <% end %>
   </div>
 
+  <!-- Demande d'amis -->
+  <div class="title-container">
+    <h2>Friends Requests</h2>
+  </div>
+
+  <div class="friend-cards">
+    <% @pending_friendships.each do |friendship| %>
+      <%= render "components/friend_card", friendship: friendship %>
+    <% end %>
+  </div>
+
+  <!-- Liste d'amis -->
+  <div class="title-container">
+    <h2>All Friends</h2>
+    <p><%= Friendship.where(status: 1).where(user: current_user).or(Friendship.where(status: 1).where(friend: current_user)).count %> friends</p>
+  </div>
+
+  <div class="friend-cards">
+    <% @accepted_friendships.each do |friendship| %>
+      <%= render "components/friend_card", friendship: friendship %>
+    <% end %>
+  </div>
 
 </div>
 
 <!-- Barre de recherche -->
-
-
 
 <!--
 <div class="container m-3">
