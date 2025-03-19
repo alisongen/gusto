@@ -5,7 +5,7 @@
   <% end %>
 </div>
 <div class="restaurant-image">
-  <%# <%= render "components/image_carousel", image: @image %> 
+  <%# <%= render "components/image_carousel", image: @image %>
 </div>
 <%= render "components/restaurant_details" %>
 
@@ -20,14 +20,18 @@
       <div class="modal-body">
         <%= form_with url: restaurant_collection_path(@collections, restaurant_id: @restaurant.id), method: :patch, local: true do |f| %>
           <div class="mb-3">
-              <% @collections.each do |collection| %>
-                <% if (SavedRestaurantsCollection.where(saved_restaurant_id: @saved_restaurant.id, collection_id: collection.id).present?) %>
-                  <label for="collection"><%= collection.name %></label>
-                  <input id="<%= collection.id %>" name="<%= collection.name %>" type="checkbox" value="<%= collection.id %>" checked/>
-                <% else %>
-                  <label for="collection"><%= collection.name %></label>
-                  <input id="<%= collection.id %>" name="<%= collection.name %>" type="checkbox" value="<%= collection.id %>"/>
+              <% if @saved_restaurant.present? %>
+                <% @collections.each do |collection| %>
+                  <% if (SavedRestaurantsCollection.where(saved_restaurant_id: @saved_restaurant.id, collection_id: collection.id).present?) %>
+                    <label for="collection"><%= collection.name %></label>
+                    <input id="<%= collection.id %>" name="<%= collection.name %>" type="checkbox" value="<%= collection.id %>" checked/>
+                  <% else %>
+                    <label for="collection"><%= collection.name %></label>
+                    <input id="<%= collection.id %>" name="<%= collection.name %>" type="checkbox" value="<%= collection.id %>"/>
+                  <% end %>
                 <% end %>
+              <% else %>
+                <p>Pas de saved_restaurant</p>
               <% end %>
           </div>
           <div class="modal-footer">
@@ -52,6 +56,8 @@
 <%# @saved_restaurant.photos.each do |photo| %>
   <%#= cl_image_tag(photo.key, width: 300, height: 200, crop: "scale", effect: "cartoonify")  %>
 <%# end %>
+
+
 <% @saved_restaurants.each do |saved_restaurant| %>
   <% if (saved_restaurant.restaurant == @restaurant) %>
 

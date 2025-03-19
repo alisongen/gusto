@@ -35,7 +35,7 @@ class RestaurantsController < ApplicationController
     # @images = @restaurant.images
     # @image = @images.sample
     @collections = Collection.where(user_id: current_user.id)
-    @saved_restaurant = SavedRestaurant.where(restaurant_id: params[:id], user_id: current_user.id).first
+    @saved_restaurant = @restaurant
     @saved_restaurants = SavedRestaurant.where(user_id: current_user.id)
     @review = Review.new
     @reviews = Review.all
