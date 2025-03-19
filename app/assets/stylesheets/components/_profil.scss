@@ -1,5 +1,4 @@
 .profil-header {
-  background-color: aqua;
   display: flex;
   margin-right: 20px;
   margin-left: 20px;
@@ -11,7 +10,6 @@
   width: 110px;
   height: 110px;
   border-radius: 10px;
-  background-color: red;
 }
 
 .profil-data {
@@ -43,6 +41,10 @@
   font-size: 14px;
 }
 
+.profil-header-btn {
+  display: flex;
+}
+
 .profil-btn-large {
   background-color: #FF5631;
   border-radius: 5px;
@@ -60,4 +62,28 @@
   color: white;
   width: 37px;
   height: 37px;
+}
+
+.profil-menu {
+  margin-right: 20px;
+  margin-left: 20px;
+  margin-top: 30px;
+}
+
+.profil-menu-btn {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.profil-btn {
+  background-color: white;
+  border: none;
+  width: 109px;
+  height: 46px;
+  flex: 1
+}
+
+.profil-content {
+  margin-top: 20px;
 }
