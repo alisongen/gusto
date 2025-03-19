@@ -1,7 +1,7 @@
 @media screen and (max-width: 767px) {
   .photos-feed-cards {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     gap: 12px;
     padding: 20px;
   }
@@ -9,7 +9,7 @@
   .photo-feed-card {
     display: flex;
     flex-direction: column;
-    width: calc(50% - 6px);
+    width: 100%;
     padding: 10px;
     background-color: white;
     border: solid 1px #EBEBEB;

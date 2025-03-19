@@ -1,7 +1,7 @@
 @media screen and (max-width: 767px) {
   .reviews-feed-cards {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     gap: 12px;
     padding: 20px;
   }
@@ -9,7 +9,7 @@
   .review-feed-card {
     display: flex;
     flex-direction: column;
-    width: calc(50% - 6px);
+    width: 100%;
     padding: 10px;
     background-color: white;
     border: solid 1px #EBEBEB;
@@ -18,6 +18,7 @@
 
   .review-feed-image {
     height: 151px;
+    width: 110px;
   }
 
   .review-feed-title {
