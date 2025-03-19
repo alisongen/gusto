@@ -9,14 +9,13 @@
   .photo-feed-card {
     display: flex;
     width: 100%;
-    padding: 10px;
     background-color: white;
     border: solid 1px #EBEBEB;
     border-radius: 10px;
   }
 
   .photo-feed-image {
-    max-height: 100px;
+    max-height: 100%;
     width: 110px;
     object-fit: cover;
     border-radius: 10px 0 0 10px;
@@ -37,5 +36,17 @@
 
   .photo-feed-text {
     margin: 5px 0;
+  }
+
+  .photo-feed-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .photo-feed-time {
+    margin: 0;
+    text-align: right;
+    padding-right: 5px;
   }
 }

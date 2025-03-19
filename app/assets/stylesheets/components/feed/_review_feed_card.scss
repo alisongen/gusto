@@ -9,14 +9,13 @@
   .review-feed-card {
     display: flex;
     width: 100%;
-    padding: 10px;
     background-color: white;
     border: solid 1px #EBEBEB;
     border-radius: 10px;
   }
 
   .review-feed-image {
-    max-height: 100px;
+    max-height: 100%;
     width: 110px;
     object-fit: cover;
     border-radius: 10px 0 0 10px;
@@ -52,5 +51,6 @@
 
   .review-feed-time {
     margin: 0;
+    padding-right: 5px;
   }
 }

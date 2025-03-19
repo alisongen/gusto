@@ -2,10 +2,23 @@
   <%= image_tag review.saved_restaurant.restaurant.images.sample, class: "review-feed-image" %>
   <div class="review-feed-content">
     <h5 class="review-feed-title"><%= review.user.username %> a laissé une review</h5>
-    <p class="review-feed-text"><%= truncate(review.content, length: 66) %></p>
+    <p class="review-feed-text"><%= truncate(review.content, length: 55) %></p>
     <div class="review-feed-info">
-      <p class="review-feed-rating">Note : <%= review.user_rating %></p>
-      <p class="review-feed-text">
+
+      <div class="restaurant-card-rating">
+        <% full_stars = review.user_rating.to_i %>
+        <% empty_stars = 5 - full_stars %>
+        <% full_stars.times do %>
+          <%= image_tag "star-fill.svg", width: 20, height: 20 %>
+        <% end %>
+        <% empty_stars.times do %>
+          <%= image_tag "star.svg", width: 20, height: 20 %>
+        <% end %>
+      </div>
+
+      <!-- <p class="review-feed-rating">Note : <%= review.user_rating %></p> -->
+
+      <p class="review-feed-time review-feed-info">
         <% elapsed_time = Time.now - review.created_at %>
         <% if elapsed_time < 1.hour %>
           il y a <%= (elapsed_time / 60).to_i %> minutes

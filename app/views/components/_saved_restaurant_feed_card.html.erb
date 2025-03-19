@@ -7,7 +7,7 @@
     <% saved_restaurant.collections.each do |collection| %>
       <p class="restaurant-feed-text">à <%= collection.name %></p> <!--TODO: Possible d'afficher que la Ville+CodePostal-->
     <% end %>
-    <p class="restaurant-feed-text">
+    <p class="restaurant-feed-time">
       <% elapsed_time = Time.now - saved_restaurant.created_at %>
       <% if elapsed_time < 1.hour %>
         il y a <%= (elapsed_time / 60).to_i %> minutes

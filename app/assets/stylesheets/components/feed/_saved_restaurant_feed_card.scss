@@ -9,14 +9,13 @@
   .restaurant-feed-card {
     display: flex;
     width: 100%;
-    padding: 10px;
     background-color: white;
     border: solid 1px #EBEBEB;
     border-radius: 10px;
   }
 
   .restaurant-feed-image {
-    max-height: 100px;
+    max-height: 100%;
     width: 110px;
     object-fit: cover;
     border-radius: 10px 0 0 10px;
@@ -30,13 +29,24 @@
     flex: 1;
   }
 
+  .restaurant-feed-text-content {
+    display: flex;
+    flex-direction: column;
+  }
+
   .restaurant-feed-title {
     font-size: 1.2em;
     font-weight: bold;
   }
 
   .restaurant-feed-text {
-    margin: 5px 0;
+    margin: 0px 0;
+  }
+
+  .restaurant-feed-time {
+    align-self: flex-end;
+    margin-top: auto;
+    padding-right: 5px;
   }
 
   .restaurant-feed-address {
