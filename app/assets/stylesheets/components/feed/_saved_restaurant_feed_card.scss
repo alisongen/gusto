@@ -1,15 +1,14 @@
 @media screen and (max-width: 767px) {
   .restaurant-feed-cards {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     gap: 12px;
     padding: 20px;
   }
 
   .restaurant-feed-card {
     display: flex;
-    flex-direction: column;
-    width: calc(50% - 6px);
+    width: 100%;
     padding: 10px;
     background-color: white;
     border: solid 1px #EBEBEB;
@@ -17,14 +16,26 @@
   }
 
   .restaurant-feed-image {
-    height: 151px;
+    max-height: 100px;
+    width: 110px;
+    object-fit: cover;
+    border-radius: 10px 0 0 10px;
+  }
+
+  .restaurant-feed-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 10px;
+    flex: 1;
   }
 
   .restaurant-feed-title {
-
+    font-size: 1.2em;
+    font-weight: bold;
   }
 
   .restaurant-feed-text {
-
+    margin: 5px 0;
   }
 }
