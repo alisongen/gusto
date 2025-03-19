@@ -3,13 +3,15 @@ Rails.application.routes.draw do
   root to: "pages#home"
 
   resources :restaurants, only: :show do
-    resources :reviews, only: [:create]
+    # resources :reviews, only: [:create]
     resources :saved_restaurants, only: [:create]
     # resources :collections, only: [:new, :create, :index]
     resources :collections, only: [:index]
   end
 
-  resources :saved_restaurants, only: [:update]
+  resources :saved_restaurants, only: [:update] do
+    resources :reviews, only: [:create]
+  end
   resources :reviews, only: [:destroy]
 
   resources :restaurants do
