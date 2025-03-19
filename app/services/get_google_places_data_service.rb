@@ -19,6 +19,7 @@ class GetGooglePlacesDataService
     }.to_json
 
     response = HTTParty.post(BASE_URL, headers: headers, body: body)
+    
     if response.success?
       response.parsed_response
     else

@@ -7,7 +7,14 @@
       <% end %>
       <div class="card-body">
         <h5 class="card-title"><%= restaurant["displayName"]["text"] %></h5>
-        <p class="card-text"><%= restaurant["formattedAddress"] %></p>
+        <p class="card-text">
+          <% if restaurant["addressComponents"].present? %>
+            <%= restaurant["addressComponents"].dig(2, "longText") || "N/A" %>,
+            <%= restaurant["addressComponents"].dig(6, "longText") || "N/A" %>
+          <% else %>
+            Adresse non disponible
+          <% end %>
+        </p>
         <p class="card-text">Rating: <%= restaurant["rating"] %></p>
         <a href="<%= restaurant_path(restaurant["id"]) %>" class="card-btn btn-primary">View Restaurant</a>
       </div>
