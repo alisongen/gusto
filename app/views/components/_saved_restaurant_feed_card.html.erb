@@ -1,19 +1,21 @@
 <div class="restaurant-feed-card">
   <%#= image_tag saved_restaurant.restaurant.images %>
   <%= image_tag saved_restaurant.restaurant.images.sample, class: "restaurant-feed-image" %>
-  <h5 class="restaurant-feed-title"><%= saved_restaurant.user.username %> a ajouté</h5>
-  <p class="restaurant-feed-text"><%= saved_restaurant.restaurant.name %></p>
-  <% saved_restaurant.collections.each do |collection| %>
-    <p class="restaurant-feed-text">à <%= collection.name %></p> <!--TODO: Possible d'afficher que la Ville+CodePostal-->
-  <% end %>
-  <p class="restaurant-feed-text">
-    <% elapsed_time = Time.now - saved_restaurant.created_at %>
-    <% if elapsed_time < 1.hour %>
-      il y a <%= (elapsed_time / 60).to_i %> minutes
-    <% elsif elapsed_time < 24.hours %>
-      il y a <%= (elapsed_time / 1.hour).to_i %> heures
-    <% else %>
-      il y a <%= (elapsed_time / 1.day).to_i %> jours
+  <div class="restaurant-feed-content">
+    <h5 class="restaurant-feed-title"><%= saved_restaurant.user.username %> a ajouté</h5>
+    <p class="restaurant-feed-text"><%= saved_restaurant.restaurant.name %></p>
+    <% saved_restaurant.collections.each do |collection| %>
+      <p class="restaurant-feed-text">à <%= collection.name %></p> <!--TODO: Possible d'afficher que la Ville+CodePostal-->
     <% end %>
-  </p>
+    <p class="restaurant-feed-text">
+      <% elapsed_time = Time.now - saved_restaurant.created_at %>
+      <% if elapsed_time < 1.hour %>
+        il y a <%= (elapsed_time / 60).to_i %> minutes
+      <% elsif elapsed_time < 24.hours %>
+        il y a <%= (elapsed_time / 1.hour).to_i %> heures
+      <% else %>
+        il y a <%= (elapsed_time / 1.day).to_i %> jours
+      <% end %>
+    </p>
+  </div>
 </div>

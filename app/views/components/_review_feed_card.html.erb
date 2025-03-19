@@ -1,16 +1,18 @@
 <div class="review-feed-card">
   <%= image_tag review.saved_restaurant.restaurant.images.sample, class: "review-feed-image" %>
-  <h5 class="review-feed-title"><%= review.user.username %> a laissé une review</h5>
-  <p class="review-feed-text"><%= review.content %></p>
-  <p class="review-feed-rating">Note : <%= review.user_rating %></p>
-  <p class="review-feed-text">
-    <% elapsed_time = Time.now - review.created_at %>
-    <% if elapsed_time < 1.hour %>
-      il y a <%= (elapsed_time / 60).to_i %> minutes
-    <% elsif elapsed_time < 24.hours %>
-      il y a <%= (elapsed_time / 1.hour).to_i %> heures
-    <% else %>
-      il y a <%= (elapsed_time / 1.day).to_i %> jours
-    <% end %>
-  </p>
+  <div class="review-feed-content">
+    <h5 class="review-feed-title"><%= review.user.username %> a laissé une review</h5>
+    <p class="review-feed-text"><%= review.content %></p>
+    <p class="review-feed-rating">Note : <%= review.user_rating %></p>
+    <p class="review-feed-text">
+      <% elapsed_time = Time.now - review.created_at %>
+      <% if elapsed_time < 1.hour %>
+        il y a <%= (elapsed_time / 60).to_i %> minutes
+      <% elsif elapsed_time < 24.hours %>
+        il y a <%= (elapsed_time / 1.hour).to_i %> heures
+      <% else %>
+        il y a <%= (elapsed_time / 1.day).to_i %> jours
+      <% end %>
+    </p>
+  </div>
 </div>
