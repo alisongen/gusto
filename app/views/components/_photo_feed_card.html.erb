@@ -1,5 +1,5 @@
 <div class="photo-feed-card">
-  <%= image_tag url_for(photo), class: "restaurant-image" %>
+  <%= image_tag url_for(photo), class: "photo-feed-image" %>
   <h5 class="photo-feed-title"><%= saved_restaurant.user.username %> a ajouté une photo</h5>
   <p class="photo-feed-text">
     <% elapsed_time = Time.now - photo.created_at %>
