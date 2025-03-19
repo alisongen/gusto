@@ -6,7 +6,7 @@ class CollectionsController < ApplicationController
 
     if params[:name].present?
       @collection_name = params[:name]
-      @restaurants = Collection.find_by(user: current_user, name: params[:name]).restaurants
+      @restaurants = Collection.find_by(user: current_user, name: params[:name]).restaurants.distinct
     else
       @restaurants = @user.restaurants
     end
@@ -19,6 +19,8 @@ class CollectionsController < ApplicationController
         marker_html: render_to_string(partial: "marker")
       }
     end
+
+    # raise
 
     @collections = @user.collections
     if params[:name]
