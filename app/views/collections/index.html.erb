@@ -30,12 +30,14 @@
 
   <div id="collection-filters" class="d-none absolute bg-white mx-auto d-flex flex-column align-items-center my-2 rounded-5" style="width: 60%; box-shadow: 0 4px 7px rgba(0, 0, 0, 0.3);" data-showcat-target="collections">
     <% @collections.each_with_index do |collection, index| %>
-      <%= link_to collection.name, collections_path(name: collection.name), data: { turbo_stream: true }, class: , class: "btn-collection no-padding d-flex align-items-center justify-content-center my-2 rounded-5"  %>
-      <div class="d-none">
-        <% collection.saved_restaurants.each do |saved_restaurant| %>
-          <p><%= link_to saved_restaurant.restaurant.name, restaurant_path(saved_restaurant.restaurant) %></p>
-        <% end %>
-      </div>
+      <% if (collection.saved_restaurants.present?)%>
+        <%= link_to collection.name, collections_path(name: collection.name), data: { turbo_stream: true }, class: , class: "btn-collection no-padding d-flex align-items-center justify-content-center my-2 rounded-5"  %>
+        <div class="d-none">
+          <% collection.saved_restaurants.each do |saved_restaurant| %>
+            <p><%= link_to saved_restaurant.restaurant.name, restaurant_path(saved_restaurant.restaurant) %></p>
+          <% end %>
+        </div>
+      <% end %>
     <% end %>
   </div>
 
