@@ -26,6 +26,9 @@ gem "stimulus-rails"
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
 
+gem 'render_turbo_stream'
+
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
 
@@ -93,3 +96,5 @@ group :test do
 end
 
 gem "pg_search"
+
+gem "turbo_power", "~> 0.7.0"
