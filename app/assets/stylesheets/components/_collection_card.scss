@@ -3,7 +3,7 @@
   border-radius: 10px;
   padding: 10px;
   display: flex;
-  gap: 20px;
+  justify-content: space-between;
 }
 
 .collection-image {
@@ -14,7 +14,10 @@
 }
 
 .collection-info {
+  display: flex;
+  flex-direction: column;
   justify-content: space-between;
+  width: 210px;
 }
 
 .collection-info-btn {

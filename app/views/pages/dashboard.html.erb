@@ -41,23 +41,19 @@
 
   <div data-controller="showcat" class="profil-menu">
     <div class="profil-menu-btn">
-      <button class="profil-btn" data-action="focus->showcat#toggle" >Collections</button>
+      <%= link_to "Collections", switch_tab_path("collections"), data: { turbo_method: :post }, id: "collections-tab-button", class: "active" %>
+      <%= link_to "Photos", switch_tab_path("photos"), data: { turbo_method: :post }, id: "photos-tab-button" %>
+      <%= link_to "Comments", switch_tab_path("reviews"), data: { turbo_method: :post }, id: "reviews-tab-button" %>
+
+      <%# <button class="profil-btn" data-action="focus->showcat#toggle" >Collections</button>
       <button class="profil-btn" data-action="focus->showcat#toggle">Photos</button>
-      <button class="profil-btn">Reviews</button>
+      <button class="profil-btn">Reviews</button> %>
     </div>
 
-    <div class="profil-content" data-showcat-target="collections">
-      <% @collections.each do |collection| %>
-        <%= render "components/collection_card", collection: collection %>
-        <p><%= link_to collection.name, collections_path %></p>
-        <%= link_to collection_path(collection), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "text-black" do %>
-          <i class="fa-solid fa-trash-can"></i>
-        <% end %>
-      <% end %>
-    </div>
-
-    <div data-showcat-target="collections">
-    <%= render "components/favorite_cards", collection: @collection %>
+    <div id="profil-content" class="profil-content" data-showcat-target="collections">
+      <div class="collection-cards">
+        <%= render partial: "components/collection_card", collection: @collections, as: :collection %>
+      </div>
     </div>
   </div>
 

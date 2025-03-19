@@ -8,6 +8,9 @@
       <%= link_to collection_path(collection), class: "btn-delete", data: { turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
         <%= image_tag "delete.svg", class: "btn-delete" %>
       <% end %>
+      <%= link_to collection_path(collection), class: "btn-arrow" do %>
+        <%= image_tag "arrow.svg", class: "btn-arrow" %>
+      <% end %>
     </div>
   </div>
 </div>
