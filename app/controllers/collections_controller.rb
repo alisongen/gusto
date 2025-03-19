@@ -5,6 +5,12 @@ class CollectionsController < ApplicationController
     @friendships = @user.friendships
 
     if params[:name].present?
+      if params[:emoji].present?
+        @collection_emoji = params[:emoji]
+      end
+      if params[:color].present?
+        @collection_color = params[:color]
+      end
       @collection_name = params[:name]
       @restaurants = Collection.find_by(user: current_user, name: params[:name]).restaurants.distinct
     else
@@ -16,7 +22,7 @@ class CollectionsController < ApplicationController
         lat: restaurant.latitude,
         lng: restaurant.longitude,
         info_window_html: render_to_string(partial: "info_window", locals: { restaurant: restaurant }),
-        marker_html: render_to_string(partial: "marker")
+        marker_html: render_to_string(partial: "marker", locals: { restaurant: restaurant })
       }
     end
 
@@ -41,6 +47,7 @@ class CollectionsController < ApplicationController
     @collection = Collection.new(collection_params)
     @collection.user_id = @user.id
     if @collection.save
+      raise
       redirect_to dashboard_path
     else
       set_colors_and_emojis
