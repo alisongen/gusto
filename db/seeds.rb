@@ -30,10 +30,10 @@ Restaurant.destroy_all
 puts 'Restos supprimés 🎊'
 p ''
 
-# puts 'Destruction des friendships 💥'
-# Friendship.destroy_all
-# puts 'Friendships supprimés 🎊'
-# p ''
+puts 'Destruction des friendships 💥'
+Friendship.destroy_all
+puts 'Friendships supprimés 🎊'
+p ''
 
 # puts 'Destruction des collections 💥'
 # Collection.destroy_all
