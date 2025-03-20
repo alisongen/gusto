@@ -10,6 +10,7 @@ export default class extends Controller {
 
   initialize() {
     this.markers = []
+    this.currentPopup = null // Nouvelle variable pour garder une référence au popup actif
   }
 
   connect() {
@@ -19,6 +20,10 @@ export default class extends Controller {
       container: this.element,
       style: "mapbox://styles/mapbox/streets-v10"
     })
+
+    this.map.on('click', () => {
+      this.closepopup(); // Ferme le popup si on clique ailleurs sur la carte
+    });
 
     this.#addMarkersToMap()
     this.#fitMapToMarkers(true)
@@ -34,7 +39,6 @@ export default class extends Controller {
 
   #addMarkersToMap() {
     this.markersValue.forEach((marker) => {
-      // Créer un popup pour chaque marqueur, mais ne l'utiliserons pas directement
       const popup = new mapboxgl.Popup().setHTML(marker.info_window_html)
 
       const customMarker = document.createElement("div")
@@ -44,23 +48,42 @@ export default class extends Controller {
         .setLngLat([marker.lng, marker.lat])
         .addTo(this.map)
 
-      // Ajouter un événement de clic pour mettre à jour l'info-bulle en bas
-      mapBoxMarker.getElement().addEventListener('click', () => {
-        this.#updateInfoBulle(marker.info_window_html);
+      // Ajouter un événement de clic pour afficher l'info-bulle
+      mapBoxMarker.getElement().addEventListener('click', (e) => {
+        e.stopPropagation(); // Empêche la propagation de l'événement de clic à la carte
+        this.#updateInfoBulle(marker.info_window_html, popup);
       });
 
       this.markers.push(mapBoxMarker)
     })
   }
 
-  #updateInfoBulle(content) {
+  #updateInfoBulle(content, popup) {
     const infoBulle = document.getElementById('info-bulle');
 
     // Affiche le conteneur d'info-bulle
-    infoBulle.style.display = 'block';
+    infoBulle.classList.remove('d-none');
 
     // Met à jour le contenu de l'info-bulle
     infoBulle.innerHTML = content;
+
+    // Affiche le popup sur la carte
+    popup.addTo(this.map);
+
+    // Garde une référence au popup actuel
+    this.currentPopup = popup;
+  }
+
+  closepopup() {
+    // Ferme le popup actif s'il existe
+    if (this.currentPopup) {
+      this.currentPopup.remove();
+      this.currentPopup = null;
+    }
+
+    // Masque l'info-bulle
+    const infoBulle = document.getElementById('info-bulle');
+    infoBulle.classList.add('d-none');
   }
 
   #fitMapToMarkers(initial_connect) {

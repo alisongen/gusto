@@ -1,9 +1,11 @@
-<% if (@collection_emoji.present?) %>
-  <div style="width: 40px; height: 40px; background-color: <%= @collection_color %>;" class="fs-1 text-center d-flex justify-content-center align-items-center rounded-circle">
-    <%= @collection_emoji %>
-  </div>
-<% else %>
-  <div style="width: 40px; height: 40px; background-color: <%= restaurant.saved_restaurants.first.collections.first.color %>;" class="fs-1 text-center d-flex justify-content-center align-items-center rounded-circle">
-    <%= restaurant.saved_restaurants.first.collections.first.emoji %>
-  </div>
-<% end %>
+<div style="width: 40px; height: 40px; background-color: <%= collection.color %>;" class="fs-1 text-center d-flex justify-content-center align-items-center rounded-circle">
+  <% if collection.user === current_user %>
+    <%= collection.emoji %>
+  <% else %>
+    <% if collection.user.avatar.attached? %>
+      <%= cl_image_tag collection.user.avatar.key, class: "friend-card-avatar" %>
+    <% else %>
+      <%= image_tag "https://png.pngtree.com/png-vector/20221018/ourmid/pngtree-master-chef-logo-illustration-png-image_6351381.png", class: "friend-card-avatar" %>
+    <% end %>
+  <% end %>
+</div>

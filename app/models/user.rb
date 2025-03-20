@@ -25,4 +25,10 @@ class User < ApplicationRecord
     end
     return User.where(id: ids)
   end
+
+  def friends_restaurants
+    friends = self.friends.pluck(:id)
+    restaurant_ids = SavedRestaurant.where(user_id: friends).pluck(:restaurant_id)
+    Restaurant.where(id: restaurant_ids)
+  end
 end

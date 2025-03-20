@@ -1,35 +1,39 @@
 class CollectionsController < ApplicationController
   def index
     @user = current_user
-    @collections = @user.collections
-    @friendships = @user.friendships
+    @friends_restaurants = @user.friends_restaurants
 
     if params[:name].present?
-      if params[:emoji].present?
-        @collection_emoji = params[:emoji]
-      end
-      if params[:color].present?
-        @collection_color = params[:color]
-      end
-      @collection_name = params[:name]
       @restaurants = Collection.find_by(user: current_user, name: params[:name]).restaurants.distinct
+    elsif params[:friends]
+      @restaurants = @friends_restaurants
     else
       @restaurants = @user.restaurants.distinct
     end
 
     @markers = @restaurants.geocoded.map do |restaurant|
+      unless params[:name].present?
+        if params[:friends]
+          friends_ids = current_user.friends.pluck(:id)
+          collection = restaurant.saved_restaurants.where(user_id: friends_ids).first.collections.first
+        else
+          collection = restaurant.saved_restaurants.find_by(user: @user).collections.first
+        end
+      else
+        collection = restaurant.saved_restaurants.find_by(user: @user).collections.first
+      end
       {
         lat: restaurant.latitude,
         lng: restaurant.longitude,
-        info_window_html: render_to_string(partial: "info_window", locals: { restaurant: restaurant }),
-        marker_html: render_to_string(partial: "marker", locals: { restaurant: restaurant })
+        info_window_html: render_to_string(partial: "info_window", locals: { restaurant: restaurant, collection: collection }),
+        marker_html: render_to_string(partial: "marker", locals: { restaurant: restaurant, collection: collection })
       }
     end
 
     @collections = @user.collections
     respond_to do |format|
       format.html
-      format.turbo_stream if params[:name]
+      format.turbo_stream if params[:name] || params[:friends]
     end
   end
 
@@ -47,7 +51,6 @@ class CollectionsController < ApplicationController
     @collection = Collection.new(collection_params)
     @collection.user_id = @user.id
     if @collection.save
-      raise
       redirect_to dashboard_path
     else
       set_colors_and_emojis

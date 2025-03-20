@@ -1,0 +1,15 @@
+body:has(#info-bulle) {
+  min-height: auto;
+
+  .main-content {
+    padding-top: 0;
+    padding-bottom: 0;
+
+    #mapbox-collection {
+      // 100vh moins hauteur de la nav + du footer
+      height: calc(100vh - 176px);
+      // hauteur de la navbar
+      margin-top: 78px;
+    }
+  }
+}
