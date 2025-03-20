@@ -31,7 +31,7 @@ class RestaurantsController < ApplicationController
 
       @photos = restaurant_data["photos"].map do |photo_data|
         img_uri = GetGooglePhotosDataService.new(photo_data["name"]).call
-        if @restaurant.images.attached? == false
+        unless @restaurant.images.attached?
           photo_file = URI.parse(img_uri).open
           @restaurant.images.attach(io: photo_file, filename: "#{img_uri}.png", content_type: "image/png")
           @restaurant.save
