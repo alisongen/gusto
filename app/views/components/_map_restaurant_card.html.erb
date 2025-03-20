@@ -1,7 +1,10 @@
+
 <%= link_to  restaurant_path(restaurant) do %>
   <div class="restaurant-feed-card p-2">
     <%#= image_tag saved_restaurant.restaurant.images %>
-    <%= image_tag restaurant.images.sample, class: "restaurant-feed-image rounded" %>
+    <% if restaurant.images.attached? %>
+      <%= cl_image_tag restaurant.images.first.key, class: "restaurant-feed-image rounded" %>
+    <% end %>
     <div class="restaurant-feed-content">
       <p class="restaurant-feed-category"><%= collection.name %></p>
       <h5 class="restaurant-feed-title"><%= restaurant.name %></h5>

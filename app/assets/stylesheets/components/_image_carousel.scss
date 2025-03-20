@@ -1,8 +1,18 @@
+@media screen and (max-width: 767px) {
+}
 .carrousel {
+  position: relative;
   margin-top: 80px;
 }
 
-.carousel-image {
-  object-fit: contain;
-  width: 100%;
+.carrousel-image {
+  object-fit: cover;
+  object-position: top;
+  border-radius: 0 0 12px 12px;
+}
+
+.btn-position {
+  position: absolute;
+  top: 20px;
+  right: 20px;
 }

@@ -1,18 +1,12 @@
-<%# <div class="carousel">
-  <%= cl_image_tag image.key, class: "carousel-image" %>
-<%# </div> %>
-
-<%#=# <div class="carousel"> %>
-  <%# images.each do |image| %>
-    <%#= cl_image_tag image.key, class: "carousel-image" %>
-  <%# end %>
-<%#= </div>  %>
-
-<!-- Le futur carousel de la show du restaurant -->
-<div class="carousel">
-  <% restaurant.images.each do |image|%>
-    <div style="width: 100%; height: 270px;">
-      <%= cl_image_tag image.key, class: "carousel-image rounded-bottom rounded-6" %>
-    </div>
+<div id="carouselShow" class="carousel slide" style="margin-top: 80px;" data-bs-ride="carousel">
+  <div class="carousel-inner  w-100">
+    <% restaurant.images.each_with_index do |image, index|%>
+      <div class="carousel-item <%= "active" if index.zero? %>" style="height: 450px;">
+        <%= cl_image_tag image.key, class: "carrousel-image d-block w-100 h-100" %>
+      </div>
+    <% end %>
+  </div>
+  <%= link_to "#", data: { bs_toggle: "modal", bs_target: "#collectionModal" }, class: "bouton-icon btn-position" do %>
+    <i class="fa-solid fa-bookmark" style="color: white;"></i>
   <% end %>
-<div>
+</div>

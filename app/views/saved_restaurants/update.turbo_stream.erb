@@ -1,0 +1,14 @@
+<%= turbo_stream.append("carousel-container") do %>
+  <div class="carousel-item" style="height: 450px;">
+    <%= cl_image_tag @saved_restaurant.photos.last.key, height: 300, width: 400, crop: :fill %>
+    <%= link_to restaurant_path(@saved_restaurant.photos.last, @saved_restaurant), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "bouton-icon btn-position" do %>
+      <i class="fa-solid fa-trash-can"></i>
+    <% end %>
+  </div>
+
+  <%# creer une partial pour un item de mon carousel %>
+<% end %>
+
+
+
+<%# la nouvelle photo : saved_restaurant.photos.last %>

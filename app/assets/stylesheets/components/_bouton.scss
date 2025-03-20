@@ -18,24 +18,8 @@
     width: 45px;
     height: 45px;
     border-radius: 10px;
-    background-color: black;
+    background-color: #FF5631;
     text-decoration: none;
-  }
-
-  .btn-ghost {
-    width: 32%;
-    height: 35px;
-    color: black;
-    border: 1px solid #7e7e7e;
-    padding: 8px 24px;
-    border-radius: 50px;
-    font-weight: bold;
-    opacity: 1;
-    background-color: white;
-    &:focus{
-      background-color: black;
-      color: white !important;
-    }
   }
 
   .no-padding{
@@ -79,7 +63,7 @@
     text-decoration: none !important;
     color: black !important;
   }
-  
+
   //BTN LINK WITH NO STYLE
   .bouton-link {
     text-decoration: none;

@@ -22,20 +22,22 @@ class RestaurantsController < ApplicationController
       @restaurant = Restaurant.find(params[:id])
     else
       restaurant_data = GetGooglePlaceDetailsService.new(params[:id]).call
-      @restaurant = Restaurant.find_or_create_by(name: restaurant_data.dig("displayName", "text"), address: restaurant_data.dig("formattedAddress"), category: restaurant_data.dig("primaryTypeDisplayName", "text"), rating: restaurant_data.dig("rating"), phone_number: restaurant_data.dig("nationalPhoneNumber"), website: restaurant_data.dig("websiteUri"))
+      restaurant_params = { name: restaurant_data.dig("displayName", "text"), address: restaurant_data.dig("formattedAddress"), category: restaurant_data.dig("primaryTypeDisplayName", "text"), rating: restaurant_data.dig("rating"), phone_number: restaurant_data.dig("nationalPhoneNumber"), website: restaurant_data.dig("websiteUri") }
+      @restaurant = Restaurant.find_by(restaurant_params)
 
-      respond_to do |format|
-        format.html # Rendu pour une page HTML
-        format.json { render json: @restaurants } # Permet aussi d'utiliser en API
-      end
-
-      @photos = restaurant_data["photos"].map do |photo_data|
-        img_uri = GetGooglePhotosDataService.new(photo_data["name"]).call
-        unless @restaurant.images.attached?
+      if @restaurant.nil?
+        @restaurant = Restaurant.create(restaurant_params)
+        @photos = restaurant_data["photos"].map do |photo_data|
+          img_uri = GetGooglePhotosDataService.new(photo_data["name"]).call
           photo_file = URI.parse(img_uri).open
           @restaurant.images.attach(io: photo_file, filename: "#{img_uri}.png", content_type: "image/png")
           @restaurant.save
         end
+      end
+
+      respond_to do |format|
+        format.html # Rendu pour une page HTML
+        format.json { render json: @restaurants } # Permet aussi d'utiliser en API
       end
     end
 
@@ -53,13 +55,10 @@ class RestaurantsController < ApplicationController
     @saved_restaurant = SavedRestaurant.find_or_create_by(restaurant: @restaurant, user: current_user)
     @collections = Collection.where(user: current_user)
 
-    @collections.each do |collection|
-      @saved_restaurants_collection = SavedRestaurantsCollection.find_or_create_by(saved_restaurant: @saved_restaurant, collection: collection)
-
-      if !params[collection.name.to_s].present? && @saved_restaurants_collection
-        @saved_restaurants_collection.destroy
-      end
+    params[:collection_ids].each do |collec_id|
+      SavedRestaurantsCollection.create(collection: Collection.find(collec_id), saved_restaurant: @saved_restaurant)
     end
+    @saved_restaurant.saved_restaurants_collections.where.not(collection_id: params[:collection_ids]).destroy_all
 
     redirect_to collections_path, format: :html
   end
