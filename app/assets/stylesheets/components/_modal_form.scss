@@ -1,3 +1,13 @@
+.modal-content {
+  border-radius: 10px;
+}
+
+.modal-dialog {
+  display: flex;
+  align-items: center;
+  min-height: 100vh;
+}
+
 .color-button, .emoji-button {
   width: 55px;
   height: 55px;
@@ -28,4 +38,31 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: 10px;
+}
+
+.modal-footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.modal-footer .btn {
+  flex: 1;
+  height: 40px;
+  border-radius: 5px;
+  border: none;
+  text-align: center;
+}
+
+.modal-footer .btn-secondary {
+  background-color: #e0e0e0;
+  color: #333;
+}
+
+.modal-footer .btn-primary {
+  background-color: #ff5530;
+  color: white;
 }

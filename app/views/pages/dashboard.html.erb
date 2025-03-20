@@ -10,15 +10,20 @@
       <% end %>
     </div>
     <div class="profil-header-info">
-      <p><%= @user.first_name %> <%= @user.last_name %></p>
+      <h2><%= @user.first_name %> <%= @user.last_name %></h2>
       <p>@<%= @user.username %></p>
       <div class="profil-header-btn">
         <!-- Bouton pour ouvrir la modal -->
         <button type="button" class="profil-btn-large" data-bs-toggle="modal" data-bs-target="#collectionModal">
-          Collection
+          <%= image_tag "add.svg", width: 18, height: 18 %>
+          <p>Collection</p>
         </button>
-        <button class="profil-btn-small">Modify Profil</button>
-        <%= button_to "Log Out", destroy_user_session_path, method: :delete, class: "profil-btn-small" %>
+        <button class="profil-btn-small">
+          <%= image_tag "setting.svg", class: "btn-icon" %>
+        </button>
+        <%= button_to destroy_user_session_path, method: :delete, class: "profil-btn-small" do %>
+          <%= image_tag "logout.svg", class: "btn-icon" %>
+        <% end %>
       </div>
     </div>
   </div>
@@ -41,13 +46,9 @@
 
   <div data-controller="showcat" class="profil-menu">
     <div class="profil-menu-btn">
-      <%= link_to "Collections", switch_tab_path("collections"), data: { turbo_method: :post }, id: "collections-tab-button", class: "active" %>
+      <%= link_to "Collections", switch_tab_path("collections"), data: { turbo_method: :post }, id: "collections-tab-button", class: "tab-active" %>
       <%= link_to "Photos", switch_tab_path("photos"), data: { turbo_method: :post }, id: "photos-tab-button" %>
       <%= link_to "Comments", switch_tab_path("reviews"), data: { turbo_method: :post }, id: "reviews-tab-button" %>
-
-      <%# <button class="profil-btn" data-action="focus->showcat#toggle" >Collections</button>
-      <button class="profil-btn" data-action="focus->showcat#toggle">Photos</button>
-      <button class="profil-btn">Reviews</button> %>
     </div>
 
     <div id="profil-content" class="profil-content" data-showcat-target="collections">

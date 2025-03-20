@@ -11,6 +11,8 @@
 <!-- Le futur carousel de la show du restaurant -->
 <div class="carousel">
   <% restaurant.images.each do |image|%>
-    <%= cl_image_tag image.key, class: "carousel-image" %>
+    <div style="width: 100%; height: 270px;">
+      <%= cl_image_tag image.key, class: "carousel-image rounded-bottom rounded-6" %>
+    </div>
   <% end %>
 <div>
