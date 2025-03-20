@@ -1,0 +1,12 @@
+<div id="carouselUpload" class="carousel slide" style="margin-top: 20px;" data-bs-ride="carousel">
+  <div id="carousel-container" class="carousel-inner  w-100">
+    <% saved_restaurant.photos.each_with_index do |photo, index| %>
+      <div class="carousel-item <%= "active" if index.zero? %>" style="height: 450px;">
+        <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
+        <%= link_to restaurant_path(photo, @saved_restaurant), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "bouton-icon btn-position" do %>
+          <i class="fa-solid fa-trash-can"></i>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>

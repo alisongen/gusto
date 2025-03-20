@@ -1,12 +1,13 @@
-<div class="restaurant-image">
-  <%= render "components/image_carousel", restaurant: @restaurant %>
+<%= render "components/image_carousel", restaurant: @restaurant %>
+
+<div class="px-4 py-4">
+  <div class="tagdiv">
+    <p class="px-3 fs-6 fw-semibold text-white"><%= @restaurant.category.split.first %></p>
+  </div>
 </div>
 
-<div class="restaurant-header">
-  <h1><%= @restaurant.name %></h1>
-  <%= link_to "#", data: { bs_toggle: "modal", bs_target: "#collectionModal" }, class: "bouton-icon " do %>
-    <i class="fa-solid fa-bookmark" style="color: white;"></i>
-  <% end %>
+<div class="px-4">
+  <h1 class="title fs-6 fw-semibold"><%= @restaurant.name %></h1>
 </div>
 <%= render "components/restaurant_details" %>
 
@@ -20,15 +21,13 @@
       </div>
       <div class="modal-body">
         <%= form_with url: restaurant_collection_path(@restaurant), method: :patch, local: true do |f| %>
-          <div class="mb-3">
+          <div class="collection-cards-modal">
             <% @collections.each do |collection| %>
-              <% if (SavedRestaurantsCollection.where(saved_restaurant: @saved_restaurant, collection: collection).present?) %>
-                <label for="collection"><%= collection.name %></label>
-                <input id="<%= collection.id %>" name="<%= collection.name %>" type="checkbox" value="<%= collection.id %>" checked/>
-              <% else %>
-                <label for="collection"><%= collection.name %></label>
-                <input id="<%= collection.id %>" name="<%= collection.name %>" type="checkbox" value="<%= collection.id %>"/>
-              <% end %>
+              <input type="checkbox" id="collection_<%= collection.id %>" name="collection_ids[]" value="<%= collection.id %>" class="input-none" <%= 'checked' if SavedRestaurantsCollection.where(saved_restaurant: @saved_restaurant, collection: collection).present? %>>
+              <label for="collection_<%= collection.id %>" class="collection-card-modal">
+                <span class="collection-emoji"><%= collection.emoji %></span>
+                <span class="collection-name"><%= collection.name %></span>
+              </label>
             <% end %>
           </div>
           <div class="modal-footer">
@@ -58,13 +57,7 @@
 <% @saved_restaurants.each do |saved_restaurant| %>
   <% if (saved_restaurant.restaurant == @restaurant) %>
 
-    <% @saved_restaurant.photos.each do |photo| %>
-      <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
-      <%= link_to restaurant_path(photo, @saved_restaurant), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "text-black" do %>
-        <i class="fa-solid fa-trash-can"></i>
-      <% end %>
-    <% end %>
-
+    <%= render "components/img_upload_carousel", saved_restaurant: @saved_restaurant %>
 
     <div class="container">
       <h1>Add my photos</h1>

@@ -34,6 +34,7 @@ class PagesController < ApplicationController
     # Récupération des collections de mon @user
     @collections = @user.collections
     @collection = Collection.new
+
     @colors = [
       "#4B3B47", # Eggplant
       "#FFBD33", # Orange

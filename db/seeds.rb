@@ -247,8 +247,8 @@ bruno = User.new(
   city: "Bruno-city",
   username: "bruno",
   first_name: "Bruno",
-  last_name: "F",
-  )
+  last_name: "F"
+)
 bruno.save!
 puts '...'
 puts 'Finish the Bruno ✅'
