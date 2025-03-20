@@ -17,7 +17,6 @@ require 'open-uri'
 # p ''
 
 puts 'Destruction des restos 💥'
-Restaurant.destroy_all
 puts 'Restos supprimés 🎊'
 p ''
 
@@ -197,9 +196,9 @@ admin = User.new(
   first_name: "Admin",
   last_name: "Admin",
   )
-  admin.save!
-  puts '...'
-  puts 'Finish the Admin ✅'
+admin.save!
+puts '...'
+puts 'Finish the Admin ✅'
 
 puts "Création de Gautier 👨🏻‍🎨"
 gautier = User.new(
@@ -267,7 +266,7 @@ users.each do |user|
 
     Friendship.create!(user: user, friend: friend)
   end
-  puts "Friendships for '#{user.name}' ✅"
+  puts "Friendships for '#{user.first_name}' ✅"
 end
 
 puts '...'
