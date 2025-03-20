@@ -5,7 +5,7 @@ class CollectionsController < ApplicationController
     collection_name = params[:name]
 
     if collection_name
-      @restaurants = Collection.find_by(user: current_user, name: collection_name).restaurants.distinct
+      @restaurants = Collection.find_by(user: current_user, name: collection_name).restaurants
     elsif params[:friends]
       @restaurants = @friends_restaurants
     else
@@ -20,7 +20,6 @@ class CollectionsController < ApplicationController
       # si on filtre en affichant les restaurants de nos friends
       elsif params[:friends]
         # friends_ids = current_user.friends.pluck(:id)
-        # collection = restaurant.saved_restaurants.where(user_id: friends_ids).first.collections.first
         friends = current_user.friends
         collection = SavedRestaurant.where(user: friends, restaurant: restaurant).first.collections.first
       # si on affiche tous nos restaurants
