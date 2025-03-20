@@ -3,24 +3,47 @@
   border-radius: 10px;
   padding: 10px;
   display: flex;
+  gap: 20px;
   justify-content: space-between;
-}
-
-.collection-image {
-  width: 104px;
-  height: 104px;
-  border-radius: 5px;
-  background-color: aqua;
+  width: 100%
 }
 
 .collection-info {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 210px;
+  width: 100%;
+
+}
+
+.collection-info-detail{
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
 .collection-info-btn {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+}
+
+.collection-info-btn p {
+  margin-bottom: 0px;
+}
+
+.collection-btn {
+  display: flex;
+  gap: 20px;
+}
+
+.collection-btn-see {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 5px;
+  border: none;
+  background-color: #FF5631;
 }

@@ -1,4 +1,9 @@
-.collection-card{
+.review-card{
   display: flex;
   flex-direction: column;
+  border: solid 1px #EBEBEB;
+  border-radius: 10px;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
 }
