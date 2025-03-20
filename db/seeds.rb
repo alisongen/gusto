@@ -11,10 +11,10 @@ require 'open-uri'
 # puts 'Reviews supprimés 🎊'
 # p ''
 
-# puts 'Destruction des saved_restos 💥'
-# SavedRestaurant.destroy_all
-# puts 'Saved_restos supprimés 🎊'
-# p ''
+puts 'Destruction des saved_restos 💥'
+SavedRestaurant.destroy_all
+puts 'Saved_restos supprimés 🎊'
+p ''
 
 puts 'Destruction des restos 💥'
 puts 'Restos supprimés 🎊'
@@ -93,7 +93,6 @@ restaurants = [
   { name: "Le Dauphin", description: "Cuisine inventive et tapas dans un cadre moderne.", address: "131 Avenue Parmentier, 75011 Paris", category: "Gastronomique", menu: "Foie gras aux figues, tartare de poisson", rating: 4.3, website: "https://www.ledauphinparis.com", phone_number: "+33 1 55 28 78 88" },
   { name: "Café de Flore", description: "Café légendaire de Saint-Germain-des-Prés.", address: "172 Boulevard Saint-Germain, 75006 Paris", category: "Café", menu: "Croque-monsieur, chocolat chaud", rating: 4.1, website: "https://www.cafedeflore.fr", phone_number: "+33 1 45 48 55 26" },
   { name: "Le Relais de l'Entrecôte", description: "Restaurant spécialisé dans l'entrecôte et sa sauce secrète.", address: "15 Rue Marbeuf, 75008 Paris", category: "Brasserie", menu: "Entrecôte-frites, salade verte", rating: 4.2, website: "https://www.relaisentrecote.fr", phone_number: "+33 1 49 52 07 17" },
-  { name: "Au Passage", description: "Bistrot contemporain avec cuisine de marché.", address: "1 bis Passage Saint-Sébastien, 75011 Paris", category: "Bistrot", menu: "Tapenade maison, bœuf mariné", rating: 4.5, website: "https://www.aupassage.fr", phone_number: "+33 1 43 55 07 52" },
   { name: "Jaja", description: "Cuisine française dans un cadre moderne et décontracté.", address: "3 Rue Sainte-Croix de la Bretonnerie, 75004 Paris", category: "Bistronomique", menu: "Magret de canard, légumes grillés", rating: 4.3, website: "https://www.jajaparis.com", phone_number: "+33 1 42 74 71 52" },
   { name: "Breizh Café", description: "Crêperie bretonne avec un large choix de galettes.", address: "109 Rue Vieille du Temple, 75003 Paris", category: "Crêperie", menu: "Galette complète, crêpe caramel beurre salé", rating: 4.6, website: "https://www.breizhcafe.com", phone_number: "+33 1 42 72 13 77" },
   { name: "Le Petit Cambodge", description: "Cuisine cambodgienne authentique et savoureuse.", address: "20 Rue Alibert, 75010 Paris", category: "Asiatique", menu: "Bobun bœuf, nouilles sautées", rating: 4.5, website: "https://www.lepetitcambodge.com", phone_number: "+33 1 53 19 70 76" },
