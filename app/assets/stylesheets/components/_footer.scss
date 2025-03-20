@@ -5,7 +5,10 @@
   background-color: #fff;
   border-top: 1px solid #ddd;
   padding: 20px 0;
-  height: 80px;
+  height: 100px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .footer-nav {

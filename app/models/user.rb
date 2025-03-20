@@ -6,11 +6,11 @@ class User < ApplicationRecord
 
   has_one_attached :avatar
 
-  has_many :friendships
+  has_many :friendships, dependent: :destroy
   has_many :friends, through: :friendships
-  has_many :reviews
-  has_many :collections
-  has_many :saved_restaurants
+  has_many :reviews, dependent: :destroy
+  has_many :collections, dependent: :destroy
+  has_many :saved_restaurants, dependent: :destroy
   has_many :restaurants, through: :saved_restaurants
 
   def friends
@@ -24,5 +24,11 @@ class User < ApplicationRecord
       end
     end
     return User.where(id: ids)
+  end
+
+  def friends_restaurants
+    friends = self.friends.pluck(:id)
+    restaurant_ids = SavedRestaurant.where(user_id: friends).pluck(:restaurant_id)
+    Restaurant.where(id: restaurant_ids)
   end
 end
