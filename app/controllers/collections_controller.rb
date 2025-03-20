@@ -22,6 +22,7 @@ class CollectionsController < ApplicationController
       else
         collection = restaurant.saved_restaurants.find_by(user: @user).collections.first
       end
+      
       {
         lat: restaurant.latitude,
         lng: restaurant.longitude,

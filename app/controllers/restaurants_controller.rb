@@ -55,13 +55,10 @@ class RestaurantsController < ApplicationController
     @saved_restaurant = SavedRestaurant.find_or_create_by(restaurant: @restaurant, user: current_user)
     @collections = Collection.where(user: current_user)
 
-    @collections.each do |collection|
-      @saved_restaurants_collection = SavedRestaurantsCollection.find_or_create_by(saved_restaurant: @saved_restaurant, collection: collection)
-
-      if !params[collection.name.to_s].present? && @saved_restaurants_collection
-        @saved_restaurants_collection.destroy
-      end
+    params[:collection_ids].each do |collec_id|
+      SavedRestaurantsCollection.create(collection: Collection.find(collec_id), saved_restaurant: @saved_restaurant)
     end
+    @saved_restaurant.saved_restaurants_collections.where.not(collection_id: params[:collection_ids]).destroy_all
 
     redirect_to collections_path, format: :html
   end

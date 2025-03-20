@@ -7,6 +7,7 @@ class SavedRestaurantsController < ApplicationController
     @saved_restaurant.user_id = current_user.id
     @saved_restaurant.restaurant = @restaurant
     @saved_restaurant.save
+  
     if @saved_restaurant.save
       redirect_to restaurant_path(@restaurant), notice: "Restaurant ajouté aux favoris !"
     else
