@@ -179,8 +179,6 @@ bruno = User.new(
     end
   end
 
-
-
 puts '...'
 puts '...'
 puts '...'

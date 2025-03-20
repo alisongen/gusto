@@ -6,7 +6,9 @@
       <%= cl_image_tag restaurant.images.first.key, class: "restaurant-feed-image rounded" %>
     <% end %>
     <div class="restaurant-feed-content">
-      <p class="restaurant-feed-category"><%= collection.name %></p>
+      <% unless collection.nil? %>
+        <p class="restaurant-feed-category"><%= collection.name %></p>
+      <% end %>
       <h5 class="restaurant-feed-title"><%= restaurant.name %></h5>
       <p class="restaurant-feed-address"><%= restaurant.address %></p>
       <div class="restaurant-card-rating">
