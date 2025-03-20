@@ -1,7 +1,7 @@
 <div class="main-content">
   <div data-controller="showcat" class="relative">
 
-    <div id="mapbox-collection" style="height: 100vh; box-shadow: 0 4px 7px rgba(0, 0, 0, 0.3);"
+    <div id="mapbox-collection" style="box-shadow: 0 4px 7px rgba(0, 0, 0, 0.3);"
       data-controller="map"
       data-map-markers-value="<%= @markers.to_json %>"
       data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
@@ -11,27 +11,18 @@
           data: { action: "click->showcat#toggle", showcat_target: "allLink", turbo_stream: true },
           class: "btn-link no-padding d-flex align-items-center justify-content-center" %>
           <button data-action="click->showcat#toggle" data-showcat-target="colLink" class="btn-no-link no-padding d-flex align-items-center justify-content-center">Collections</button>
-          <button data-action="click->showcat#toggle" data-showcat-target="friendLink" class="btn-no-link no-padding d-flex align-items-center justify-content-center">Friends</button>
+
+          <%= link_to "Friends", collections_path(friends: true), data: { action:"click->showcat#toggle", showcat_target:"friendLink", turbo_stream: true }, class: "btn-no-link no-padding d-flex align-items-center justify-content-center" %>
+          <!-- <button data-action="click->showcat#toggle" data-showcat-target="friendLink" class="btn-no-link no-padding d-flex align-items-center justify-content-center">Friends</button> -->
         </div>
       </div>
     </div>
-    <div id="info-bulle" style="display: none; width: 90vw; position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%); padding: 10px; border-radius: 5px;"></div>
-
-    <div id="collection-window" class="d-none" data-showcat-target="all">
-      <% @restaurants.each do |restaurant| %>
-        <div class="card-vignette rounded-5 mx-auto border border-1 my-3">
-          <p><%= link_to restaurant.name, restaurant_path(restaurant),  class: "text-deco-none" %></p>
-          <p><%= restaurant.rating %> </p>
-          <p><%= restaurant.address %> </p>
-        </div>
-      <% end %>
-    </div>
-
+    <div id="info-bulle" class="d-none" style="width: 90vw; position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%); padding: 10px; border-radius: 5px;"></div>
 
     <div id="collection-filters" class="d-none absolute bg-white mx-auto d-flex flex-column align-items-center my-2 rounded-5" style="width: 60%; box-shadow: 0 4px 7px rgba(0, 0, 0, 0.3);" data-showcat-target="collections">
       <% @collections.each_with_index do |collection, index| %>
         <% if (collection.saved_restaurants.present?)%>
-          <%= link_to collection.name, collections_path(name: collection.name, color: collection.color, emoji: collection.emoji), data: { turbo_stream: true }, class: , class: "btn-collection no-padding d-flex align-items-center justify-content-center my-2 rounded-5"  %>
+          <%= link_to collection.name, collections_path(name: collection.name, color: collection.color, emoji: collection.emoji), data: { turbo_stream: true }, class: "btn-collection no-padding d-flex align-items-center justify-content-center my-2 rounded-5"  %>
           <div class="d-none">
             <% collection.saved_restaurants.each do |saved_restaurant| %>
               <p><%= link_to saved_restaurant.restaurant.name, restaurant_path(saved_restaurant.restaurant) %></p>
@@ -42,18 +33,21 @@
     </div>
 
 
-
+<% if false %>
     <div class="d-none" data-showcat-target="friends">
-      <% if @frienships %>
-        <% @frienships.each do |friendship| %>
+      <% unless @friends_restaurants.empty? %>
+        <% @friends_restaurants.each do |restaurant| %>
           <div class="card-vignette rounded-5 mx-auto border border-1 my-3">
-            <p><%= friendship.user.username %></p>
+            <p><%= link_to restaurant.name, restaurant_path(restaurant),  class: "text-deco-none" %></p>
+            <p><%= restaurant.rating %> </p>
+            <p><%= restaurant.address %> </p>
           </div>
         <% end %>
       <% else %>
         <p>No friends</p>
       <% end %>
     </div>
+  <% end %>
 
   </div>
 </div>

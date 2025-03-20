@@ -33,8 +33,8 @@ class PagesController < ApplicationController
     @restaurants = @user.restaurants
     # Récupération des collections de mon @user
     @collections = @user.collections
-    @collection = @user.collections.where(name: "Favoris").first
-    @new_collection = Collection.new
+    @collection = Collection.new
+
     @colors = [
       "#4B3B47", # Eggplant
       "#FFBD33", # Orange

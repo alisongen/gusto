@@ -8,20 +8,50 @@
   min-height: 100vh;
 }
 
+.collection-card-modal {
+  width: auto;
+  height: 55px;
+  border-radius: 10%;
+  display: flex;
+  cursor: pointer;
+  border: 3px solid transparent;
+  text-align: center;
+  line-height: 55px;
+  background-color: #f0f0f0;
+  font-size: 14px;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
 .color-button, .emoji-button {
   width: 55px;
   height: 55px;
   border-radius: 10%;
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
   border: 3px solid transparent;
   text-align: center;
-  line-height: 55px; /* Centrer verticalement les émojis */
-  background-color: #f0f0f0; /* Fond légèrement grisé */
-  font-size: 30px; /* Taille de police pour les émojis */
+  line-height: 55px;
+  background-color: #f0f0f0;
+  font-size: 30px;
+  padding: 10px;
 }
 
-.input-none:checked + .color-button, .input-none:checked + .emoji-button {
+
+.collection-emoji {
+  font-size: 24px; /* Taille de l'emoji */
+  margin-top: 10px;
+}
+
+.collection-name {
+  font-size: 12px; /* Taille du texte */
+  margin-top: -32px;
+}
+
+.input-none:checked + .color-button, .input-none:checked + .emoji-button, .input-none:checked + .collection-card-modal {
   border-color: #ff5530;
 }
 
@@ -29,15 +59,17 @@
   display: none;
 }
 
-.colors-iteration, .emojis-iteration {
+.colors-iteration, .emojis-iteration, .collection-cards-modal {
   margin-top: 20px;
+  margin-bottom: 20px;
 }
 
-.color-buttons, .emoji-buttons {
+.color-buttons, .emoji-buttons, .collection-cards-modal {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 10px;
+  flex-direction: row;
 }
 
 .modal-footer {

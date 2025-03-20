@@ -21,18 +21,14 @@
       </div>
       <div class="modal-body">
         <%= form_with url: restaurant_collection_path(@restaurant), method: :patch, local: true do |f| %>
-          <div class="mb-3">
-
-                <% @collections.each do |collection| %>
-                  <% if (SavedRestaurantsCollection.where(saved_restaurant: @saved_restaurant, collection: collection).present?) %>
-                    <label for="collection"><%= collection.name %></label>
-                    <input id="<%= collection.id %>" name="<%= collection.name %>" type="checkbox" value="<%= collection.id %>" checked/>
-                  <% else %>
-                    <label for="collection"><%= collection.name %></label>
-                    <input id="<%= collection.id %>" name="<%= collection.name %>" type="checkbox" value="<%= collection.id %>"/>
-                  <% end %>
-                <% end %>
-
+          <div class="collection-cards-modal">
+            <% @collections.each do |collection| %>
+              <input type="checkbox" id="collection_<%= collection.id %>" name="collection_ids[]" value="<%= collection.id %>" class="input-none" <%= 'checked' if SavedRestaurantsCollection.where(saved_restaurant: @saved_restaurant, collection: collection).present? %>>
+              <label for="collection_<%= collection.id %>" class="collection-card-modal">
+                <span class="collection-emoji"><%= collection.emoji %></span>
+                <span class="collection-name"><%= collection.name %></span>
+              </label>
+            <% end %>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
