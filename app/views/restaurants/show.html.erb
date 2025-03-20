@@ -62,7 +62,7 @@
     <div class="container px-4">
       <h1 class="fw-semibold fs-5 mt-3 mb-3">Add my photos</h1>
       <div class="row">
-        <div class="col-xs-12 d-flex justify-content-center">
+        <div class="col-xs-12 d-flex justify-content-between">
           <%= simple_form_for @saved_restaurant do |f| %>
             <div class="d-flex justify-content-between">
               <%= f.input :photos, input_html: { multiple: true, class: "form-upload w-75" }, label: false %>
@@ -96,9 +96,12 @@
     </div>
     <% @reviews.each do |review| %>
       <% if (review.saved_restaurant.restaurant == @restaurant && (review.user == current_user || @friends.include?(review.user))) %>
-        <p>
-          <%= review.user.username %>:
+      <div class="my-3 py-3 border-review">
+        <p class="mb-2">
+          <span class="fw-semibold"><%= review.user.username %></span>
           <%= review.content %>
+        </p>
+        <div class="d-flex justify-content-between align-items-center">
           <div class="restaurant-card-rating">
             <% full_stars = review.user_rating.floor %>
             <% empty_stars = 5 - full_stars %>
@@ -111,10 +114,11 @@
           </div>
           <% if (review.user == current_user) %>
             <%= link_to review_path(review), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "text-black" do %>
-              <i class="fa-solid fa-trash-can"></i>
+              <i class="fa-solid fa-trash-can btn-photo d-flex align-items-center justify-content-center"></i>
             <% end %>
           <% end %>
-        </p>
+        </div>
+      </div>
       <% end %>
     <% end %>
   <% end %>

@@ -44,8 +44,17 @@ h1, h2, h3, p {
     border-radius: 12px;
     background-color: white;
   }
+
+  .border-review {
+    border-top: 1px solid #EBEBEB;
+    border-bottom: 1px solid #EBEBEB;
+  }
 }
 
 .review_user_rating {
   margin: 0 !important;
+}
+
+.saved_restaurant_photos {
+  width: 90%;
 }
