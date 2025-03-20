@@ -12,6 +12,8 @@
     background-color: white;
     border: solid 1px #EBEBEB;
     border-radius: 10px;
+    height: 110px;
+    padding: 5px;
   }
 
   .photo-feed-image {
@@ -24,7 +26,7 @@
   .photo-feed-content {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-evenly;
     padding-left: 10px;
     flex: 1;
   }

@@ -9,9 +9,11 @@
   .restaurant-feed-card {
     display: flex;
     width: 100%;
+    height: 110px;
     background-color: white;
     border: solid 1px #EBEBEB;
     border-radius: 10px;
+    padding: 5px;
   }
 
   .research-restaurant-feed-card {
@@ -32,7 +34,7 @@
   .restaurant-feed-content {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-evenly;
     padding-left: 10px;
     flex: 1;
   }
@@ -45,6 +47,7 @@
   .restaurant-feed-title {
     font-size: 1.2em;
     font-weight: bold;
+    margin-bottom: 0;
   }
 
   .restaurant-feed-text {
@@ -64,5 +67,11 @@
   .restaurant-feed-category {
     color: #FF5631;
     font-weight: bold;
+  }
+
+  .feed-restaurant-card-rating{
+    display: flex;
+    flex-direction: row;
+    gap: 0px;
   }
 }
