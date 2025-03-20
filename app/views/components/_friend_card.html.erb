@@ -9,7 +9,7 @@
         <% end %>
         <div class="friend-card-info">
           <h3><%= friend.first_name %> <%= friend.last_name %></h3>
-          <p><%= friend.username %></p>
+          <p>@<%= friend.username %></p>
         </div>
       </div>
       <div class="friend-card-btn">
@@ -33,7 +33,7 @@
           <% end %>
           <div class="friend-card-info">
             <h3><%= friend.first_name %> <%= friend.last_name %></h3>
-            <p><%= friend.username %></p>
+            <p>@<%= friend.username %></p>
           </div>
            </div>
           <div class="friend-card-btn">
@@ -57,7 +57,7 @@
           <% end %>
           <div class="friend-card-info">
             <h3><%= friend.first_name %> <%= friend.last_name %></h3>
-            <p><%= friend.username %></p>
+            <p>@<%= friend.username %></p>
           </div>
           <div class="friend-card-btn">
             <%= link_to friendship_path(friendship), class: "btn-delete", data: { turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
