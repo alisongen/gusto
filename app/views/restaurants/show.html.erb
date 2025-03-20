@@ -20,17 +20,15 @@
       <div class="modal-body">
         <%= form_with url: restaurant_collection_path(@restaurant), method: :patch, local: true do |f| %>
           <div class="mb-3">
-
-                <% @collections.each do |collection| %>
-                  <% if (SavedRestaurantsCollection.where(saved_restaurant: @saved_restaurant, collection: collection).present?) %>
-                    <label for="collection"><%= collection.name %></label>
-                    <input id="<%= collection.id %>" name="<%= collection.name %>" type="checkbox" value="<%= collection.id %>" checked/>
-                  <% else %>
-                    <label for="collection"><%= collection.name %></label>
-                    <input id="<%= collection.id %>" name="<%= collection.name %>" type="checkbox" value="<%= collection.id %>"/>
-                  <% end %>
-                <% end %>
-
+            <% @collections.each do |collection| %>
+              <% if (SavedRestaurantsCollection.where(saved_restaurant: @saved_restaurant, collection: collection).present?) %>
+                <label for="collection"><%= collection.name %></label>
+                <input id="<%= collection.id %>" name="<%= collection.name %>" type="checkbox" value="<%= collection.id %>" checked/>
+              <% else %>
+                <label for="collection"><%= collection.name %></label>
+                <input id="<%= collection.id %>" name="<%= collection.name %>" type="checkbox" value="<%= collection.id %>"/>
+              <% end %>
+            <% end %>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

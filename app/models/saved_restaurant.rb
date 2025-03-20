@@ -3,7 +3,7 @@ class SavedRestaurant < ApplicationRecord
   belongs_to :user
 
   has_many_attached :photos
-  has_many :saved_restaurants_collections
+  has_many :saved_restaurants_collections, dependent: :destroy
   has_many :collections, through: :saved_restaurants_collections
-  has_many :reviews
+  has_many :reviews, dependent: :destroy
 end
