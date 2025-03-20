@@ -15,14 +15,14 @@
       <div class="profil-header-btn">
         <!-- Bouton pour ouvrir la modal -->
         <button type="button" class="profil-btn-large" data-bs-toggle="modal" data-bs-target="#collectionModal">
-          <%= image_tag "add.svg", class: "btn-icon" %>
+          <%= image_tag "add.svg", width: 18, height: 18 %>
           <p>Collection</p>
         </button>
         <button class="profil-btn-small">
           <%= image_tag "setting.svg", class: "btn-icon" %>
         </button>
         <%= button_to destroy_user_session_path, method: :delete, class: "profil-btn-small" do %>
-          <%= image_tag "logout.svg", class: "btn-icon", alt: "Log Out" %>
+          <%= image_tag "logout.svg", class: "btn-icon" %>
         <% end %>
       </div>
     </div>
