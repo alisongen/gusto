@@ -116,17 +116,7 @@ restaurants = [
 ]
 
 restaurants.each do |restaurant_data|
-  restaurant = Restaurant.new(
-    name: restaurant_data[:name],
-    description: restaurant_data[:description],
-    address: restaurant_data[:address],
-    category: restaurant_data[:category],
-    menu: restaurant_data[:menu],
-    rating: restaurant_data[:rating],
-    website: restaurant_data[:website],
-    phone_number: restaurant_data[:phone_number]
-  )
-
+  restaurant = Restaurant.new(restaurant_data)
   image_url = Cloudinary::Uploader.upload(images.sample)['url']
   image = URI.parse(image_url).open
   restaurant.images.attach(io: image, filename: "#{restaurant.name.parameterize}.jpg", content_type: "image/jpg")
