@@ -11,10 +11,10 @@ require 'open-uri'
 # puts 'Reviews supprimés 🎊'
 # p ''
 
-# puts 'Destruction des saved_restos 💥'
-# SavedRestaurant.destroy_all
-# puts 'Saved_restos supprimés 🎊'
-# p ''
+puts 'Destruction des saved_restos 💥'
+SavedRestaurant.destroy_all
+puts 'Saved_restos supprimés 🎊'
+p ''
 
 puts 'Destruction des restos 💥'
 puts 'Restos supprimés 🎊'
