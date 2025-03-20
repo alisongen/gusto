@@ -1,47 +1,31 @@
-<div class="details-container">
-  <!-- Afficher la description -->
-  <%# <div class="description"> %>
-    <%# <p>Description</p> %>
-    <%# <% if @restaurant.description.length <= 120 %>
-      <%# <p><%= @restaurant.description </p> %>
-    <%# <% else %>
-      <%# <p><%= truncate(@restaurant.description, length: 120) </p> %>
-      <!-- TODO: JS pour afficher un bouton "See more"/"See less" -->
-    <%# <% end %>
-  <%# </div> %>
+<div class="details-container mt-4 px-4">
   <div class="details-list">
-    <!-- Afficher la catégorie -->
-    <div class="detail">
-      <i class="fa-solid fa-utensils"></i>
-      <div class="detail-info">
-        <p>Category</p>
-        <p><%= @restaurant.category %></p>
+  <h1 class="fw-semibold fs-5 mt-3">Details</h1>
+    <!-- Afficher le site internet -->
+    <div class="detail py-2">
+      <%= image_tag "web.png" %>
+      <div class="detail-info ps-2 flex-grow-1">
+        <p class="fs-6"><%= @restaurant.website %></p>
       </div>
+      <a href="<%= @restaurant.website %>"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
     </div>
     <!-- Afficher l'adresse -->
-    <div class="detail">
-      <i class="fa-solid fa-utensils"></i>
-      <div class="detail-info">
-        <p>Address</p>
-        <p><%= @restaurant.address %></p>
+    <div class="detail py-2">
+      <%= image_tag "pin.png" %>
+      <div class="detail-info ps-2">
+        <p class="fs-6"><%= @restaurant.address %></p>
       </div>
     </div>
     <!-- Afficher le téléphone -->
-    <div class="detail">
-      <i class="fa-solid fa-utensils"></i>
-      <div class="detail-info">
-        <p>Phone number</p>
-        <p><%= @restaurant.phone_number %></p>
+    <div class="detail py-2 mb-3">
+      <%= image_tag "phone.png" %>
+      <div class="detail-info ps-2">
+        <% if @restaurant.phone_number %>
+          <p class="fs-6"><%= @restaurant.phone_number %></p>
+        <% else %>
+          <p>No phone number</p>
+        <% end %>
       </div>
-    </div>
-    <!-- Afficher le site internet -->
-    <div class="detail">
-      <i class="fa-solid fa-utensils"></i>
-      <div class="detail-info">
-        <p>Website</p>
-        <p><%= @restaurant.website %></p>
-      </div>
-      <i class="fa-solid fa-arrow-up-right-from-square"></i>
     </div>
   </div>
 </div>

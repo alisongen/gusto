@@ -12,8 +12,17 @@ h1, h2, h3, p {
     margin-top: 80px;
   }
 
-  .restaurant-image {
-    margin-top: 80px;
-    width: 100%;
+  .tagdiv {
+    background-color: #FF5631;
+    height: 47px;
+    width: fit-content;
+    display: flex;
+    justify-content: center;  /* Alignement horizontal (optionnel) */
+    align-items: center;
+    border-radius: 5px;
+  }
+
+  .title{
+    font-size: 30px !important;
   }
 }

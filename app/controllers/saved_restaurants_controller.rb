@@ -30,11 +30,20 @@ class SavedRestaurantsController < ApplicationController
         @saved_restaurant.photos.attach(photo)
       end
     end
-    if @saved_restaurant.update(saved_restaurant_params)
-      redirect_to restaurant_path(@saved_restaurant.restaurant), notice: "Photo ajoutée avec succès !"
-    else
-      render "restaurants/show", status: :unprocessable_entity
+
+    respond_to do |format|
+      if @saved_restaurant.update(saved_restaurant_params)
+        format.turbo_stream
+        format.html { redirect_to restaurant_path(@saved_restaurant.restaurant), notice: "Photo ajoutée avec succès !" }
+      else
+        format.html { render "restaurants/show", status: :unprocessable_entity }
+      end
     end
+    # if @saved_restaurant.update(saved_restaurant_params)
+    #   redirect_to restaurant_path(@saved_restaurant.restaurant), notice: "Photo ajoutée avec succès !"
+    # else
+    #   render "restaurants/show", status: :unprocessable_entity
+    # end
   end
 
   def delete
