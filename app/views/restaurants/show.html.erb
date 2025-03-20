@@ -63,13 +63,17 @@
 
     <%= render "components/img_upload_carousel", saved_restaurant: @saved_restaurant %>
 
-    <div class="container">
-      <h1>Add my photos</h1>
+    <div class="container px-4">
+      <h1 class="fw-semibold fs-5 mt-3 mb-3">Add my photos</h1>
       <div class="row">
-        <div class="col-xs-4">
+        <div class="col-xs-12 d-flex justify-content-center">
           <%= simple_form_for @saved_restaurant do |f| %>
-            <%= f.input :photos, input_html: { multiple: true } %>
-            <%= f.submit "Send your photos" %>
+            <div class="d-flex justify-content-between">
+              <%= f.input :photos, input_html: { multiple: true, class: "form-upload w-75" }, label: false %>
+              <%= button_tag type: "submit", class: "btn-photo" do %>
+                <i class="fa-solid fa-plus"></i>
+              <% end %>
+            </div>
           <% end %>
         </div>
       </div>
@@ -78,15 +82,19 @@
 <% end %>
 
 
-<div class="container mt-3">
+<div class="container px-4">
   <% if (!@saved_restaurant.nil? && @saved_restaurant.restaurant == @restaurant) %>
-    <h1>Reviews</h1>
+    <h1 class="fw-semibold fs-5 mt-3 mb-2">Reviews</h1>
     <div class="row mb-3">
       <div class="col-xs-4">
         <%= simple_form_for([@saved_restaurant, @review], data: { controller: "submit" }) do |f| %>
-          <%= f.input :content %>
-          <%= f.input :user_rating, collection: (1..5).to_a, label: "Rate your experience", input_html: {data: { controller: "star-rating", action: "click->form-submit#submit"} }  %>
-          <%= f.submit "Send your review" %>
+          <%= f.input :content, input_html: { class: "form-content" }, label: false %>
+          <div class="d-flex justify-content-between align-items-center">
+            <%= f.input :user_rating, collection: (1..5).to_a, label: false, input_html: {data: { controller: "star-rating", action: "click->form-submit#submit"}, class: "no-marg"}  %>
+            <%= button_tag type: "submit", class: "btn-photo" do %>
+              <i class="fa-solid fa-plus"></i>
+            <% end %>
+          </div>
         <% end %>
       </div>
     </div>
