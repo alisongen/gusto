@@ -12,7 +12,7 @@ require 'open-uri'
 # p ''
 
 puts 'Destruction des saved_restos 💥'
-SavedRestaurant.destroy_all
+Restaurant.destroy_all
 puts 'Saved_restos supprimés 🎊'
 p ''
 
@@ -25,10 +25,10 @@ Friendship.destroy_all
 puts 'Friendships supprimés 🎊'
 p ''
 
-# puts 'Destruction des collections 💥'
-# Collection.destroy_all
-# puts 'Collections supprimés 🎊'
-# p ''
+puts 'Destruction des collections 💥'
+Collection.destroy_all
+puts 'Collections supprimés 🎊'
+p ''
 
 puts 'Destruction des users 💥'
 User.destroy_all
