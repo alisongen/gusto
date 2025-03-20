@@ -1,11 +1,11 @@
 <div class="review-feed-card">
-  <%= image_tag review.saved_restaurant.restaurant.images.sample, class: "review-feed-image" %>
+  <%= cl_image_tag review.saved_restaurant.restaurant.images.first.key, class: "review-feed-image" %>
   <div class="review-feed-content">
     <h5 class="review-feed-title"><%= review.user.username %> a laissé une review</h5>
-    <p class="review-feed-text"><%= truncate(review.content, length: 55) %></p>
+    <p class="review-feed-text"><%= truncate(review.content, length: 30) %></p>
     <div class="review-feed-info">
 
-      <div class="restaurant-card-rating">
+      <div class="feed-restaurant-card-rating">
         <% full_stars = review.user_rating.to_i %>
         <% empty_stars = 5 - full_stars %>
         <% full_stars.times do %>
