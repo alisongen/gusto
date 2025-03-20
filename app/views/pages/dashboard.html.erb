@@ -10,8 +10,10 @@
       <% end %>
     </div>
     <div class="profil-header-info">
-      <h2><%= @user.first_name %> <%= @user.last_name %></h2>
-      <p>@<%= @user.username %></p>
+      <div class="profil-name">
+        <h2><%= @user.first_name %> <%= @user.last_name %></h2>
+        <p>@<%= @user.username %></p>
+      </div>
       <div class="profil-header-btn">
         <!-- Bouton pour ouvrir la modal -->
         <button type="button" class="profil-btn-large" data-bs-toggle="modal" data-bs-target="#collectionModal">
