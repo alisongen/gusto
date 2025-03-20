@@ -72,6 +72,6 @@ class RestaurantsController < ApplicationController
     @saved_restaurant = SavedRestaurant.find(params[:format])
     @photo = @saved_restaurant.photos.find(params[:id])
     @photo.destroy
-    redirect_to restaurant_path()
+    redirect_to restaurant_path(@saved_restaurant.restaurant_id)
   end
 end

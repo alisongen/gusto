@@ -25,4 +25,36 @@ h1, h2, h3, p {
   .title{
     font-size: 30px !important;
   }
+
+  .form-upload {
+    border-radius: 8px;
+  }
+
+  .btn-photo {
+    color: white;
+    font-size: 20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    background-color: #FF5631;
+    border: none;
+  }
+
+  .form-content {
+    border-radius: 12px;
+    background-color: white;
+  }
+
+  .border-review {
+    border-top: 1px solid #EBEBEB;
+    border-bottom: 1px solid #EBEBEB;
+  }
+}
+
+.review_user_rating {
+  margin: 0 !important;
+}
+
+.saved_restaurant_photos {
+  width: 90%;
 }
