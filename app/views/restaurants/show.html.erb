@@ -1,11 +1,12 @@
+<div class="restaurant-image">
+  <%= render "components/image_carousel", restaurant: @restaurant %>
+</div>
+
 <div class="restaurant-header">
   <h1><%= @restaurant.name %></h1>
   <%= link_to "#", data: { bs_toggle: "modal", bs_target: "#collectionModal" }, class: "bouton-icon " do %>
     <i class="fa-solid fa-bookmark" style="color: white;"></i>
   <% end %>
-</div>
-<div class="restaurant-image">
-  <%= render "components/image_carousel", restaurant: @restaurant %>
 </div>
 <%= render "components/restaurant_details" %>
 
@@ -20,17 +21,15 @@
       <div class="modal-body">
         <%= form_with url: restaurant_collection_path(@restaurant), method: :patch, local: true do |f| %>
           <div class="mb-3">
-
-                <% @collections.each do |collection| %>
-                  <% if (SavedRestaurantsCollection.where(saved_restaurant: @saved_restaurant, collection: collection).present?) %>
-                    <label for="collection"><%= collection.name %></label>
-                    <input id="<%= collection.id %>" name="<%= collection.name %>" type="checkbox" value="<%= collection.id %>" checked/>
-                  <% else %>
-                    <label for="collection"><%= collection.name %></label>
-                    <input id="<%= collection.id %>" name="<%= collection.name %>" type="checkbox" value="<%= collection.id %>"/>
-                  <% end %>
-                <% end %>
-
+            <% @collections.each do |collection| %>
+              <% if (SavedRestaurantsCollection.where(saved_restaurant: @saved_restaurant, collection: collection).present?) %>
+                <label for="collection"><%= collection.name %></label>
+                <input id="<%= collection.id %>" name="<%= collection.name %>" type="checkbox" value="<%= collection.id %>" checked/>
+              <% else %>
+                <label for="collection"><%= collection.name %></label>
+                <input id="<%= collection.id %>" name="<%= collection.name %>" type="checkbox" value="<%= collection.id %>"/>
+              <% end %>
+            <% end %>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

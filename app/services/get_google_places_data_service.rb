@@ -15,11 +15,23 @@ class GetGooglePlacesDataService
 
     body = {
       "textQuery" => @query,
-      "includedType" => "restaurant"
+      "includedType" => "restaurant",
+      "locationRestriction" => {
+        rectangle: {
+          low: {
+            latitude: 48.815573,
+            longitude: 2.224199
+          },
+          high: {
+            latitude: 48.902144,
+            longitude: 2.469921
+          }
+        }
+      }
     }.to_json
 
     response = HTTParty.post(BASE_URL, headers: headers, body: body)
-    
+
     if response.success?
       response.parsed_response
     else

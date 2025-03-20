@@ -23,15 +23,15 @@
 <% end %>
 
  <% if @tab == "collections" %>
-  <%= turbo_stream.add_css_class("#collections-tab-button", "active") %>
-  <%= turbo_stream.remove_css_class("#photos-tab-button", "active") %>
-  <%= turbo_stream.remove_css_class("#reviews-tab-button", "active") %>
+  <%= turbo_stream.add_css_class("#collections-tab-button", "tab-active") %>
+  <%= turbo_stream.remove_css_class("#photos-tab-button", "tab-active") %>
+  <%= turbo_stream.remove_css_class("#reviews-tab-button", "tab-active") %>
 <% elsif @tab == "photos" %>
-  <%= turbo_stream.add_css_class("#photos-tab-button", "active") %>
-  <%= turbo_stream.remove_css_class("#reviews-tab-button", "active") %>
-  <%= turbo_stream.remove_css_class("#collections-tab-button", "active") %>
+  <%= turbo_stream.add_css_class("#photos-tab-button", "tab-active") %>
+  <%= turbo_stream.remove_css_class("#reviews-tab-button", "tab-active") %>
+  <%= turbo_stream.remove_css_class("#collections-tab-button", "tab-active") %>
 <% elsif @tab == 'reviews' %>
-  <%= turbo_stream.add_css_class("#reviews-tab-button", "active") %>
-  <%= turbo_stream.remove_css_class("#photos-tab-button", "active") %>
-  <%= turbo_stream.remove_css_class("#collections-tab-button", "active") %>
+  <%= turbo_stream.add_css_class("#reviews-tab-button", "tab-active") %>
+  <%= turbo_stream.remove_css_class("#photos-tab-button", "tab-active") %>
+  <%= turbo_stream.remove_css_class("#collections-tab-button", "tab-active") %>
 <% end %>

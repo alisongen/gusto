@@ -3,7 +3,7 @@
     <%= collection.emoji %>
   <% else %>
     <% if collection.user.avatar.attached? %>
-      <%= cl_image_tag(collection.user.avatar.key) %>
+      <%= cl_image_tag collection.user.avatar.key, class: "friend-card-avatar" %>
     <% else %>
       <%= image_tag "https://png.pngtree.com/png-vector/20221018/ourmid/pngtree-master-chef-logo-illustration-png-image_6351381.png", class: "friend-card-avatar" %>
     <% end %>

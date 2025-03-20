@@ -1,3 +1,4 @@
+<!--
 <h1 class="m-3 text-center"><%= @user.username %></h1>
 
 
@@ -25,4 +26,56 @@
       <p><%= collection.name %></p>
     <% end %>
   </div>
+</div>
+-->
+
+<div class="main-content">
+
+  <!-- Header avec photo, nom et username -->
+  <div class="profil-header">
+    <div class="profil-header-image">
+      <% if (@user.avatar.attached?) %>
+        <img src="<% cl_image_path @user.avatar.key %>" class="avatar-large img-fluid rounded-start" alt="avatar">
+      <% else %>
+        <img src="https://png.pngtree.com/png-vector/20221018/ourmid/pngtree-master-chef-logo-illustration-png-image_6351381.png" class="avatar-large img-fluid rounded-start" alt="avatar">
+      <% end %>
+    </div>
+    <div class="profil-header-info">
+      <div class="profil-name">
+        <h2><%= @user.first_name %> <%= @user.last_name %></h2>
+        <p>@<%= @user.username %></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Data sur le profil -->
+  <div class="profil-data">
+    <div class="profil-data-item">
+      <p class="profil-data-number"><%= @user.collections.count %></p>
+      <p class="profil-data-text">collections</p>
+    </div>
+    <div class="profil-data-item">
+      <p class="profil-data-number"><%= @user.saved_restaurants.count %></p>
+      <p class="profil-data-text">restaurants</p>
+    </div>
+    <div class="profil-data-item">
+      <p class="profil-data-number"><%= Friendship.where(status: 1).where(user: @user).or(Friendship.where(status: 1).where(friend: @user)).count %></p>
+      <p class="profil-data-text">friends</p>
+    </div>
+  </div>
+
+  <div data-controller="showcat" class="profil-menu">
+    <div class="profil-menu-btn">
+      <%= link_to "Collections", switch_tab_path("collections"), data: { turbo_method: :post }, id: "collections-tab-button", class: "tab-active" %>
+      <%= link_to "Photos", switch_tab_path("photos"), data: { turbo_method: :post }, id: "photos-tab-button" %>
+      <%= link_to "Comments", switch_tab_path("reviews"), data: { turbo_method: :post }, id: "reviews-tab-button" %>
+    </div>
+
+    <div id="profil-content" class="profil-content" data-showcat-target="collections">
+      <div class="collection-cards">
+        <%= render partial: "components/collection_card", collection: @collections, as: :collection %>
+      </div>
+    </div>
+  </div>
+
 </div>

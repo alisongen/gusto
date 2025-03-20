@@ -10,20 +10,20 @@ require 'open-uri'
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
-puts 'Destruction des saved_restos_collections 💥'
-SavedRestaurantsCollection.destroy_all
-puts 'Saved_restos supprimés 🎊'
-p ''
+# puts 'Destruction des saved_restos_collections 💥'
+# SavedRestaurantsCollection.destroy_all
+# puts 'Saved_restos supprimés 🎊'
+# p ''
 
-puts 'Destruction des reviews 💥'
-Review.destroy_all
-puts 'Reviews supprimés 🎊'
-p ''
+# puts 'Destruction des reviews 💥'
+# Review.destroy_all
+# puts 'Reviews supprimés 🎊'
+# p ''
 
-puts 'Destruction des saved_restos 💥'
-SavedRestaurant.destroy_all
-puts 'Saved_restos supprimés 🎊'
-p ''
+# puts 'Destruction des saved_restos 💥'
+# SavedRestaurant.destroy_all
+# puts 'Saved_restos supprimés 🎊'
+# p ''
 
 puts 'Destruction des restos 💥'
 Restaurant.destroy_all
@@ -35,10 +35,10 @@ Friendship.destroy_all
 puts 'Friendships supprimés 🎊'
 p ''
 
-puts 'Destruction des collections 💥'
-Collection.destroy_all
-puts 'Collections supprimés 🎊'
-p ''
+# puts 'Destruction des collections 💥'
+# Collection.destroy_all
+# puts 'Collections supprimés 🎊'
+# p ''
 
 puts 'Destruction des users 💥'
 User.destroy_all
@@ -52,14 +52,10 @@ puts 'Création de 10 restaurants 👨🏻‍🎨'
 # Cloudinary::Uploader.upload(Rails.root.join('app/assets/images/nick-karvounis-Ciqxn7FE4vE-unsplash.jpg'))
 # Cloudinary::Uploader.upload(Rails.root.join('app/assets/images/volkan-vardar-1H30uRC1plc-unsplash.jpg'))
 
-photo_ids = [
-  'ap2cjhbd0jaoytk31ynr',
-  'ceelnbk7kgconvmmoius',
-  'wo0jqa95b7lmgme2cdbt',
-  'jloubcbwbitpxlplp8bx'
-]
 
-10.times do
+images = Dir.glob("app/assets/images/*.jpg").first(10)
+10.times do |i|
+
   restaurant = Restaurant.new(
     name: Faker::Restaurant.name,
     description: Faker::Restaurant.description,
@@ -72,48 +68,21 @@ photo_ids = [
 
   Faker::Config.locale = 'fr'
   restaurant.phone_number = Faker::PhoneNumber.cell_phone_with_country_code
-  photo_ids.each do |photo_id|
-    image_url = Cloudinary::Utils.cloudinary_url(photo_id)
-    photo1 = URI.parse(image_url).open
-    restaurant.images.attach(io: photo1, filename: "WHATEVER.jpg", content_type: "image/jpg")
-    restaurant.save!
-  end
-  p 'one down'
+  image_url = Cloudinary::Uploader.upload(images[i])['url']
+  image = URI.parse(image_url).open
+  restaurant.images.attach(io: image, filename: "#{restaurant.name.parameterize}.jpg", content_type: "image/jpg")
+  restaurant.save!
+
+  puts "#{restaurant.name} created"
 end
 
 puts "photo uploadés sur cloudinary ✅"
 
-# 100.times do
-#   restaurant = Restaurant.new(
-#     name: Faker::Restaurant.name,
-#     description: Faker::Restaurant.description,
-#     address: Faker::Address.full_address,
-#     category: Faker::Nation.nationality,
-#     menu: Faker::Internet.domain_name,
-#     rating: Faker::Number.within(range: 1..5),
-#     website: Faker::Internet.domain_name
-#   )
-
-#   Faker::Config.locale = 'fr'
-#   restaurant.phone_number = Faker::PhoneNumber.cell_phone_with_country_code
-#   restaurant.save!
-
-#   photo_id = photo_ids.sample
-#   restaurant.images.attach(
-#     io: URI.open("https://res.cloudinary.com/#{ENV['CLOUDINARY_CLOUD_NAME']}/image/upload/#{photo_id}.jpg"),
-#     filename: "#{photo_id}.jpg",
-#     content_type: "image/jpeg"
-#   )
-
-# end
-
-p
 puts '...'
 puts '...'
 puts '...'
 puts 'Finished restos ✅'
 
-p ''
 puts 'Création de 10 users 👨🏻‍🎨'
 users = Array.new(10) do
   user = User.new(
