@@ -47,7 +47,6 @@ class CollectionsController < ApplicationController
     @collection = Collection.new(collection_params)
     @collection.user_id = @user.id
     if @collection.save
-      raise
       redirect_to dashboard_path
     else
       set_colors_and_emojis
