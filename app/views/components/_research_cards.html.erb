@@ -1,55 +1,31 @@
-<% @restaurants["places"].each do |restaurant| %>
-  <%= link_to  restaurant_path(restaurant["id"]) do %>
-    <div class="restaurant-feed-card">
-      <% img_uri = GetGooglePhotosDataService.new(restaurant.dig("photos")[0].dig("name")).call %>
-      <% if restaurant.dig("photos").present? %>
-        <%= image_tag img_uri, class: "card-img-top" %>
-      <% end %>
-      <div class="restaurant-feed-content">
-        <h5 class="restaurant-feed-title"><%= restaurant["displayName"]["text"] %></h5>
-        <p class="restaurant-feed-address">
-          <% if restaurant["addressComponents"].present? %>
-            <%= restaurant["addressComponents"].dig(2, "longText") || "N/A" %>,
-            <%= restaurant["addressComponents"].dig(6, "longText") || "N/A" %>
-          <% else %>
-            Adresse non disponible
-          <% end %>
-        </p>
-        <div class="restaurant-card-rating">
-          <% full_stars = restaurant["rating"].to_i %>
-          <% empty_stars = 5 - full_stars %>
-          <% full_stars.times do %>
-            <%= image_tag "star-fill.svg", width: 20, height: 20 %>
-          <% end %>
-          <% empty_stars.times do %>
-            <%= image_tag "star.svg", width: 20, height: 20 %>
-          <% end %>
+  <% @restaurants["places"].each do |restaurant| %>
+    <%= link_to  restaurant_path(restaurant["id"]), class: "info-bulle" do %>
+      <div class="research-restaurant-feed-card">
+        <% img_uri = GetGooglePhotosDataService.new(restaurant.dig("photos")[0].dig("name")).call %>
+        <% if restaurant.dig("photos").present? %>
+          <%= image_tag img_uri, class: "research-card-img-top" %>
+        <% end %>
+        <div class="restaurant-feed-content">
+          <h5 class="restaurant-feed-title"><%= restaurant["displayName"]["text"] %></h5>
+          <p class="restaurant-feed-address">
+            <% if restaurant["addressComponents"].present? %>
+              <%= restaurant["addressComponents"].dig(2, "longText") || "N/A" %>,
+              <%= restaurant["addressComponents"].dig(6, "longText") || "N/A" %>
+            <% else %>
+              Adresse non disponible
+            <% end %>
+          </p>
+          <div class="restaurant-card-rating">
+            <% full_stars = restaurant["rating"].to_i %>
+            <% empty_stars = 5 - full_stars %>
+            <% full_stars.times do %>
+              <%= image_tag "star-fill.svg", width: 20, height: 20 %>
+            <% end %>
+            <% empty_stars.times do %>
+              <%= image_tag "star.svg", width: 20, height: 20 %>
+            <% end %>
+          </div>
         </div>
       </div>
-    </div>
+    <% end %>
   <% end %>
-<% end %>
-
-<div class="card-container">
-  <% @restaurants["places"].each do |restaurant| %>
-    <div class="card">
-    <% img_uri = GetGooglePhotosDataService.new(restaurant.dig("photos")[0].dig("name")).call %>
-      <% if restaurant.dig("photos").present? %>
-        <%= image_tag img_uri, class: "card-img-top" %>
-      <% end %>
-      <div class="card-body">
-        <h5 class="card-title"><%= restaurant["displayName"]["text"] %></h5>
-        <p class="card-text">
-          <% if restaurant["addressComponents"].present? %>
-            <%= restaurant["addressComponents"].dig(2, "longText") || "N/A" %>,
-            <%= restaurant["addressComponents"].dig(6, "longText") || "N/A" %>
-          <% else %>
-            Adresse non disponible
-          <% end %>
-        </p>
-        <p class="card-text">Rating: <%= restaurant["rating"] %></p>
-        <a href="<%= restaurant_path(restaurant["id"]) %>" class="card-btn btn-primary">View Restaurant</a>
-      </div>
-    </div>
-  <% end %>
-</div>
