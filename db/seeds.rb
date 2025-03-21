@@ -2,18 +2,18 @@ require 'faker'
 require 'open-uri'
 
 colors = [
-  "#4B3B47", # Eggplant
-  "#FFBD33", # Orange
-  "#FFD133", # Yellow
-  "#A3E635", # Lime Green
-  "#33FF57", # Green
-  "#33FFBD", # Mint
-  "#33D1FF", # Sky Blue
-  "#3357FF", # Blue
-  "#8A33FF", # Purple
-  "#FF33F0", # Pink
-  "#FF3380", # Hot Pink
-  "#FF3366"  # Red
+  "#4B3B47",
+  "#FFBD33",
+  "#FFD133",
+  "#A3E635",
+  "#33FF57",
+  "#33FFBD",
+  "#33D1FF",
+  "#3357FF",
+  "#8A33FF",
+  "#FF33F0",
+  "#FF3380",
+  "#FF3366"
 ]
 # puts 'Destruction des saved_restos_collections 💥'
 # SavedRestaurantsCollection.destroy_all
@@ -198,6 +198,7 @@ admin = User.new(
   username: "admin",
   first_name: "Admin",
   last_name: "Admin",
+  avatar_color: colors.sample
   )
 admin.save!
 puts '...'
@@ -211,6 +212,7 @@ gautier = User.new(
   username: "gautier",
   first_name: "Gautier",
   last_name: "DM",
+  avatar_color: colors.sample
   )
 gautier.save!
 puts '...'
@@ -224,6 +226,7 @@ gil = User.new(
   username: "gil",
   first_name: "Gil",
   last_name: "G",
+  avatar_color: colors.sample
   )
 gil.save!
 puts '...'
@@ -237,6 +240,7 @@ alison = User.new(
   username: "alison",
   first_name: "Alison",
   last_name: "G",
+  avatar_color: colors.sample
   )
 alison.save!
 puts '...'
@@ -250,6 +254,7 @@ bruno = User.new(
   username: "bruno",
   first_name: "Bruno",
   last_name: "F"
+  avatar_color: colors.sample
 )
 bruno.save!
 puts '...'
