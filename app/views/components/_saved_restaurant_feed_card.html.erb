@@ -8,14 +8,7 @@
       <p class="restaurant-feed-text">à <%= collection.name %></p> <!--TODO: Possible d'afficher que la Ville+CodePostal-->
     <% end %>
     <p class="restaurant-feed-time">
-      <% elapsed_time = Time.now - saved_restaurant.created_at %>
-      <% if elapsed_time < 1.hour %>
-        il y a <%= (elapsed_time / 60).to_i %> minutes
-      <% elsif elapsed_time < 24.hours %>
-        il y a <%= (elapsed_time / 1.hour).to_i %> heures
-      <% else %>
-        il y a <%= (elapsed_time / 1.day).to_i %> jours
-      <% end %>
+      <%= time_ago_in_words(saved_restaurant.created_at) %> ago
     </p>
   </div>
 </div>

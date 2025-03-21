@@ -345,13 +345,13 @@ users.each do |user|
     rand(2..10).times do
       restaurant = restaurants.sample
       unless SavedRestaurant.exists?(user: user, restaurant: restaurant)
-        saved_restaurant = SavedRestaurant.create!(user: user, restaurant: restaurant)
+        saved_restaurant = SavedRestaurant.create!(user: user, restaurant: restaurant, created_at: (rand*10).days.ago)
         saved_restaurants << saved_restaurant
       end
     end
 
     saved_restaurants.each do |saved_restaurant|
-      SavedRestaurantsCollection.create!(collection: collection, saved_restaurant: saved_restaurant)
+      SavedRestaurantsCollection.create!(collection: collection, saved_restaurant: saved_restaurant, created_at: (rand*10).days.ago)
     end
   end
 end
@@ -393,7 +393,8 @@ users.each do |user|
       content: reviews.sample,
       user_rating: rand(3..5),
       user: user,
-      saved_restaurant: saved_restaurant
+      saved_restaurant: saved_restaurant,
+      created_at: (rand*10).days.ago
     )
   end
 end

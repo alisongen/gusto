@@ -12,12 +12,12 @@
     background-color: white;
     border: solid 1px #EBEBEB;
     border-radius: 10px;
-    height: 110px;
+    height: 160px;
     padding: 5px;
   }
 
   .review-feed-image {
-    max-height: 100px;
+    max-height: 160px;
     width: 110px;
     object-fit: cover;
     border-radius: 10px 0 0 10px;
@@ -43,8 +43,9 @@
 
   .review-feed-info {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
+    gap: 0.3rem;
+    align-items: end;
   }
 
   .review-feed-rating {
