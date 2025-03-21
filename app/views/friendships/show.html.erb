@@ -34,8 +34,10 @@
   <!-- Header avec photo, nom et username -->
   <div class="profil-header">
     <div class="profil-header-image">
-      <% if (@user.avatar.attached?) %>
-        <img src="<% cl_image_path @user.avatar.key %>" class="avatar-large img-fluid rounded-start" alt="avatar">
+      <% if (@user.avatar_color.present?) %>
+        <div class="user-avatar" style="width: 80px; height: 80px; background-color: <%= @user.avatar_color %>;">
+          <%= @user.first_name[0] %><%= @user.last_name[0] %>
+        </div>
       <% else %>
         <img src="https://png.pngtree.com/png-vector/20221018/ourmid/pngtree-master-chef-logo-illustration-png-image_6351381.png" class="avatar-large img-fluid rounded-start" alt="avatar">
       <% end %>
