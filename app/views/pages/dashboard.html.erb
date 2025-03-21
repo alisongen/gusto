@@ -79,7 +79,7 @@
           <div class="colors-iteration mb-4">
             <label>Choose a color</label>
             <div class="color-buttons">
-              <% @colors.each_with_index do |color, index| %>
+              <% COLORS.each_with_index do |color, index| %>
                 <input type="radio" id="color_<%= index %>" name="collection[color]" value="<%= color %>" class="input-none">
                 <label for="color_<%= index %>" style="background-color:<%= color %>;" class="color-button"></label>
               <% end %>
@@ -88,7 +88,7 @@
           <div class="emojis-iteration mb-4">
             <label>Choose an emoji</label>
             <div class="emoji-buttons">
-              <% @emojis.each_with_index do |emoji, index| %>
+              <% EMOJIS.each_with_index do |emoji, index| %>
                 <input type="radio" id="emoji_<%= index %>" name="collection[emoji]" value="<%= emoji %>" class="input-none">
                 <label for="emoji_<%= index %>" class="emoji-button"><%= emoji %></label>
               <% end %>
