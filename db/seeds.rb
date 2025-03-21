@@ -1,6 +1,20 @@
 require 'faker'
 require 'open-uri'
 
+colors = [
+  "#4B3B47", # Eggplant
+  "#FFBD33", # Orange
+  "#FFD133", # Yellow
+  "#A3E635", # Lime Green
+  "#33FF57", # Green
+  "#33FFBD", # Mint
+  "#33D1FF", # Sky Blue
+  "#3357FF", # Blue
+  "#8A33FF", # Purple
+  "#FF33F0", # Pink
+  "#FF3380", # Hot Pink
+  "#FF3366"  # Red
+]
 # puts 'Destruction des saved_restos_collections 💥'
 # SavedRestaurantsCollection.destroy_all
 # puts 'Saved_restos supprimés 🎊'
@@ -99,7 +113,6 @@ restaurants = [
   { name: "Dersou", description: "Cuisine fusion avec des cocktails signatures.", address: "21 Rue Saint-Nicolas, 75012 Paris", category: "Fusion", menu: "Tataki de thon, cocktails épicés", rating: 4.6, website: "https://www.dersouparis.com", phone_number: "+33 1 43 02 21 58" },
   { name: "Le Mary Celeste", description: "Bar à huîtres avec des cocktails originaux.", address: "1 Rue Commines, 75003 Paris", category: "Poisson", menu: "Huîtres fraîches, ceviche de daurade", rating: 4.4, website: "https://www.lemaryceleste.com", phone_number: "+33 9 80 72 98 83" },
   { name: "La Bourse et La Vie", description: "Cuisine française classique revisitée.", address: "12 Rue Vivienne, 75002 Paris", category: "Bistronomique", menu: "Pot-au-feu, tarte aux pommes", rating: 4.7, website: "https://www.labourselavie.com", phone_number: "+33 1 42 60 08 83" },
-
   { name: "Candelaria", description: "Bar à cocktails caché avec des tacos mexicains.", address: "52 Rue de Saintonge, 75003 Paris", category: "Mexicain", menu: "Tacos carnitas, guacamole maison", rating: 4.4, website: "https://www.candelariaparis.com", phone_number: "+33 1 42 74 41 28" },
   { name: "Bones", description: "Cuisine inventive dans un cadre brut et industriel.", address: "43 Rue Godefroy Cavaignac, 75011 Paris", category: "Gastronomique", menu: "Cochon rôti, légumes de saison", rating: 4.6, website: "https://www.bonesparis.com", phone_number: "+33 1 40 09 03 70" },
   { name: "La Rotonde Stalingrad", description: "Brasserie et bar dans un bâtiment historique.", address: "6-8 Place de la Bataille de Stalingrad, 75019 Paris", category: "Brasserie", menu: "Planche de charcuterie, burger maison", rating: 4.3, website: "https://www.larotonde.com", phone_number: "+33 1 80 48 33 40" },
@@ -145,27 +158,27 @@ puts 'Création de users 👨🏻‍🎨'
 #   end
 
 users = [
-  { email: "thomas.dupont@gmail.com", password: "password123", city: "Paris", username: "thomdup", first_name: "Thomas", last_name: "Dupont" },
-  { email: "marie.lefebvre@yahoo.fr", password: "password456", city: "Versailles", username: "marielef", first_name: "Marie", last_name: "Lefebvre" },
-  { email: "paul.martin@outlook.fr", password: "password789", city: "Boulogne-Billancourt", username: "paulmart", first_name: "Paul", last_name: "Martin" },
-  { email: "lucie.robert@protonmail.com", password: "securepass", city: "Neuilly-sur-Seine", username: "lucierob", first_name: "Lucie", last_name: "Robert" },
-  { email: "jean.morel@gmail.com", password: "123456", city: "Montreuil", username: "jeanmor", first_name: "Jean", last_name: "Morel" },
-  { email: "juliette.bernard@wanadoo.fr", password: "juliette123", city: "Saint-Denis", username: "julbern", first_name: "Juliette", last_name: "Bernard" },
-  { email: "arnaud.petit@orange.fr", password: "petitpass", city: "Nanterre", username: "arnopet", first_name: "Arnaud", last_name: "Petit" },
-  { email: "camille.dupuis@gmail.com", password: "camdup456", city: "Asnières-sur-Seine", username: "camdup", first_name: "Camille", last_name: "Dupuis" },
-  { email: "florent.renard@gmail.com", password: "flo1234", city: "Cergy", username: "florenard", first_name: "Florent", last_name: "Renard" },
-  { email: "aurelie.marchand@laposte.net", password: "marchandpass", city: "Argenteuil", username: "aurelmar", first_name: "Aurélie", last_name: "Marchand" },
-  { email: "morgan.durand@hotmail.fr", password: "durandpass", city: "Créteil", username: "morgandur", first_name: "Morgan", last_name: "Durand" },
-  { email: "thibaut.roux@yahoo.com", password: "rouxpass", city: "Vitry-sur-Seine", username: "thibroux", first_name: "Thibaut", last_name: "Roux" },
-  { email: "lea.faure@orange.fr", password: "faure123", city: "Courbevoie", username: "leafau", first_name: "Léa", last_name: "Faure" },
-  { email: "yann.vidal@protonmail.com", password: "vidalpass", city: "Rueil-Malmaison", username: "yannvid", first_name: "Yann", last_name: "Vidal" },
-  { email: "emilie.giraud@gmail.com", password: "giraudpass", city: "Colombes", username: "emiligir", first_name: "Émilie", last_name: "Giraud" },
-  { email: "arnaud.boyer@free.fr", password: "boyerpass", city: "Levallois-Perret", username: "arnoboy", first_name: "Arnaud", last_name: "Boyer" },
-  { email: "sophie.poirier@laposte.net", password: "poirier123", city: "Aulnay-sous-Bois", username: "soppoi", first_name: "Sophie", last_name: "Poirier" },
-  { email: "vincent.gautier@wanadoo.fr", password: "gautier456", city: "Champigny-sur-Marne", username: "vingaut", first_name: "Vincent", last_name: "Gautier" },
-  { email: "clemence.perrin@gmail.com", password: "perrin789", city: "Antony", username: "clemperr", first_name: "Clémence", last_name: "Perrin" },
-  { email: "etienne.collet@live.fr", password: "colletpass", city: "Ivry-sur-Seine", username: "etiencol", first_name: "Étienne", last_name: "Collet" },
-  { email: "julien.legrand@gmail.com", password: "julien", city: "Paris", username: "julien", first_name: "Julien", last_name: "Legrand" }
+  { email: "thomas.dupont@gmail.com", password: "password123", city: "Paris", username: "thomdup", first_name: "Thomas", last_name: "Dupont", avatar_color: colors.sample },
+  { email: "marie.lefebvre@yahoo.fr", password: "password456", city: "Versailles", username: "marielef", first_name: "Marie", last_name: "Lefebvre", avatar_color: colors.sample },
+  { email: "paul.martin@outlook.fr", password: "password789", city: "Boulogne-Billancourt", username: "paulmart", first_name: "Paul", last_name: "Martin", avatar_color: colors.sample },
+  { email: "lucie.robert@protonmail.com", password: "securepass", city: "Neuilly-sur-Seine", username: "lucierob", first_name: "Lucie", last_name: "Robert", avatar_color: colors.sample },
+  { email: "jean.morel@gmail.com", password: "123456", city: "Montreuil", username: "jeanmor", first_name: "Jean", last_name: "Morel", avatar_color: colors.sample },
+  { email: "juliette.bernard@wanadoo.fr", password: "juliette123", city: "Saint-Denis", username: "julbern", first_name: "Juliette", last_name: "Bernard", avatar_color: colors.sample },
+  { email: "arnaud.petit@orange.fr", password: "petitpass", city: "Nanterre", username: "arnopet", first_name: "Arnaud", last_name: "Petit", avatar_color: colors.sample },
+  { email: "camille.dupuis@gmail.com", password: "camdup456", city: "Asnières-sur-Seine", username: "camdup", first_name: "Camille", last_name: "Dupuis", avatar_color: colors.sample },
+  { email: "florent.renard@gmail.com", password: "flo1234", city: "Cergy", username: "florenard", first_name: "Florent", last_name: "Renard", avatar_color: colors.sample },
+  { email: "aurelie.marchand@laposte.net", password: "marchandpass", city: "Argenteuil", username: "aurelmar", first_name: "Aurélie", last_name: "Marchand", avatar_color: colors.sample },
+  { email: "morgan.durand@hotmail.fr", password: "durandpass", city: "Créteil", username: "morgandur", first_name: "Morgan", last_name: "Durand", avatar_color: colors.sample },
+  { email: "thibaut.roux@yahoo.com", password: "rouxpass", city: "Vitry-sur-Seine", username: "thibroux", first_name: "Thibaut", last_name: "Roux", avatar_color: colors.sample },
+  { email: "lea.faure@orange.fr", password: "faure123", city: "Courbevoie", username: "leafau", first_name: "Léa", last_name: "Faure", avatar_color: colors.sample },
+  { email: "yann.vidal@protonmail.com", password: "vidalpass", city: "Rueil-Malmaison", username: "yannvid", first_name: "Yann", last_name: "Vidal", avatar_color: colors.sample },
+  { email: "emilie.giraud@gmail.com", password: "giraudpass", city: "Colombes", username: "emiligir", first_name: "Émilie", last_name: "Giraud", avatar_color: colors.sample },
+  { email: "arnaud.boyer@free.fr", password: "boyerpass", city: "Levallois-Perret", username: "arnoboy", first_name: "Arnaud", last_name: "Boyer", avatar_color: colors.sample },
+  { email: "sophie.poirier@laposte.net", password: "poirier123", city: "Aulnay-sous-Bois", username: "soppoi", first_name: "Sophie", last_name: "Poirier", avatar_color: colors.sample },
+  { email: "vincent.gautier@wanadoo.fr", password: "gautier456", city: "Champigny-sur-Marne", username: "vingaut", first_name: "Vincent", last_name: "Gautier", avatar_color: colors.sample },
+  { email: "clemence.perrin@gmail.com", password: "perrin789", city: "Antony", username: "clemperr", first_name: "Clémence", last_name: "Perrin", avatar_color: colors.sample },
+  { email: "etienne.collet@live.fr", password: "colletpass", city: "Ivry-sur-Seine", username: "etiencol", first_name: "Étienne", last_name: "Collet", avatar_color: colors.sample },
+  { email: "julien.legrand@gmail.com", password: "julien", city: "Paris", username: "julien", first_name: "Julien", last_name: "Legrand", avatar_color: colors.sample }
 ]
 
 users.each do |user|
@@ -275,20 +288,6 @@ collections = [
 
 emojis = [ "🍔", "🥞", "🧁", "🍣", "☕️", "🥗", "🍻", "🥩", "🌯", "💙", "🎉", "🍽️" ]
 
-colors = [
-  "#4B3B47", # Eggplant
-  "#FFBD33", # Orange
-  "#FFD133", # Yellow
-  "#A3E635", # Lime Green
-  "#33FF57", # Green
-  "#33FFBD", # Mint
-  "#33D1FF", # Sky Blue
-  "#3357FF", # Blue
-  "#8A33FF", # Purple
-  "#FF33F0", # Pink
-  "#FF3380", # Hot Pink
-  "#FF3366"  # Red
-]
 
 users.each do |user|
   5.times do

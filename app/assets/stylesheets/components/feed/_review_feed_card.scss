@@ -12,6 +12,8 @@
     background-color: white;
     border: solid 1px #EBEBEB;
     border-radius: 10px;
+    height: 110px;
+    padding: 5px;
   }
 
   .review-feed-image {
@@ -24,7 +26,7 @@
   .review-feed-content {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-evenly;
     padding-left: 10px;
     flex: 1;
   }
@@ -36,7 +38,7 @@
   }
 
   .review-feed-text {
-    margin: 5px 0;
+    margin: 2px 0;
   }
 
   .review-feed-info {
