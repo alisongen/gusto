@@ -1,11 +1,3 @@
 <%= turbo_stream.set_dataset_attribute("#mapbox-collection", "map-markers-value", @markers.to_json) %>
 <%= turbo_stream.add_css_class("#collection-filters", "d-none") %>
 <%= turbo_stream.add_css_class("#info-bulle", "d-none") %>
-
-<% if false %>
-  <%= turbo_stream.replace("collection-window") do %>
-    <div id="collection-window" data-showcat-target="all">
-      <%= render partial: 'collections/card', collection: @restaurants, as: :restaurant %>
-    </div>
-  <% end %>
-<% end %>
