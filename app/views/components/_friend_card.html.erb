@@ -2,8 +2,10 @@
   <% friend = User.find(friendship.user_id) %>
     <div class="friend-card">
       <div class="friend-card-infos">
-        <% if friend.avatar.attached? %>
-          <%= cl_image_tag friend.avatar.key %>
+        <% if friend.avatar_color.present? %>
+            <div class="user-avatar" style="background-color: <%= friend.avatar_color %>;">
+              <%= friend.first_name[0] %><%= friend.last_name[0] %>
+            </div>
         <% else %>
           <%= image_tag "https://png.pngtree.com/png-vector/20221018/ourmid/pngtree-master-chef-logo-illustration-png-image_6351381.png", class: "friend-card-avatar" %>
         <% end %>
@@ -26,8 +28,10 @@
     <% if (friend != current_user) %>
       <div class="friend-card">
         <div class="friend-card-infos">
-          <% if friend.avatar.attached? %>
-            <%= cl_image_tag friend.avatar.key %>
+          <% if friend.avatar_color.present? %>
+            <div class="user-avatar" style="background-color: <%= friend.avatar_color %>;">
+              <%= friend.first_name[0] %><%= friend.last_name[0] %>
+            </div>
           <% else %>
             <%= image_tag "https://png.pngtree.com/png-vector/20221018/ourmid/pngtree-master-chef-logo-illustration-png-image_6351381.png", class: "friend-card-avatar" %>
           <% end %>
@@ -49,8 +53,10 @@
       <% friend = User.find(friendship.friend_id) %>
       <div class="friend-card">
         <div class="friend-card-infos">
-          <% if friend.avatar.attached? %>
-            <%= cl_image_tag friend.avatar.key %>
+          <% if friend.avatar_color.present? %>
+            <div class="user-avatar" style="background-color: <%= friend.avatar_color %>;">
+              <%= friend.first_name[0] %><%= friend.last_name[0] %>
+            </div>
           <% else %>
             <%= image_tag "https://png.pngtree.com/png-vector/20221018/ourmid/pngtree-master-chef-logo-illustration-png-image_6351381.png", class: "friend-card-avatar" %>
           <% end %>

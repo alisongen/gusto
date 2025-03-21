@@ -3,8 +3,10 @@
   <!-- Header avec photo, nom et username -->
   <div class="profil-header">
     <div class="profil-header-image">
-      <% if (current_user.avatar.attached?) %>
-        <img src="<% cl_image_path current_user.avatar.key %>" class="avatar-large img-fluid rounded-start" alt="avatar">
+      <% if (current_user.avatar_color.present?) %>
+        <div class="user-avatar" style="width: 80px; height: 80px; background-color: <%= current_user.avatar_color %>;">
+          <%= current_user.first_name[0] %><%= current_user.last_name[0] %>
+        </div>
       <% else %>
         <img src="https://png.pngtree.com/png-vector/20221018/ourmid/pngtree-master-chef-logo-illustration-png-image_6351381.png" class="avatar-large img-fluid rounded-start" alt="avatar">
       <% end %>
