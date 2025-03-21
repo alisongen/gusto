@@ -1,6 +1,6 @@
 
 <%= link_to  restaurant_path(restaurant) do %>
-  <div class="restaurant-feed-card p-2">
+  <div class="restaurant-feed-card height-auto p-2">
     <%#= image_tag saved_restaurant.restaurant.images %>
     <% if restaurant.images.attached? %>
       <%= cl_image_tag restaurant.images.first.key, class: "restaurant-feed-image rounded" %>
