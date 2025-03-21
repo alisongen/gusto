@@ -253,7 +253,7 @@ bruno = User.new(
   city: "Bruno-city",
   username: "bruno",
   first_name: "Bruno",
-  last_name: "F"
+  last_name: "F",
   avatar_color: colors.sample
 )
 bruno.save!
