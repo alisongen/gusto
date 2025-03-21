@@ -7,9 +7,9 @@ body:has(#info-bulle) {
 
     #mapbox-collection {
       // 100vh moins hauteur de la nav + du footer
-      height: calc(100vh - 176px);
+      height: calc(100vh - 160px);
       // hauteur de la navbar
-      margin-top: 78px;
+      margin-top: 80px;
     }
   }
 }
