@@ -3,7 +3,7 @@
     <% saved_restaurant.photos.each_with_index do |photo, index| %>
       <div class="carousel-item <%= "active" if index.zero? %>" style="height: 250px;">
         <%= cl_image_tag photo.key, class: "carrousel-upload d-block w-100 h-100" %>
-        <%= link_to restaurant_path(photo, @saved_restaurant), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "bouton-icon btn-position" do %>
+        <%= link_to restaurant_path(photo, @saved_restaurant), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "bouton-icon btn-position" do %>
           <i class="fa-solid fa-trash-can" style="color:white;"></i>
         <% end %>
       </div>
