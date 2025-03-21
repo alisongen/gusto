@@ -298,8 +298,8 @@ users.each do |user|
     Collection.create!(
       name: collection_name,
       user: user,
-      emoji: emojis.sample,
-      color: colors.sample
+      emoji: EMOJIS.sample,
+      color: COLORS.sample
     )
   end
 end
